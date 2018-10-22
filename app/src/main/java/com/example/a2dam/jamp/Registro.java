@@ -32,7 +32,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 if(texteMail.getText().length()>0){
                     if(pass1.getText().length()>0){
                         if(pass2.getText().length()>0){
-                            contraseñasIguales();
+                            contrasenasIguales();
                         }else{cambiarlblComprobante("La Segunda Contrasaeña Esta Vaacia");}
                     }else{cambiarlblComprobante("La Primera Contraseña Esta Vacia");}
                 }else{cambiarlblComprobante("El eMail Esta Vacio");}
@@ -47,7 +47,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         comprobante.setTextColor(getResources().getColor(R.color.rojo));
     }
 
-    private void contraseñasIguales() {
+    private void contrasenasIguales() {
         if(pass1!=pass2){
             cambiarlblComprobante("Las Contraseñas No Coinciden");
         }
@@ -55,21 +55,30 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
     private void comprobarDatos(){
         comprobarLogin();
-        comprobarNombre();
         comprobarEmail();
-        comprobarContraseñas();
+        comprobarContrasenas();
     }
 
-    private void comprobarContraseñas() {
-
+    //Los if(correcto) hay que cambiarlos, solo estan para que no den fallos
+    private void comprobarContrasenas() {
+        if(correcto){//conectar con la base de datos y comprobar la contraseña
+            correcto=true;
+        }else{
+            correcto=false;
+        }
     }
     private void comprobarEmail() {
-
-    }
-    private void comprobarNombre() {
-
+        if(correcto){//conectar con la base de datos y comprobar el email
+            correcto=true;
+        }else{
+            correcto=false;
+        }
     }
     private void comprobarLogin() {
-
+        if(correcto){//conectar con la base de datos y comprobar el email
+            correcto=true;
+        }else{
+            correcto=false;
+        }
     }
 }
