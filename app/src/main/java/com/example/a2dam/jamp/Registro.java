@@ -1,5 +1,7 @@
 package com.example.a2dam.jamp;
 
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +10,7 @@ import android.widget.TextView;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
 
-    boolean correcto=false;
+    //boolean correcto=false;
     TextView textLogin =findViewById(R.id.tfLogin);
     TextView textFullName =findViewById(R.id.tfFullName);
     TextView texteMail =findViewById(R.id.tfeMail);
@@ -23,7 +25,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        controlarTodosLosCampos();
+        switch (v.getId()){
+            case R.id.btnRegistrarse:
+                controlarTodosLosCampos();
+                break;
+            case R.id.btnAtras:
+                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(inicio);
+                break;
+            case R.id.btnShowPass1:
+                //mostrar contraseña
+                break;
+        }
+
     }
 
     private void controlarTodosLosCampos() {
@@ -33,18 +47,34 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     if(pass1.getText().length()>0){
                         if(pass2.getText().length()>0){
                             contrasenasIguales();
-                        }else{cambiarlblComprobante("La Segunda Contrasaeña Esta Vaacia");}
-                    }else{cambiarlblComprobante("La Primera Contraseña Esta Vacia");}
-                }else{cambiarlblComprobante("El eMail Esta Vacio");}
-            }else{cambiarlblComprobante("El Nombre Esta Vacio");}
+                        }else{
+                            //Cambiar color del campo de texto
+                            cambiarlblComprobante("La Segunda Contraseña Esta Vacia");
+                        }
+                    }else{
+                        //Cambiar color del campo de texto
+                        cambiarlblComprobante("La Primera Contraseña Esta Vacia");
+                    }
+                }else{
+                    //Cambiar color del campo de texto
+                    cambiarlblComprobante("El eMail Esta Vacio");
+                }
+            }else{
+                //Cambiar color del campo de texto
+                cambiarlblComprobante("El Nombre Esta Vacio");
+            }
         comprobarDatos();
-        }else{cambiarlblComprobante("El Login Esta Vacio");}
+        }else{
+            //Cambiar color del campo de texto
+            cambiarlblComprobante("El Login Esta Vacio");
+        }
     }
 
     public void cambiarlblComprobante(String mensaje){
         TextView comprobante=findViewById(R.id.lblComprobante);
         comprobante.setText(mensaje);
         comprobante.setTextColor(getResources().getColor(R.color.rojo));
+        //Cambiar color del campo de texto
     }
 
     private void contrasenasIguales() {
@@ -59,26 +89,25 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         comprobarContrasenas();
     }
 
-    //Los if(correcto) hay que cambiarlos, solo estan para que no den fallos
     private void comprobarContrasenas() {
-        if(correcto){//conectar con la base de datos y comprobar la contraseña
-            correcto=true;
-        }else{
-            correcto=false;
+        try {
+            //conectar con la base de datos y comprobar la contraseña
+        }catch(Exception e){
+            e.getMessage();
         }
     }
     private void comprobarEmail() {
-        if(correcto){//conectar con la base de datos y comprobar el email
-            correcto=true;
-        }else{
-            correcto=false;
+         try{
+             //conectar con la base de datos y comprobar el email
+        }catch(Exception e){
+            e.getMessage();
         }
     }
     private void comprobarLogin() {
-        if(correcto){//conectar con la base de datos y comprobar el email
-            correcto=true;
-        }else{
-            correcto=false;
+        try{
+            //conectar con la base de datos y comprobar el Login
+        }catch(Exception e){
+            e.getMessage();
         }
     }
 }

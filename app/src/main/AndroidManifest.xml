@@ -29,8 +29,7 @@
 
         <activity
             android:name=".Registro"
-            android:label="Registro"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="Registro"/>
     </application>
 
 </manifest>
