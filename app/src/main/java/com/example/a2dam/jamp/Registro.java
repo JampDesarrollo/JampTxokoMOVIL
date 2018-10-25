@@ -1,7 +1,6 @@
 package com.example.a2dam.jamp;
 
 import android.content.Intent;
-import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
     TextView textLogin,textFullName,texteMail,showPass2;
@@ -149,15 +146,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
         comprobarDatos();
 
-    }
-
-
-
-    public void cambiarlblComprobante(String mensaje){
-        TextView comprobante=findViewById(R.id.lblComprobante);
-        comprobante.setText(mensaje);
-        comprobante.setTextColor(getResources().getColor(R.color.rojo));
-        //Cambiar color del campo de texto
     }
 
     private Boolean contrasenaMayor8(EditText texto) {
