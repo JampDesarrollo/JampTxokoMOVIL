@@ -7,14 +7,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import static android.view.View.VISIBLE;
+
 public class Registro extends AppCompatActivity implements View.OnClickListener{
-    TextView textLogin,textFullName,texteMail,showPass2;
+    TextView textLogin,textFullName,texteMail,showPass2, showPass1;
     EditText pass1, pass2;
     Button btnRegistrarse,btnAtras;
     ImageButton btnShowPass;
     Boolean menor;
+    Boolean formatEmail;
+    Boolean iguales;
+    Boolean mayor8;
+    ImageView imLoading;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +35,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
+        showPass1=findViewById(R.id.tfPassword1);
         showPass2=findViewById(R.id.tfShowPass2);
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
@@ -37,29 +47,36 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras=findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(this);
 
+        imLoading=findViewById(R.id.imLoading);
+
+        //el progress bar es invisible desde un principio
         menor=false;
+        formatEmail=false;
+        mayor8=false;
+        iguales = false;
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-                //
+
                 controlarTodosLosCampos();
+                // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
             case R.id.btnAtras:
-                //
-                Intent inicio=new Intent(getApplicationContext(),Registro.class);
+                //si pulso en el boton atras que vaya a la ventana de inicio
+                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(inicio);
                 break;
             case R.id.btnShowPass2:
-                //
-                showPass2.setText(pass2.getText());
-                pass2.setEnabled(false);
-                showPass2.setEnabled(true);
+                //que vaya al metodo showpassword
+                showPassword();
                 break;
         }
     }
+
 
     private void controlarTodosLosCampos() {
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
@@ -68,9 +85,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
-        if(textLogin.getText().length()>0){
+        if(textLogin.getText().length()>0){ // si el campo esta lleno
             menor=menor255(textLogin);
-            if(!menor){
+            if(!menor){ //controlar que el campo sea menor de 255
                 textLogin.setError("El Login De Ser Menor De 255");
             }
         }else{
@@ -94,7 +111,12 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(texteMail.getText().length()>0) {
+            formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
             menor=menor255(texteMail);
+            if(!formatEmail){
+                texteMail.setError("El formato no es el correcto");
+                texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            }
             if(!menor){
                 texteMail.setError("El Nombre De Ser Menor De 255");
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
@@ -107,7 +129,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(pass1.getText().length()>0){
-            Boolean mayor8=contrasenaMayor8(pass1);
+            mayor8=contrasenaMayor8(pass1);
             menor=menor255(pass1);
             if(!menor){
                 pass1.setError("La Contraseña Debe Ser Menor De 255");
@@ -124,9 +146,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(pass2.getText().length()>0){
-            Boolean mayor8=contrasenaMayor8(pass2);
+            mayor8=contrasenaMayor8(pass2);
             menor=menor255(pass2);
-            Boolean iguales=contrasenasIguales();
+            iguales=contrasenasIguales();
             if(!menor){
                 pass1.setError("La Contraseña Debe Ser Menor De 255");
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
@@ -143,10 +165,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             //cambiarlblComprobante("La Segunda Contraseña Esta Vacia");
             pass2.setError("Campo Requerido");
         }
+        //una vez que compruebe que los campos estan llenos, las contraseñas estan iguales
 
-        comprobarDatos();
+         if(textLogin.getText().length()>0 && textFullName.getText().length()>0 && texteMail.getText().length() >0 && pass1.getText().length()>0
+                 && pass2.getText().length()>0 && menor && mayor8 && iguales && formatEmail){
+            //en el momento que vaya a comprobar con la base de datos, que se ponga la imagen
+            imLoading.setVisibility(View.VISIBLE);
+             comprobarDatos();
 
-    }
+    }}
 
     private Boolean contrasenaMayor8(EditText texto) {
         Boolean mayor=false;
@@ -170,6 +197,18 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             menor=true;
         }
         return menor;
+    }
+    private Boolean emailFormat(TextView texto){
+        boolean formato = false;
+        String email = texto.getText().toString().trim();
+        String emailPattern= "[A-Za-z0-9._]*+@[A-Za-z]*+.[A-Za-z]{2,3}";
+        if(email.matches(emailPattern)){
+            //el asterisco es que pueden aparecer las letras y los numeros 0 o mas veces
+            //{2-3} tiene que haber dos o tres caracteres despues del punto
+            formato = true;
+        }
+
+        return formato;
     }
 
     private Boolean contrasenasIguales() {
@@ -206,5 +245,32 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }catch(Exception e){
             e.getMessage();
         }
+    }
+
+    private void showPassword(){
+        // si la contraseña no esta visible, que se haga visible
+        //el showpass es el tf
+        //pass2 es el pf
+
+        if(pass1.getVisibility() == (View.VISIBLE)) {
+            //que el showpass sea visible
+            //va a aparecer el textfield
+            showPass2.setText(pass2.getText()); //paso el texto del pass2 al textfield
+            showPass2.setEnabled(true); // el text field se active
+            pass2.setEnabled(false); //el password field pasa a false
+            showPass1.setText(pass1.getText());
+            showPass1.setEnabled(true);
+            pass1.setEnabled(false);
+
+        }else{ //si pass2 no es visible desde el inicio
+            //que el password field sea visible
+            pass2.setText(showPass2.getText()); //lo que esta en el textfield le paso a passwordfield
+            showPass2.setEnabled(false); // el textfield lo inhabilito
+            pass2.setEnabled(true); //habilito el password field
+            pass1.setText(showPass1.getText());
+            showPass1.setEnabled(false);
+            pass1.setEnabled(true);
+        }
+
     }
 }
