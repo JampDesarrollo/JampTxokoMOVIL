@@ -15,7 +15,7 @@
     <string name="registro_Contraseña">Contraseña</string>
     <string name="registro_Comprobante">La contraseña debe tener minimo 8 caracteres.</string>
     <string name="show_password_2">Show Password 2</string>
-    <string name="registro_Atras">Atrás</string>
+    <string name="registro_Atras">Atras</string>
 
     <string name="registro_Registrarse">Registrarse</string>
     <string name="usuario">Usuario</string>
