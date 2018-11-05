@@ -44,8 +44,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     ImageButton btnShowPass;
     /**
      * @param correcto User Data Correct Boolean
+     * @param format User email Correct format Boolean
      */
-    Boolean correcto;
+    Boolean correcto,formatEmail;
+
+    ImageView imLoading;
 
     /**
      * Method that create the Registro View
@@ -60,7 +63,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
-        showPass1=findViewById(R.id.tfPassword1);
         showPass2=findViewById(R.id.tfShowPass2);
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
@@ -73,6 +75,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras.setOnClickListener(this);
 
         correcto=true;
+
         //el progress bar es invisible desde un principio
         imLoading=findViewById(R.id.imLoading);
         formatEmail=false;
@@ -150,10 +153,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             if(texteMail.getText().length()<255){
                 formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
      
-            if(!formatEmail){
-                texteMail.setError("El formato no es el correcto");
-                texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            }
+                if(!formatEmail) {
+                    texteMail.setError("El formato no es el correcto");
+                    texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                }
+            }else{
                 texteMail.setError("El Nombre De Ser Menor De 255");
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
@@ -166,7 +170,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(pass1.getText().length()>0){
-            if(pass1.getText().length()>8){
+            if(pass1.getText().length()<8){
                 pass1.setError("La Contraseña Debe Ser Mayor De 8");
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
@@ -183,7 +187,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(pass2.getText().length()>0){
-            if(pass2.getText().length()>8){
+            if(pass2.getText().length()<8){
                 pass2.setError("La Contraseña Debe Ser Mayor De 8");
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
@@ -205,6 +209,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         if(correcto)
             comprobarDatos();
 
+    }
+
+    private Boolean emailFormat(TextView texto){
+        boolean formato = false;
+        String email = texto.getText().toString().trim();
+        String emailPattern= "[A-Za-z0-9._]*+@[A-Za-z]*+.[A-Za-z]{2,3}";
+        if(email.matches(emailPattern)){
+            //el asterisco es que pueden aparecer las letras y los numeros 0 o mas veces
+            //{2-3} tiene que haber dos o tres caracteres despues del punto
+            formato = true;
+        }
+
+        return formato;
     }
 
     private void comprobarDatos(){
@@ -233,32 +250,5 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }catch(Exception e){
             e.getMessage();
         }
-    }
-
-    private void showPassword(){
-        // si la contraseña no esta visible, que se haga visible
-        //el showpass es el tf
-        //pass2 es el pf
-
-        if(pass1.getVisibility() == (View.VISIBLE)) {
-            //que el showpass sea visible
-            //va a aparecer el textfield
-            showPass2.setText(pass2.getText()); //paso el texto del pass2 al textfield
-            showPass2.setEnabled(true); // el text field se active
-            pass2.setEnabled(false); //el password field pasa a false
-            showPass1.setText(pass1.getText());
-            showPass1.setEnabled(true);
-            pass1.setEnabled(false);
-
-        }else{ //si pass2 no es visible desde el inicio
-            //que el password field sea visible
-            pass2.setText(showPass2.getText()); //lo que esta en el textfield le paso a passwordfield
-            showPass2.setEnabled(false); // el textfield lo inhabilito
-            pass2.setEnabled(true); //habilito el password field
-            pass1.setText(showPass1.getText());
-            showPass1.setEnabled(false);
-            pass1.setEnabled(true);
-        }
-
     }
 }
