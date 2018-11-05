@@ -10,21 +10,46 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import static android.view.View.VISIBLE;
+/**
+ * @author Markel Oñate
+ * @author Paula Lopez
+ * @since 2018
+ * @version 1.0
+ */
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
-    TextView textLogin,textFullName,texteMail,showPass2, showPass1;
-    EditText pass1, pass2;
+    /**
+     * @param textLogin Password 2 Show Text
+     */
+    TextView showPass2;
+
+    /**
+     * @param pass1 User Password EditText
+     * @param pass2 Repetition Of The User Password
+     * @param textLogin User Login EditText
+     * @param textFullName User Full Name EditText
+     * @param texteMail User eMail EditText
+     */
+    EditText pass1, pass2,textLogin,textFullName,texteMail;
+
+    /**
+     * @param btnRegistrarse User SignUp Button
+     * @param btnAtras Go Back To Login View Button
+     */
     Button btnRegistrarse,btnAtras;
+
+    /**
+     * @param btnShowPass Show Written Password Button
+     */
     ImageButton btnShowPass;
-    Boolean menor;
-    Boolean formatEmail;
-    Boolean iguales;
-    Boolean mayor8;
-    ImageView imLoading;
+    /**
+     * @param correcto User Data Correct Boolean
+     */
+    Boolean correcto;
 
-
+    /**
+     * Method that create the Registro View
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,15 +72,16 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras=findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(this);
 
-        imLoading=findViewById(R.id.imLoading);
-
+        correcto=true;
         //el progress bar es invisible desde un principio
-        menor=false;
+        imLoading=findViewById(R.id.imLoading);
         formatEmail=false;
-        mayor8=false;
-        iguales = false;
     }
 
+    /**
+     * Method That Checks Clicked Button
+     * @param v Clicked Button
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -71,12 +97,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 startActivity(inicio);
                 break;
             case R.id.btnShowPass2:
-                //que vaya al metodo showpassword
-                showPassword();
+                //
+                if(pass2.getVisibility()==View.VISIBLE){
+                    showPass2.setText(pass2.getText());
+                    pass2.setVisibility(View.INVISIBLE);
+                    showPass2.setVisibility(View.VISIBLE);
+
+                }else{
+                    pass2.setVisibility(View.VISIBLE);
+                    showPass2.setVisibility(View.INVISIBLE);
+                }
                 break;
         }
     }
-
 
     private void controlarTodosLosCampos() {
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
@@ -84,139 +117,94 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        correcto=true;
+      
+        if(textLogin.getText().length()>0){// si el campo esta lleno
+            if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
 
-        if(textLogin.getText().length()>0){ // si el campo esta lleno
-            menor=menor255(textLogin);
-            if(!menor){ //controlar que el campo sea menor de 255
                 textLogin.setError("El Login De Ser Menor De 255");
+                textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            //cambiarlblComprobante("El Login Esta Vacio");
             textLogin.setError("Campo Requerido");
+            correcto=false;
         }
 
         if(textFullName.getText().length()>0){
-            menor=menor255(textFullName);
-            if(!menor){
+            if(textFullName.getText().length()>255){
                 textFullName.setError("El Nombre De Ser Menor De 255");
                 textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            //cambiarlblComprobante("El Nombre Esta Vacio");
             textFullName.setError("Campo Requerido");
+            correcto=false;
         }
 
         if(texteMail.getText().length()>0) {
-            formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
-            menor=menor255(texteMail);
+            if(texteMail.getText().length()<255){
+                formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
+     
             if(!formatEmail){
                 texteMail.setError("El formato no es el correcto");
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
-            if(!menor){
                 texteMail.setError("El Nombre De Ser Menor De 255");
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            //cambiarlblComprobante("El eMail Esta Vacio");
             texteMail.setError("Campo Requerido");
+            correcto=false;
         }
 
         if(pass1.getText().length()>0){
-            mayor8=contrasenaMayor8(pass1);
-            menor=menor255(pass1);
-            if(!menor){
-                pass1.setError("La Contraseña Debe Ser Menor De 255");
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            }else if(!mayor8){
+            if(pass1.getText().length()>8){
                 pass1.setError("La Contraseña Debe Ser Mayor De 8");
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
+            }else if(pass1.getText().length()>255){
+                pass1.setError("La Contraseña Debe Ser Menor De 255");
+                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            //cambiarlblComprobante("La Primera Contraseña Esta Vacia");
             pass1.setError("Campo Requerido");
+            correcto=false;
         }
 
         if(pass2.getText().length()>0){
-            mayor8=contrasenaMayor8(pass2);
-            menor=menor255(pass2);
-            iguales=contrasenasIguales();
-            if(!menor){
-                pass1.setError("La Contraseña Debe Ser Menor De 255");
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            }else if(!mayor8){
-                pass1.setError("La Contraseña Debe Ser Mayor De 8");
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            }else if(!iguales){
-                pass1.setError("Las Contraseña Deben Ser Iguales");
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            if(pass2.getText().length()>8){
+                pass2.setError("La Contraseña Debe Ser Mayor De 8");
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
+            }else if(pass2.getText().length()>255){
+                pass2.setError("La Contraseña Debe Ser Menor De 255");
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
+            }else if(pass1.getText().equals(pass2.getText())){
+                pass2.setError("Las Contraseña Deben Ser Iguales");
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            //cambiarlblComprobante("La Segunda Contraseña Esta Vacia");
             pass2.setError("Campo Requerido");
+            correcto=false;
         }
-        //una vez que compruebe que los campos estan llenos, las contraseñas estan iguales
+        if(correcto)
+            comprobarDatos();
 
-         if(textLogin.getText().length()>0 && textFullName.getText().length()>0 && texteMail.getText().length() >0 && pass1.getText().length()>0
-                 && pass2.getText().length()>0 && menor && mayor8 && iguales && formatEmail){
-            //en el momento que vaya a comprobar con la base de datos, que se ponga la imagen
-            imLoading.setVisibility(View.VISIBLE);
-             comprobarDatos();
-
-    }}
-
-    private Boolean contrasenaMayor8(EditText texto) {
-        Boolean mayor=false;
-        if(texto.getText().length()>=8){
-            mayor=true;
-        }
-        return mayor;
-    }
-
-    private Boolean menor255(EditText texto) {
-        Boolean menor=false;
-        if(texto.getText().length()<=255){
-            menor=true;
-        }
-        return menor;
-    }
-
-    private Boolean menor255(TextView texto) {
-        Boolean menor=false;
-        if(texto.getText().length()<=255){
-            menor=true;
-        }
-        return menor;
-    }
-    private Boolean emailFormat(TextView texto){
-        boolean formato = false;
-        String email = texto.getText().toString().trim();
-        String emailPattern= "[A-Za-z0-9._]*+@[A-Za-z]*+.[A-Za-z]{2,3}";
-        if(email.matches(emailPattern)){
-            //el asterisco es que pueden aparecer las letras y los numeros 0 o mas veces
-            //{2-3} tiene que haber dos o tres caracteres despues del punto
-            formato = true;
-        }
-
-        return formato;
-    }
-
-    private Boolean contrasenasIguales() {
-        Boolean iguales=false;
-        if(pass1!=pass2){
-            iguales=true;
-        }
-        return iguales;
     }
 
     private void comprobarDatos(){

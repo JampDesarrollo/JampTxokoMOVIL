@@ -91,13 +91,13 @@
         android:fontFamily="@font/alef"
         android:hint="@string/registro_Contraseña"
         android:inputType="textAutoComplete|textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/PasswordLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfeMail" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/PasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -133,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/pfPassword2"
             app:layout_constraintTop_toTopOf="parent" />
-
+      
         <TextView
             android:id="@+id/tfShowPass2"
             android:layout_width="0dp"
@@ -145,51 +145,85 @@
             app:layout_constraintEnd_toEndOf="@+id/pfPassword2"
             app:layout_constraintStart_toStartOf="@+id/pfPassword2"
             app:layout_constraintTop_toTopOf="@+id/pfPassword2" />
+
+        <ImageButton
+            android:id="@+id/btnShowPass2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/show_password_2"
+            android:elevation="0dp"
+            android:foregroundGravity="center_vertical|center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pfPassword2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/ic_menu_view" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/lblComprobante"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
+        android:layout_height="19dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/registro_Comprobante"
         android:textAlignment="center"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordLayout" />
 
-    <Button
-        android:id="@+id/btnAtras"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/ButtonsLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:background="@color/colorJAMP"
-        android:text="@string/registro_Atras"
-        android:textColor="@color/blanco"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnRegistrarse"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btnRegistrarse"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginStart="8dp"
-        android:background="@color/colorJAMP"
-        android:text="@string/registro_Registrarse"
-        android:textColor="@color/blanco"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnAtras" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblComprobante">
+
+        <Button
+            android:id="@+id/btnAtras"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorJAMP"
+            android:fontFamily="@font/alef"
+            android:text="@string/registro_Atras"
+            android:textColor="@color/blanco"
+            android:textSize="18sp"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnRegistrarse"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRegistrarse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@color/colorJAMP"
+            android:fontFamily="@font/alef"
+            android:text="@string/registro_Registrarse"
+            android:textColor="@color/blanco"
+            android:textSize="18sp"
+            android:typeface="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnAtras"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <ImageView
         android:id="@+id/imageView2"
