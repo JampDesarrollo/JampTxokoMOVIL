@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
 /**
  * @author Markel Oñate
  * @author Paula Lopez
@@ -59,6 +60,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
+        showPass1=findViewById(R.id.tfPassword1);
         showPass2=findViewById(R.id.tfShowPass2);
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
@@ -71,6 +73,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras.setOnClickListener(this);
 
         correcto=true;
+        //el progress bar es invisible desde un principio
+        imLoading=findViewById(R.id.imLoading);
+        formatEmail=false;
     }
 
     /**
@@ -80,13 +85,15 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-                //
+
                 controlarTodosLosCampos();
+                // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
             case R.id.btnAtras:
-                //
-                Intent inicio=new Intent(getApplicationContext(),Registro.class);
+                //si pulso en el boton atras que vaya a la ventana de inicio
+                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(inicio);
                 break;
             case R.id.btnShowPass2:
@@ -100,14 +107,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                     pass2.setVisibility(View.VISIBLE);
                     showPass2.setVisibility(View.INVISIBLE);
                 }
-
                 break;
         }
     }
 
-    /**
-     *
-     */
     private void controlarTodosLosCampos() {
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
@@ -115,9 +118,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         correcto=true;
+      
+        if(textLogin.getText().length()>0){// si el campo esta lleno
+            if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
 
-        if(textLogin.getText().length()>0){
-            if(textLogin.getText().length()>255){
                 textLogin.setError("El Login De Ser Menor De 255");
                 textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
@@ -143,7 +147,13 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
 
         if(texteMail.getText().length()>0) {
-            if(texteMail.getText().length()>255){
+            if(texteMail.getText().length()<255){
+                formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
+     
+            if(!formatEmail){
+                texteMail.setError("El formato no es el correcto");
+                texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            }
                 texteMail.setError("El Nombre De Ser Menor De 255");
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
@@ -223,5 +233,32 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }catch(Exception e){
             e.getMessage();
         }
+    }
+
+    private void showPassword(){
+        // si la contraseña no esta visible, que se haga visible
+        //el showpass es el tf
+        //pass2 es el pf
+
+        if(pass1.getVisibility() == (View.VISIBLE)) {
+            //que el showpass sea visible
+            //va a aparecer el textfield
+            showPass2.setText(pass2.getText()); //paso el texto del pass2 al textfield
+            showPass2.setEnabled(true); // el text field se active
+            pass2.setEnabled(false); //el password field pasa a false
+            showPass1.setText(pass1.getText());
+            showPass1.setEnabled(true);
+            pass1.setEnabled(false);
+
+        }else{ //si pass2 no es visible desde el inicio
+            //que el password field sea visible
+            pass2.setText(showPass2.getText()); //lo que esta en el textfield le paso a passwordfield
+            showPass2.setEnabled(false); // el textfield lo inhabilito
+            pass2.setEnabled(true); //habilito el password field
+            pass1.setText(showPass1.getText());
+            showPass1.setEnabled(false);
+            pass1.setEnabled(true);
+        }
+
     }
 }
