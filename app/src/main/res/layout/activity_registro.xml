@@ -113,6 +113,7 @@
             android:id="@+id/pfPassword2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:ems="10"
             android:fontFamily="@font/alef"
             android:hint="@string/registro_Contraseña"
@@ -124,33 +125,9 @@
 
         <ImageButton
             android:id="@+id/btnShowPass2"
-            android:layout_width="39dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="8dp"
-            android:contentDescription="@string/show_password_2"
-            android:src="@android:drawable/ic_menu_view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pfPassword2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tfShowPass2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fontFamily="@font/alef"
-            android:gravity="center_vertical"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pfPassword2"
-            app:layout_constraintEnd_toEndOf="@+id/pfPassword2"
-            app:layout_constraintStart_toStartOf="@+id/pfPassword2"
-            app:layout_constraintTop_toTopOf="@+id/pfPassword2" />
-
-        <ImageButton
-            android:id="@+id/btnShowPass2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:contentDescription="@string/show_password_2"
             android:elevation="0dp"
             android:foregroundGravity="center_vertical|center_horizontal"

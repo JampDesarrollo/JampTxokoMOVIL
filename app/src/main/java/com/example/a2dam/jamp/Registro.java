@@ -3,6 +3,7 @@ package com.example.a2dam.jamp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +19,6 @@ import android.widget.TextView;
  */
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
-    /**
-     * @param textLogin Password 2 Show Text
-     */
-    TextView showPass2;
-
     /**
      * @param pass1 User Password EditText
      * @param pass2 Repetition Of The User Password
@@ -46,7 +42,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
      * @param correcto User Data Correct Boolean
      * @param format User email Correct format Boolean
      */
-    Boolean correcto,formatEmail;
+    Boolean correcto,formatEmail,bTextVisible;
 
     ImageView imLoading;
 
@@ -63,7 +59,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
-        showPass2=findViewById(R.id.tfShowPass2);
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
         btnRegistrarse.setOnClickListener(this);
@@ -75,6 +70,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras.setOnClickListener(this);
 
         correcto=true;
+        bTextVisible=false;
 
         //el progress bar es invisible desde un principio
         imLoading=findViewById(R.id.imLoading);
@@ -101,15 +97,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.btnShowPass2:
                 //
-                if(pass2.getVisibility()==View.VISIBLE){
-                    showPass2.setText(pass2.getText());
-                    pass2.setVisibility(View.INVISIBLE);
-                    showPass2.setVisibility(View.VISIBLE);
-
-                }else{
-                    pass2.setVisibility(View.VISIBLE);
-                    showPass2.setVisibility(View.INVISIBLE);
-                }
+                showPassword();
                 break;
         }
     }
@@ -249,6 +237,16 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             //conectar con la base de datos y comprobar el Login
         }catch(Exception e){
             e.getMessage();
+        }
+    }
+
+    private void showPassword() {
+        if(!bTextVisible){
+            pass2.setInputType(InputType.TYPE_CLASS_TEXT);
+            bTextVisible = true;
+        }else  {
+            pass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            bTextVisible = false;
         }
     }
 }
