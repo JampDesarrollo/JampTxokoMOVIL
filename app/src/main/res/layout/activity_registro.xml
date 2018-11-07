@@ -171,7 +171,7 @@
         <Button
             android:id="@+id/btnAtras"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginEnd="4dp"
             android:background="@color/colorJAMP"
             android:fontFamily="@font/alef"
@@ -201,7 +201,7 @@
         <Button
             android:id="@+id/btnRegistrarse"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="4dp"
             android:background="@color/colorJAMP"
             android:fontFamily="@font/alef"
