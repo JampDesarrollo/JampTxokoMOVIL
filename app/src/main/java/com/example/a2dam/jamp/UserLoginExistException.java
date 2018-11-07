@@ -5,21 +5,16 @@
  */
 package com.example.a2dam.jamp;
 
-
-
 /**
- *
- * @author paula
+ * Exception thrown when the user login exist on database
+ * @author ander
  */
-public class UserNotExistException extends Exception {
-
-    public UserNotExistException(String msg){
-
+public class UserLoginExistException extends Exception {
+     public UserLoginExistException(String msg){
         super(msg);
-
     }
 
-    public UserNotExistException() {
+    public UserLoginExistException() {
+    
     }
-
 }
