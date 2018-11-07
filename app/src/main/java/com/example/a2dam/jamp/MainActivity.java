@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView lblError,  tfUsuario;
     ImageView imLoading;
     ImageButton btnShowPass;
+    Boolean visible = false;
+    Boolean bTextVisible    = false;
 
 
 
@@ -55,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         */
     }
 
+    /**
+     * Metodo que indica que se va a hacer dependiendo del boton al que se pulse.
+     * @param v Recibe el parametro v que es la vista.
+     */
     @Override
     public void onClick(View v) {
         //en el momento que pulsa
@@ -75,6 +83,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Metodo de logIn. En el momento en el que el usuario pulse en el boton Iniciar Sesion
+     * vendrá a este metodo y hará todas las comprobaciones necesarias para poder Iniciar Sesion.
+     */
+
     private void logIn() {
 
       Boolean filled = chkAllFieldsFilled(); //vamos  a mirar que todos los campos esten llenos
@@ -93,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
-
-                   /* UserBean userReturn =comprobarDatos();
+                    /* UserBean userReturn =comprobarDatos();
                     //si el usuario que devuelve no es null
                     if(userReturn!=null){
                         //el gif se hara visible
@@ -106,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     imLoading.setVisibility(View.VISIBLE);
                     //que vaya a la ventana principal
                     Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                    //iniciarSesion.putExtra("Usuario", userReturn); //mandarle el usuario a la ventana principal
                     startActivity(iniciarSesion);
                 }else{
                     //si los caracteres se pasan del rango
@@ -147,16 +160,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Metodo para chekear que todos los campos estan llenos.
+     * @return devuelve un boolean indicando si estan llenos o no.
+     */
+
     private Boolean chkAllFieldsFilled() {
         //mirar si todos los campos estan llenos
         Boolean isFilled = false;
 
-        if(tfUsuario.getText().length()>0 && pfContraseña.getText().toString().trim().length()>0){
+        if(tfUsuario.getText().toString().trim().length()>0 && pfContraseña.getText().toString().trim().length()>0){
 
             isFilled = true;
         }
         return isFilled;
     }
+
+    /**
+     * Metodo para chekear los caracteres metiodos en el campo usuario y contraseña.
+     * @return Devuelve un booleano indicando si se han pasado de 255 o no.
+     */
 
     private Boolean maxCaracters() {
         Boolean maxCaracteres = false;
@@ -167,42 +190,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return maxCaracteres;
     }
+/**
+ * Metodo que comprueba si el usuario existe y si dicha contraseña está con ese usuario.
+ * En caso de que el usuario sea incorrecto salta la excepcion UserNotExistException.
+ * Si la contraseña es incorrecta salta la excepcion PasswordNotOkException.
+ * Si hay error al conectar con la base de datos salta Exception.
+ * @return Devuelve el usuario entero.
+ */
 /*
     private UserBean comprobarDatos() {
 
         //conectar con la base de datos
+        UserBean returnUser = null;
+        try {
+            UserBean usuario = new UserBean(tfUsuario.getText(), pfContraseña.getText());
+            returnUser = ilogic.userLogin(usuario);
+        }catch(UserNotExistException e){
 
-        return null;
+            tfUsuario.setError("Usuario o contraseña incorrecta");
+            pfContraseña.setError("Usuario o contraseña incorrecta");
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+
+        }catch(PasswordNotOkException e){
+
+            tfUsuario.setError("Usuario o contraseña incorrecta");
+            pfContraseña.setError("Usuario o contraseña incorrecta");
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+        }catch(Exception e){
+            //ERRROR AL CONECTAR CON LA BASE DE DATOS
+            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+        }
+        return returnUser;
 
     }
 
 */
+
+    /**
+     * Metodo para hacer visible u ocultar la contraseña.
+     */
     private void showPassword() {
-
-        if(pfContraseña.getInputType()==InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD){
-
-            //el texto que hay en el pfContraseña  se pasa al textfield
-            /*
-            textContraseña.setText(pfContraseña.getText());
-            pfContraseña.setEnabled(false);
-            textContraseña.setEnabled(true);
-
-            */
-            pfContraseña.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
-
-
-        }else{
-    /*
-            pfContraseña.setText(textContraseña.getText());
-            textContraseña.setEnabled(false);
-            pfContraseña.setEnabled(true);
-
-           */
-            pfContraseña.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-
-
-
-        }
+       if(bTextVisible == false){ //si no esta visible la contraseña
+           pfContraseña.setInputType(InputType.TYPE_CLASS_TEXT);
+           bTextVisible = true;
+          }else  {
+           pfContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+           //Toast.makeText(this,"HHHHHHHHHHHHHHHHHH", Toast.LENGTH_LONG).show();
+           bTextVisible = false;
+    }
     }
 
 }
