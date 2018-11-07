@@ -9,11 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.sql.Timestamp;
-
 import messageuserbean.UserBean;
 
 /**
@@ -32,6 +31,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
      * @param texteMail User eMail EditText
      */
     EditText pass1, pass2,textLogin,textFullName,texteMail;
+
+    TextView lblMessage;
 
     /**
      * @param btnRegistrarse User SignUp Button
@@ -65,6 +66,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
+
+        lblMessage=findViewById(R.id.lblComprobante);
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
         btnRegistrarse.setOnClickListener(this);
@@ -103,7 +106,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 startActivity(inicio);
                 break;
             case R.id.btnShowPass2:
-                //
+                //llamar al metodo show password para mostrar la contraseña
                 showPassword();
                 break;
         }
@@ -115,32 +118,36 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+
+        lblMessage.setText("");
+
         correcto=true;
+
       
         if(textLogin.getText().length()>0){// si el campo esta lleno
             if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
 
-                textLogin.setError("El Login De Ser Menor De 255");
+                textLogin.setError(this.getResources().getString(R.string.max_lenght_error));
                 textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textLogin.setError("Campo Requerido");
+            textLogin.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
 
         if(textFullName.getText().length()>0){
             if(textFullName.getText().length()>255){
-                textFullName.setError("El Nombre De Ser Menor De 255");
+                textFullName.setError(this.getResources().getString(R.string.max_lenght_error));
                 textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textFullName.setError("Campo Requerido");
+            textFullName.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
 
@@ -149,56 +156,56 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
      
                 if(!formatEmail) {
-                    texteMail.setError("El formato no es el correcto");
+                    texteMail.setError(this.getResources().getString(R.string.format_error));
                     texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }else{
-                texteMail.setError("El Nombre De Ser Menor De 255");
+                texteMail.setError(this.getResources().getString(R.string.max_lenght_error));
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            texteMail.setError("Campo Requerido");
+            texteMail.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
 
         if(pass1.getText().length()>0){
             if(pass1.getText().length()<8){
-                pass1.setError("La Contraseña Debe Ser Mayor De 8");
+                pass1.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass1.getText().length()>255){
-                pass1.setError("La Contraseña Debe Ser Menor De 255");
+                pass1.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass1.setError("Campo Requerido");
+            pass1.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
 
         if(pass2.getText().length()>0){
             if(pass2.getText().length()<8){
-                pass2.setError("La Contraseña Debe Ser Mayor De 8");
+                pass2.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass2.getText().length()>255){
-                pass2.setError("La Contraseña Debe Ser Menor De 255");
+                pass2.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass1.getText().equals(pass2.getText())){
-                pass2.setError("Las Contraseña Deben Ser Iguales");
+                pass2.setError(this.getResources().getString(R.string.pass_equals_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass2.setError("Campo Requerido");
+            pass2.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
         if(correcto)
@@ -206,6 +213,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    /**
+     *
+     * @param texto manda el email
+     * @return devuelve true si el formato del email es correcto
+     */
     private Boolean emailFormat(TextView texto){
         boolean formato = false;
         String email = texto.getText().toString().trim();
@@ -219,24 +231,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         return formato;
     }
 
-    private void comprobarDatos(){
-        comprobarLogin();
-    }
-
-
-    private void comprobarLogin() {
-        try{
-
-            Long tsLong = System.currentTimeMillis();
-            Timestamp now = new Timestamp(tsLong);
-            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
-                    pass1.getText().toString(), now, now);
-          ilogic.userSignUp(user);
-        }catch(Exception e){
-            e.getMessage();
-        }
-    }
-
     private void showPassword() {
         if(!bTextVisible){
             pass2.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -244,6 +238,24 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }else  {
             pass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             bTextVisible = false;
+        }
+    }
+
+    private void comprobarDatos(){
+        try{
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
+                    pass1.getText().toString(), now, now);
+            ilogic.userSignUp(user);
+        }catch(UserLoginExistException e){
+            lblMessage.setText(R.string.user_login_exist_error);
+            lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
+        }catch (IOException e){
+            lblMessage.setText(R.string.conection_error);
+            lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
+        }catch (Exception e){
+            lblMessage.setText(R.string.other_error);
+            lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
         }
     }
 }
