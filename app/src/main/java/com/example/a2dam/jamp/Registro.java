@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -10,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import messageuserbean.UserBean;
@@ -23,7 +21,7 @@ import messageuserbean.UserBean;
  */
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
-    /**
+    /*
      * @param pass1 User Password EditText
      * @param pass2 Repetition Of The User Password
      * @param textLogin User Login EditText
@@ -34,17 +32,17 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
     TextView lblMessage;
 
-    /**
+    /*
      * @param btnRegistrarse User SignUp Button
      * @param btnAtras Go Back To Login View Button
      */
     Button btnRegistrarse,btnAtras;
 
-    /**
+    /*
      * @param btnShowPass Show Written Password Button
      */
     ImageButton btnShowPass;
-    /**
+    /*
      * @param correcto User Data Correct Boolean
      * @param format User email Correct format Boolean
      */
@@ -102,8 +100,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.btnAtras:
                 //si pulso en el boton atras que vaya a la ventana de inicio
-                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(inicio);
+                /*Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(inicio);*/
+                finish();
                 break;
             case R.id.btnShowPass2:
                 //llamar al metodo show password para mostrar la contraseña
@@ -113,104 +112,109 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void controlarTodosLosCampos() {
+        //Restablecer Los Colores Por Defecto De Los Campos De Texto
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
+        //vaciar mensaje de error
         lblMessage.setText("");
 
+        //establecer correcto en true
         correcto=true;
 
-      
         if(textLogin.getText().length()>0){// si el campo esta lleno
             if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
-
+                //Cambiar color del campo de texto y establecer mensaje de error
                 textLogin.setError(this.getResources().getString(R.string.max_lenght_error));
                 textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
-            //Cambiar color del campo de texto
+            //Cambiar color del campo de texto y establecer mensaje de error
             textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             textLogin.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
-
         if(textFullName.getText().length()>0){
             if(textFullName.getText().length()>255){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 textFullName.setError(this.getResources().getString(R.string.max_lenght_error));
                 textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
-            //Cambiar color del campo de texto
+            //Cambiar color del campo de texto y establecer mensaje de error
             textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             textFullName.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
-
         if(texteMail.getText().length()>0) {
             if(texteMail.getText().length()<255){
                 formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
      
                 if(!formatEmail) {
+                    //Cambiar color del campo de texto y establecer mensaje de error
                     texteMail.setError(this.getResources().getString(R.string.format_error));
                     texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }else{
+                //Cambiar color del campo de texto y establecer mensaje de error
                 texteMail.setError(this.getResources().getString(R.string.max_lenght_error));
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
-            //Cambiar color del campo de texto
+            //Cambiar color del campo de texto y establecer mensaje de error
             texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             texteMail.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
-
         if(pass1.getText().length()>0){
             if(pass1.getText().length()<8){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 pass1.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass1.getText().length()>255){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 pass1.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
-            //Cambiar color del campo de texto
+            //Cambiar color del campo de texto y establecer mensaje de error
             pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             pass1.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
-
         if(pass2.getText().length()>0){
             if(pass2.getText().length()<8){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 pass2.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass2.getText().length()>255){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 pass2.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }else if(pass1.getText().equals(pass2.getText())){
+                //Cambiar color del campo de texto y establecer mensaje de error
                 pass2.setError(this.getResources().getString(R.string.pass_equals_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
-            //Cambiar color del campo de texto
+            //Cambiar color del campo de texto y establecer mensaje de error
             pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             pass2.setError(this.getResources().getString(R.string.field_requiered));
             correcto=false;
         }
         if(correcto)
             comprobarDatos();
-
     }
 
     /**
@@ -227,7 +231,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             //{2-3} tiene que haber dos o tres caracteres despues del punto
             formato = true;
         }
-
         return formato;
     }
 
