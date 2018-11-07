@@ -11,6 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.sql.Timestamp;
+
+import messageuserbean.UserBean;
+
 /**
  * @author Markel Oñate
  * @author Paula Lopez
@@ -45,6 +50,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     Boolean correcto,formatEmail,bTextVisible;
 
     ImageView imLoading;
+    private ILogic ilogic;
 
     /**
      * Method that create the Registro View
@@ -75,6 +81,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         //el progress bar es invisible desde un principio
         imLoading=findViewById(R.id.imLoading);
         formatEmail=false;
+        ilogic = ILogicFactory.getILogic();
     }
 
     /**
@@ -214,27 +221,17 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
     private void comprobarDatos(){
         comprobarLogin();
-        comprobarEmail();
-        comprobarContrasenas();
     }
 
-    private void comprobarContrasenas() {
-        try {
-            //conectar con la base de datos y comprobar la contraseña
-        }catch(Exception e){
-            e.getMessage();
-        }
-    }
-    private void comprobarEmail() {
-        try{
-            //conectar con la base de datos y comprobar el email
-        }catch(Exception e){
-            e.getMessage();
-        }
-    }
+
     private void comprobarLogin() {
         try{
-            //conectar con la base de datos y comprobar el Login
+
+            Long tsLong = System.currentTimeMillis();
+            Timestamp now = new Timestamp(tsLong);
+            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
+                    pass1.getText().toString(), now, now);
+          ilogic.userSignUp(user);
         }catch(Exception e){
             e.getMessage();
         }

@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import messageuserbean.UserBean;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button btnInicio, btnRegistrarse;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton btnShowPass;
     Boolean visible = false;
     Boolean bTextVisible    = false;
-
+    private ILogic ilogic;
 
 
 
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInicio.setOnClickListener(this);
         btnRegistrarse.setOnClickListener(this);
         btnShowPass.setOnClickListener(this);
+        ilogic = ILogicFactory.getILogic();
 
     /*
         btnInicio.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +109,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
-                    /* UserBean userReturn =comprobarDatos();
+                    UserBean userReturn =comprobarDatos();
                     //si el usuario que devuelve no es null
-                    if(userReturn!=null){
+                    if(userReturn!=null) {
                         //el gif se hara visible
                         imLoading.setVisibility(View.VISIBLE);
                         //que vaya a la ventana principal
                         Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
                         startActivity(iniciarSesion);
-                    }*/
-                    imLoading.setVisibility(View.VISIBLE);
-                    //que vaya a la ventana principal
-                    Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
-                    //iniciarSesion.putExtra("Usuario", userReturn); //mandarle el usuario a la ventana principal
-                    startActivity(iniciarSesion);
+                    }
                 }else{
                     //si los caracteres se pasan del rango
                     if(pfContraseña.getText().toString().trim().length()>255){
@@ -197,13 +195,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  * Si hay error al conectar con la base de datos salta Exception.
  * @return Devuelve el usuario entero.
  */
-/*
+
     private UserBean comprobarDatos() {
 
         //conectar con la base de datos
         UserBean returnUser = null;
         try {
-            UserBean usuario = new UserBean(tfUsuario.getText(), pfContraseña.getText());
+            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContraseña.getText().toString());
             returnUser = ilogic.userLogin(usuario);
         }catch(UserNotExistException e){
 
@@ -226,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-*/
+
 
     /**
      * Metodo para hacer visible u ocultar la contraseña.
