@@ -1,11 +1,13 @@
 package com.example.a2dam.jamp;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +20,11 @@ import org.w3c.dom.Text;
 
 import messageuserbean.UserBean;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler{
 
     Button btnInicio, btnRegistrarse;
-    EditText pfContraseña;
-    TextView lblError,  tfUsuario;
+    EditText pfContraseña, tfUsuario;
+    TextView lblError;
     ImageView imLoading;
     ImageButton btnShowPass;
     Boolean visible = false;
@@ -49,17 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrarse.setOnClickListener(this);
         btnShowPass.setOnClickListener(this);
         ilogic = ILogicFactory.getILogic();
-
-    /*
-        btnInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
-                startActivity(iniciarSesion);
-            }
-        });
-        */
     }
 
     /**
@@ -81,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
               // que vaya a la ventana de registro
               Intent registrar =new Intent(getApplicationContext(),Registro.class);
               startActivity(registrar);
+              tfUsuario.setText("");
+              pfContraseña.setText("");
+              lblError.setText("");
+              finish();
               break;
       }
 
@@ -97,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
       if(filled){ //si estan escritos
           //si todos los campos estan llenos, el label de error se va a poner invisible y se le quita el color rojo a los campos
-          lblError.setVisibility(View.INVISIBLE);
+
           pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
           tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
           //si todos los campos estan llenos miramos los caracteres
@@ -105,18 +100,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(max){
                     //si los caracteres son los indicados
-                    lblError.setVisibility(View.INVISIBLE);
                     pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
                     UserBean userReturn =comprobarDatos();
                     //si el usuario que devuelve no es null
-                    if(userReturn!=null) {
+                    if(userReturn.getId()!=0) {
                         //el gif se hara visible
                         imLoading.setVisibility(View.VISIBLE);
                         //que vaya a la ventana principal
                         Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                        iniciarSesion.putExtra("Usuario", userReturn);
                         startActivity(iniciarSesion);
+                        tfUsuario.setText("");
+                        pfContraseña.setText("");
+                        lblError.setText("");
+                        imLoading.setVisibility(View.INVISIBLE);
                     }
                 }else{
                     //si los caracteres se pasan del rango
@@ -139,18 +138,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
   }else{ //si no estan llenos los campos
-          if(pfContraseña.getText().toString().trim().length()==0){
+         /* if(pfContraseña.getText().toString().trim().length()==0 && tfUsuario.getText().toString().trim().length()==0) {
               pfContraseña.setError("Campo requerido");
+              tfUsuario.setError("Campo requerido");
+              tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
               pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
 
-          }else if (tfUsuario.getText().toString().trim().length()==0){
-              tfUsuario.setError("Campo requerido");
-              tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+          }*/
+          if (tfUsuario.getText().toString().trim().length()==0){
+          tfUsuario.setError("Campo requerido");
+          tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
 
-          }else{
+          }
+          if(pfContraseña.getText().toString().trim().length()==0){
               pfContraseña.setError("Campo requerido");
-              tfUsuario.setError("Campo requerido");
-              tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
               pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
 
           }
@@ -200,31 +201,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //conectar con la base de datos
         UserBean returnUser = null;
+
         try {
             UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContraseña.getText().toString());
-            returnUser = ilogic.userLogin(usuario);
-        }catch(UserNotExistException e){
-
-            tfUsuario.setError("Usuario o contraseña incorrecta");
-            pfContraseña.setError("Usuario o contraseña incorrecta");
-            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-
-        }catch(PasswordNotOkException e){
-
-            tfUsuario.setError("Usuario o contraseña incorrecta");
-            pfContraseña.setError("Usuario o contraseña incorrecta");
-            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-        }catch(Exception e){
-            //ERRROR AL CONECTAR CON LA BASE DE DATOS
+            //crear hilo
+            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
+            thread.setUncaughtExceptionHandler(this::uncaughtException);
+            //inicializar hilo
+            thread.start();
+            //esperar al que el hilo muera
+            thread.join();
+            //coger el user que he recibido
+            returnUser = thread.getUser();
+            //returnUser = ilogic.userLogin(usuario);
+        }catch(InterruptedException e){
             Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
         }
+
         return returnUser;
 
     }
-
-
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+     if (e.getCause() instanceof com.example.a2dam.jamp.UserNotExistException ) {
+         lblError.setText("Usuario o contraseña incorrecta");
+        }
+        else if( e.getCause() instanceof  com.example.a2dam.jamp.PasswordNotOkException) {
+         lblError.setText("Usuario o contraseña incorrecta");
+        }else {
+            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+        }
+    }
+//    @Override
+//    public void threadForSocketClientExceptionHandler(Thread t, Throwable e){
+//        try{
+//         throw e;
+//        } catch (UserNotExistException e1) {
+//            tfUsuario.setError("Usuario o contraseña incorrecta");
+//            pfContraseña.setError("Usuario o contraseña incorrecta");
+//            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+//            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+//        } catch (PasswordNotOkException e1){
+//            tfUsuario.setError("Usuario o contraseña incorrecta");
+//            pfContraseña.setError("Usuario o contraseña incorrecta");
+//            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+//            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+//        }catch (Throwable e1){
+//
+//            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
     /**
      * Metodo para hacer visible u ocultar la contraseña.
@@ -239,5 +265,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
            bTextVisible = false;
     }
     }
+
 
 }

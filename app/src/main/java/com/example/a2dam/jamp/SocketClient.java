@@ -6,11 +6,15 @@
  */
 package com.example.a2dam.jamp;
 
+import android.util.Log;
+
 import messageuserbean.UserBean;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,11 +37,13 @@ public class SocketClient {
     /**
      * Port from which the connection to the server socket will be done.
      */
-    private final String PORT = ResourceBundle.getBundle("config").getString("PORT");
+    private final String PORT ="5000";
+    // PropertyResourceBundle.getBundle("comººexample.a2dam.jamp.config").getString("PORT");
     /**
      * IP address the server socket has to connect to.
      */
-    private final String IP = ResourceBundle.getBundle(".config").getString("IP");
+    private final String IP = "10.22.82.131";
+            //PropertyResourceBundle.getBundle("com.example.a2dam.jamp.config").getString("IP");
 
     /**
      * Method for login in a user.
@@ -45,7 +51,7 @@ public class SocketClient {
      * @param user The user tipped in
      * @return UserBean Whole information of the user who has logged in
      */
-    public UserBean logIn(UserBean user) throws PasswordNotOkException, UserNotExistException, Exception {
+    public UserBean logIn(UserBean user) throws PasswordNotOkException, UserNotExistException,IOException {
 
         Socket client = null;
         ObjectInputStream input = null;
@@ -72,11 +78,9 @@ public class SocketClient {
                 case 22:
                     throw new UserNotExistException();
                 case -2:
-                    throw new Exception();
+                    throw new IOException("Error en lado servidor,");
             }
 
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SocketClient.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -103,7 +107,7 @@ public class SocketClient {
      *
      * @param user The user tipped in
      */
-    public void signUp(UserBean user) throws UserLoginExistException, Exception {
+    public void signUp(UserBean user) throws UserLoginExistException, IOException {
 
         Socket client = null;
         ObjectInputStream input = null;
@@ -127,10 +131,8 @@ public class SocketClient {
                 case 11:
                     throw new UserLoginExistException();
                 case -1:
-                    throw new Exception();
+                    throw new IOException();
             }
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
         } catch (ClassNotFoundException e) {
             System.out.println("Error: " + e.getMessage());
         } finally {
