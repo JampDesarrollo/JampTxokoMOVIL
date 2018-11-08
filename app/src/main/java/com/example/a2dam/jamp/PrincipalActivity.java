@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,18 +18,27 @@ import messageuserbean.UserBean;
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * Full name TextView
+     */
     TextView tfFullName;
+    /**
+     * Login TextView
+     */
     TextView tfLogin;
+    /**
+     * LastAcces TextView
+     */
     TextView tfLastAcces;
 
 
+    /**
+     * Method that create Principal Activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
-//       tfFullName = findViewById(R.id.tfFullName2);
-//       tfLogin = findViewById(R.id.tfLogin);
-//       tfLastAcces = findViewById(R.id.tfLastConnection);
 
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -42,15 +52,26 @@ public class PrincipalActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View hView = navigationView.getHeaderView(0);
 
-//        tfFullName.setText(user.getFullname());
-//        tfLogin.setText(user.getLogin());
-//        tfLastAcces.setText((CharSequence) user.getLastAccess());
+        tfFullName = hView.findViewById(R.id.tfFullName);
+        tfLogin = hView.findViewById(R.id.tfLogin);
+        tfLastAcces = hView.findViewById(R.id.tfLastConnection);
+
+//      UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
+//      tfFullName.setText(user.getFullname());
+//      tfLogin.setText(user.getLogin());
+//      tfLastAcces.setText((CharSequence) user.getLastAccess());
     }
 
+
+    /**
+     *  Method to close the nav header if is opened and
+     *  close the PrincipalActivity if nav_header is closed with back button
+     */
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -58,13 +79,23 @@ public class PrincipalActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Method that create menuOptions in PrincipalActivity
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.principal, menu);
         return true;
     }
 
+    /**
+     * Method that logOut and close PrincipalActivity
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -74,7 +105,11 @@ public class PrincipalActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Method that create nav_header and options
+     * @param item
+     * @return
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
