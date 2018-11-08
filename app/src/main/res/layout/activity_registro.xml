@@ -37,14 +37,14 @@
         android:ems="10"
         android:hint="@string/registro_Login"
         android:inputType="textAutoComplete|textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tfFullName"
+        app:layout_constraintBottom_toTopOf="@+id/tfFullName2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
 
     <EditText
-        android:id="@+id/tfFullName"
+        android:id="@+id/tfFullName2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/alef"
@@ -77,7 +77,7 @@
         app:layout_constraintBottom_toTopOf="@+id/pfPassword1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfFullName" />
+        app:layout_constraintTop_toBottomOf="@+id/tfFullName2" />
 
     <EditText
         android:id="@+id/pfPassword1"
@@ -146,9 +146,10 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:text="@string/registro_Comprobante"
+        android:text=""
         android:textAlignment="center"
-        android:visibility="invisible"
+        android:visibility="visible"
+        android:textColor="@android:color/holo_red_dark"
         app:layout_constraintBottom_toTopOf="@+id/ButtonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

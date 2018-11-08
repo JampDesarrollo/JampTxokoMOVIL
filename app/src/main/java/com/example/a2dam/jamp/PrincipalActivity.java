@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,14 +9,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import messageuserbean.UserBean;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    TextView tfFullName;
+    TextView tfLogin;
+    TextView tfLastAcces;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
+//       tfFullName = findViewById(R.id.tfFullName2);
+//       tfLogin = findViewById(R.id.tfLogin);
+//       tfLastAcces = findViewById(R.id.tfLastConnection);
+
         setContentView(R.layout.activity_principal);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -30,6 +42,10 @@ public class PrincipalActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+//        tfFullName.setText(user.getFullname());
+//        tfLogin.setText(user.getLogin());
+//        tfLastAcces.setText((CharSequence) user.getLastAccess());
     }
 
     @Override
@@ -53,8 +69,7 @@ public class PrincipalActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_logOut) {
-            Intent logOut = new Intent(this, MainActivity.class);
-            startActivity(logOut);
+           finish();
         }
         return super.onOptionsItemSelected(item);
     }
