@@ -36,7 +36,7 @@
     <string name="conection_error">Ha habido un error con la conexion</string>
     <string name="other_error">Ha habido un error</string>
     <string name="field_requiered">Campo Requerido</string>
-    <string name="max_lenght_error">El Camp Debe Ser Menor De 255</string>
+    <string name="max_lenght_error">El Campo Debe Ser Menor De 255</string>
     <string name="pass_equals_error">Las Contraseña Deben Ser Iguales</string>
     <string name="pass_min_lenght_error">La Contraseña Debe Ser Mayor De 8</string>
     <string name="format_error">El formato no es el correcto</string>
