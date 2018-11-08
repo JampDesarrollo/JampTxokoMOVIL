@@ -244,6 +244,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+
     /**
      * method that connect to the ilogic class to connect with the database
      */
