@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -8,9 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.io.IOException;
 import java.sql.Timestamp;
 import messageuserbean.UserBean;
@@ -23,52 +20,57 @@ import messageuserbean.UserBean;
  */
 
 public class Registro extends AppCompatActivity implements View.OnClickListener{
-    /**
-     * @param pass1 User Password EditText
-     * @param pass2 Repetition Of The User Password
-     * @param textLogin User Login EditText
-     * @param textFullName User Full Name EditText
-     * @param texteMail User eMail EditText
+    /*
+     *  pass1 User Password EditText
+     *  pass2 Repetition Of The User Password
+     *  textLogin User Login EditText
+     *  textFullName User Full Name EditText
+     *  texteMail User eMail EditText
      */
     EditText pass1, pass2,textLogin,textFullName,texteMail;
 
+    //lblMesassage Exception error messages
     TextView lblMessage;
 
-    /**
-     * @param btnRegistrarse User SignUp Button
-     * @param btnAtras Go Back To Login View Button
+    /*
+     * btnRegistrarse User SignUp Button
+     * btnAtras Go Back To Login View Button
      */
     Button btnRegistrarse,btnAtras;
 
-    /**
-     * @param btnShowPass Show Written Password Button
-     */
+    // btnShowPass Show Written Password Button
     ImageButton btnShowPass;
-    /**
-     * @param correcto User Data Correct Boolean
-     * @param format User email Correct format Boolean
+
+    /*
+     * correcto User Data Correct Boolean
+     * format User email Correct format Boolean
      */
     Boolean correcto,formatEmail,bTextVisible;
 
-    ImageView imLoading;
+    //declarar la variable ilogic
     private ILogic ilogic;
 
     /**
-     * Method that create the Registro View
+     * Method that create the Registro Activity
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        // relacionar las nuevas variables con las del xml de registro
+
+        //Los EditText
         textLogin =findViewById(R.id.tfLogin);
         textFullName =findViewById(R.id.tfFullName);
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
 
+        //El TextView
         lblMessage=findViewById(R.id.lblComprobante);
 
+        //Los Botones
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
         btnRegistrarse.setOnClickListener(this);
 
@@ -78,12 +80,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         btnAtras=findViewById(R.id.btnAtras);
         btnAtras.setOnClickListener(this);
 
+        //Inicializar los boolean
         correcto=true;
         bTextVisible=false;
-
-        //el progress bar es invisible desde un principio
-        imLoading=findViewById(R.id.imLoading);
         formatEmail=false;
+
         ilogic = ILogicFactory.getILogic();
     }
 
@@ -94,16 +95,14 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            // si le da al boton de registro, vaya al metodo para comprobar todos los campos
-            case R.id.btnRegistrarse:
 
+            case R.id.btnRegistrarse:
+                // si le da al boton de registro, vaya al metodo para comprobar todos los campos
                 controlarTodosLosCampos();
-                // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
             case R.id.btnAtras:
-                //si pulso en el boton atras que vaya a la ventana de inicio
-                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(inicio);
+                //si pulso en el boton atras que vaya a la ventana anterior cerrando la presente
+                finish();
                 break;
             case R.id.btnShowPass2:
                 //llamar al metodo show password para mostrar la contraseña
@@ -112,148 +111,155 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         }
     }
 
+    /**
+     * method that control all fields
+     */
     private void controlarTodosLosCampos() {
+        //Establecer los valores por defecto de los campos de la ventana de registro
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-
         lblMessage.setText("");
-
         correcto=true;
 
-      
-        if(textLogin.getText().length()>0){// si el campo esta lleno
-            if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
+        //Empieza a comprobar todos los campos de uno en uno
+        if(textLogin.getText().length()>0){//controlar que el campo sea mayor de 0
+            if(textLogin.getText().length()>255){//controlar que el campo sea mayor de 255
 
-                textLogin.setError(this.getResources().getString(R.string.max_lenght_error));
-                textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+                textLogin.setError(this.getResources().getString(R.string.max_lenght_error));//establecer el campo de error
+                textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }
         }else{
             //Cambiar color del campo de texto
-            textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textLogin.setError(this.getResources().getString(R.string.field_requiered));
-            correcto=false;
+            textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+            textLogin.setError(this.getResources().getString(R.string.field_requiered));//establecer el campo de error
+            correcto=false;//inicializa el boolean correcto a falso por fallar
         }
 
-        if(textFullName.getText().length()>0){
-            if(textFullName.getText().length()>255){
-                textFullName.setError(this.getResources().getString(R.string.max_lenght_error));
-                textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+        if(textFullName.getText().length()>0){//controlar que el campo sea mayor de 0
+            if(textFullName.getText().length()>255){//controlar que el campo sea mayor de 255
+                textFullName.setError(this.getResources().getString(R.string.max_lenght_error));//establecer el campo de error
+                textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }
         }else{
             //Cambiar color del campo de texto
-            textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textFullName.setError(this.getResources().getString(R.string.field_requiered));
-            correcto=false;
+            textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+            textFullName.setError(this.getResources().getString(R.string.field_requiered));//establecer el campo de error
+            correcto=false;//inicializa el boolean correcto a falso por fallar
         }
 
-        if(texteMail.getText().length()>0) {
-            if(texteMail.getText().length()<255){
+        if(texteMail.getText().length()>0) {//controlar que el campo sea mayor de 0
+            if(texteMail.getText().length()<255){//controlar que el campo sea menor de 255
                 formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
      
                 if(!formatEmail) {
-                    texteMail.setError(this.getResources().getString(R.string.format_error));
-                    texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    texteMail.setError(this.getResources().getString(R.string.format_error));//establecer el campo de error
+                    texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                    correcto=false;//inicializa el boolean correcto a falso por fallar
                 }
             }else{
-                texteMail.setError(this.getResources().getString(R.string.max_lenght_error));
-                texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+                texteMail.setError(this.getResources().getString(R.string.max_lenght_error));//establecer el campo de error
+                texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }
         }else{
             //Cambiar color del campo de texto
-            texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            texteMail.setError(this.getResources().getString(R.string.field_requiered));
-            correcto=false;
+            texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+            texteMail.setError(this.getResources().getString(R.string.field_requiered));//establecer el campo de error
+            correcto=false;//inicializa el boolean correcto a falso por fallar
         }
 
-        if(pass1.getText().length()>0){
-            if(pass1.getText().length()<8){
-                pass1.setError(this.getResources().getString(R.string.pass_min_lenght_error));
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
-            }else if(pass1.getText().length()>255){
-                pass1.setError(this.getResources().getString(R.string.max_lenght_error));
-                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+        if(pass1.getText().length()>0){//controlar que el campo sea mayor de 0
+            if(pass1.getText().length()<8){//controlar que el campo sea menor de 8
+                pass1.setError(this.getResources().getString(R.string.pass_min_lenght_error));//establecer el campo de error
+                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
+            }else if(pass1.getText().length()>255){//controlar que el campo sea mayor de 255
+                pass1.setError(this.getResources().getString(R.string.max_lenght_error));//establecer el campo de error
+                pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }
         }else{
             //Cambiar color del campo de texto
-            pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass1.setError(this.getResources().getString(R.string.field_requiered));
-            correcto=false;
+            pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+            pass1.setError(this.getResources().getString(R.string.field_requiered));//establecer el campo de error
+            correcto=false;//inicializa el boolean correcto a falso por fallar
         }
 
-        if(pass2.getText().length()>0){
-            if(pass2.getText().length()<8){
-                pass2.setError(this.getResources().getString(R.string.pass_min_lenght_error));
-                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
-            }else if(pass2.getText().length()>255){
-                pass2.setError(this.getResources().getString(R.string.max_lenght_error));
-                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+        if(pass2.getText().length()>0){//controlar que el campo sea mayor de 0
+            if(pass2.getText().length()<8){//controlar que el campo sea menor de 8
+                pass2.setError(this.getResources().getString(R.string.pass_min_lenght_error));//establecer el campo de error
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
+            }else if(pass2.getText().length()>255){//controlar que el campo sea mayor de 255
+                pass2.setError(this.getResources().getString(R.string.max_lenght_error));//establecer el campo de error
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }else if(pass1.getText().equals(pass2.getText())){
-                pass2.setError(this.getResources().getString(R.string.pass_equals_error));
-                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                correcto=false;
+                pass2.setError(this.getResources().getString(R.string.pass_equals_error));//establecer el campo de error
+                pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+                correcto=false;//inicializa el boolean correcto a falso por fallar
             }
         }else{
             //Cambiar color del campo de texto
-            pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass2.setError(this.getResources().getString(R.string.field_requiered));
-            correcto=false;
+            pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));//pintar de rojo la linea de debajo del texto
+            pass2.setError(this.getResources().getString(R.string.field_requiered));//establecer el campo de error
+            correcto=false;//inicializa el boolean correcto a falso por fallar
         }
+
+        // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces la llamada al metodo que hace la conexion a la base de datos
         if(correcto)
             comprobarDatos();
-
     }
 
     /**
-     *
      * @param texto manda el email
-     * @return devuelve true si el formato del email es correcto
+     * @return formato devuelve true si el formato del email es correcto
      */
     private Boolean emailFormat(TextView texto){
         boolean formato = false;
-        String email = texto.getText().toString().trim();
-        String emailPattern= "[A-Za-z0-9._]*+@[A-Za-z]*+.[A-Za-z]{2,3}";
-        if(email.matches(emailPattern)){
+        String emailPattern= "[A-Za-z0-9._]*+@[A-Za-z]*+.[A-Za-z]{2,3}";//crear un email pattern
+        if(texto.getText().toString().trim().matches(emailPattern)){//comparar el emailpattern con el email introducido para comprobar que tenga un buen formato
             //el asterisco es que pueden aparecer las letras y los numeros 0 o mas veces
             //{2-3} tiene que haber dos o tres caracteres despues del punto
-            formato = true;
+            formato = true;//si el formato es correcto se inicializa a true y se devuelve al metodo que lo ha llamado
         }
-
         return formato;
     }
 
+    /**
+     * method that show the password fields
+     */
     private void showPassword() {
-        if(!bTextVisible){
+        if(!bTextVisible){//si la contraseña no se visualiza como texto plano cambiar el tipo de dato a textview
             pass2.setInputType(InputType.TYPE_CLASS_TEXT);
             bTextVisible = true;
-        }else  {
+        }else  {//si la contraseña se visualiza como texto plano cambiar el tipo de dato a passwordfield
             pass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             bTextVisible = false;
         }
     }
 
+    /**
+     * method that connect to the ilogic class to connect with the database
+     */
     private void comprobarDatos(){
         try{
-            Timestamp now = new Timestamp(System.currentTimeMillis());
+            Timestamp now = new Timestamp(System.currentTimeMillis());//crear una variable de tipo timestap con la fecha del momento para mandarla a la base de datos
             UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
-                    pass1.getText().toString(), now, now);
-            ilogic.userSignUp(user);
-        }catch(UserLoginExistException e){
+                    pass1.getText().toString(), now, now); //crear un userbean con los datos introducidos anteriormente y la hora del momento
+            ilogic.userSignUp(user);//mandar el usuario con todos los datos al metodo userSignUp de la clase iLogic
+        }catch(UserLoginExistException e){//si salta la excepcion establecer un mensaje de error en el textview y pinta de rojo el contenido del campo de texto
             lblMessage.setText(R.string.user_login_exist_error);
             lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
-        }catch (IOException e){
+        }catch (IOException e){//si salta la excepcion establecer un mensaje de error en el textview y pinta de rojo el contenido del campo de texto
             lblMessage.setText(R.string.conection_error);
             lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
-        }catch (Exception e){
+        }catch (Exception e){//si salta la excepcion establecer un mensaje de error en el textview y pinta de rojo el contenido del campo de texto
             lblMessage.setText(R.string.other_error);
             lblMessage.setTextColor(this.getResources().getColorStateList(R.color.rojo));
         }
