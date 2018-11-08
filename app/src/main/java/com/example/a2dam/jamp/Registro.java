@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Timestamp;
 
@@ -23,7 +23,7 @@ import messageuserbean.UserBean;
  * @version 1.0
  */
 
-public class Registro extends AppCompatActivity implements View.OnClickListener{
+public class Registro extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler{
     /**
      * @param pass1 User Password EditText
      * @param pass2 Repetition Of The User Password
@@ -47,9 +47,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
      * @param correcto User Data Correct Boolean
      * @param format User email Correct format Boolean
      */
-    Boolean correcto,formatEmail,bTextVisible;
+    Boolean correcto,formatEmail,bTextVisible, allOK;
 
     ImageView imLoading;
+    TextView lblError;
     private ILogic ilogic;
 
     /**
@@ -61,7 +62,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_registro);
 
         textLogin =findViewById(R.id.tfLogin);
-        textFullName =findViewById(R.id.tfFullName);
+        textFullName =findViewById(R.id.tfFullName2);
         texteMail =findViewById(R.id.tfeMail);
         pass1=findViewById(R.id.pfPassword1);
         pass2=findViewById(R.id.pfPassword2);
@@ -77,10 +78,12 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
 
         correcto=true;
         bTextVisible=false;
+        allOK=true;
 
         //el progress bar es invisible desde un principio
         imLoading=findViewById(R.id.imLoading);
         formatEmail=false;
+        lblError=findViewById(R.id.lblComprobante);
         ilogic = ILogicFactory.getILogic();
     }
 
@@ -99,8 +102,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.btnAtras:
                 //si pulso en el boton atras que vaya a la ventana de inicio
-                Intent inicio=new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(inicio);
+                finish();
                 break;
             case R.id.btnShowPass2:
                 //
@@ -201,8 +203,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
             pass2.setError("Campo Requerido");
             correcto=false;
         }
-        if(correcto)
+        if(correcto) {
             comprobarDatos();
+        }
 
     }
 
@@ -220,28 +223,53 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     }
 
     private void comprobarDatos(){
-        comprobarLogin();
-    }
-
-
-    private void comprobarLogin() {
         try{
-
             Long tsLong = System.currentTimeMillis();
             Timestamp now = new Timestamp(tsLong);
             UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
                     pass1.getText().toString(), now, now);
-          ilogic.userSignUp(user);
-        }catch(Exception e){
-            e.getMessage();
+            //crear hilo
+            ThreadForSocketClient thread = new ThreadForSocketClient(user, ilogic, 1);
+            thread.setUncaughtExceptionHandler(this::uncaughtException);
+            //inicializar hilo
+            thread.start();
+            //esperar al que el hilo muera
+            thread.join();
+            if (allOK) {
+                Intent registrar = new Intent(Registro.this, PrincipalActivity.class);
+                registrar.putExtra("usuarioRegistro", user);
+                startActivity(registrar);
+                textLogin.setText("");
+                textFullName.setText("");
+                texteMail.setText("");
+                pass1.setText("");
+                pass2.setText("");
+                finish();
+            }
+        }catch(InterruptedException e){
+            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
         }
     }
 
+    @Override
+    public void uncaughtException(Thread t, Throwable e) {
+        if (e.getCause() instanceof com.example.a2dam.jamp.UserLoginExistException ) {
+            lblError.setText("Ese nombre de usuario existe");
+            allOK=false;
+        }else {
+            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+            allOK=false;
+        }
+    }
+
+
     private void showPassword() {
         if(!bTextVisible){
+            pass1.setInputType(InputType.TYPE_CLASS_TEXT);
             pass2.setInputType(InputType.TYPE_CLASS_TEXT);
             bTextVisible = true;
         }else  {
+            pass1.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             pass2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             bTextVisible = false;
         }
