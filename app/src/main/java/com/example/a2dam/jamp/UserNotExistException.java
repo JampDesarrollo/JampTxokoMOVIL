@@ -6,14 +6,15 @@
 package com.example.a2dam.jamp;
 
 
-
 /**
+ * Clase de excepcion para cuando el user no existe a la hora de hacer login
+ * Exception class for when the user doesn't exist.
  *
  * @author paula
  */
 public class UserNotExistException extends Exception {
 
-    public UserNotExistException(String msg){
+    public UserNotExistException(String msg) {
 
         super(msg);
 

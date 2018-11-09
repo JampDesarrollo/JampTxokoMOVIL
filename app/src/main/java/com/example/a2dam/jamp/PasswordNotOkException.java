@@ -6,12 +6,14 @@
 package com.example.a2dam.jamp;
 
 /**
+ * Clase de excepcion para cuando la contraseña no esta bien
+ * Excepction class for when the password doesn't exist.
  *
  * @author paula
  */
-public class PasswordNotOkException extends Exception{
+public class PasswordNotOkException extends Exception {
 
-    public PasswordNotOkException(String msg){
+    public PasswordNotOkException(String msg) {
 
         super(msg);
 

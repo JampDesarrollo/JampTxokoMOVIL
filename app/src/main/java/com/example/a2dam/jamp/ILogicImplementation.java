@@ -7,10 +7,12 @@ package com.example.a2dam.jamp;
 
 
 import java.util.logging.Logger;
+
 import messageuserbean.UserBean;
 
 /**
  * This class implements iLogic interface
+ *
  * @author Julen
  */
 public class ILogicImplementation implements ILogic {
@@ -22,6 +24,7 @@ public class ILogicImplementation implements ILogic {
 
     /**
      * This method register a new UserBean in database
+     *
      * @param user The UserBean object to be added
      * @throws UserLoginExistException, Exception.
      */
@@ -34,6 +37,7 @@ public class ILogicImplementation implements ILogic {
 
     /**
      * This method returns a UserBean after and make Login.
+     *
      * @param user The UserBean object to be added
      * @return UserBean
      * @throws UserNotExistException, PasswordNotOkException, Exception
