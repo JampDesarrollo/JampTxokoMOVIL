@@ -1,5 +1,9 @@
 package com.example.a2dam.jamp;
 
+/**
+ *
+ * @autor Ander
+ */
 
 import messageuserbean.UserBean;
 

@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import messageuserbean.UserBean;
 
 public class PrincipalActivity extends AppCompatActivity
@@ -34,6 +37,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     /**
      * Method that create Principal Activity
+     *
      * @param savedInstanceState
      */
     @Override
@@ -58,16 +62,17 @@ public class PrincipalActivity extends AppCompatActivity
         tfLogin = hView.findViewById(R.id.tfLogin);
         tfLastAcces = hView.findViewById(R.id.tfLastConnection);
 
-//      UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
-//      tfFullName.setText(user.getFullname());
-//      tfLogin.setText(user.getLogin());
-//      tfLastAcces.setText((CharSequence) user.getLastAccess());
+        UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
+        String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(user.getLastAccess());
+        tfFullName.setText(user.getFullname());
+        tfLogin.setText(user.getLogin());
+        tfLastAcces.setText("Ultimo acceso: " + date);
     }
 
 
     /**
-     *  Method to close the nav header if is opened and
-     *  close the PrincipalActivity if nav_header is closed with back button
+     * Method to close the nav header if is opened and
+     * close the PrincipalActivity if nav_header is closed with back button
      */
     @Override
     public void onBackPressed() {
@@ -81,6 +86,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     /**
      * Method that create menuOptions in PrincipalActivity
+     *
      * @param menu
      * @return
      */
@@ -93,6 +99,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     /**
      * Method that logOut and close PrincipalActivity
+     *
      * @param item
      * @return
      */
@@ -100,13 +107,14 @@ public class PrincipalActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_logOut) {
-           finish();
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
 
     /**
      * Method that create nav_header and options
+     *
      * @param item
      * @return
      */
@@ -115,7 +123,8 @@ public class PrincipalActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Toast toast = Toast.makeText(getApplicationContext(),
-                "Boton desactivado en este momento", Toast.LENGTH_SHORT);;
+                "Boton desactivado en este momento", Toast.LENGTH_SHORT);
+        ;
 
         if (id == R.id.nav_camera) {
             toast.show();
