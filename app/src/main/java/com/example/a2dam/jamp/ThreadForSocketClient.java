@@ -1,12 +1,15 @@
 package com.example.a2dam.jamp;
 
 /**
- *
+ * Method for comunication for server
  * @autor Ander
  */
 
 import messageuserbean.UserBean;
 
+/**
+ * Creation fro the thread
+ */
 public class ThreadForSocketClient extends Thread {
 
     private UserBean user;
@@ -22,6 +25,10 @@ public class ThreadForSocketClient extends Thread {
         this.ilogic=ilogic;
         this.code=i;
     }
+
+    /**
+     * Method that start the thread
+     */
     @Override
     public void run() {
         if(code==1){
