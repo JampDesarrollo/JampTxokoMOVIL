@@ -14,6 +14,9 @@ import messageuserbean.UserBean;
  * This class implements iLogic interface
  *
  * @author Julen
+ * @author Ander
+ * @author Markel
+ * @author Paula
  */
 public class ILogicImplementation implements ILogic {
 

@@ -10,6 +10,9 @@ import messageuserbean.UserBean;
 /**
  * Es la interfaz de lógica. Si hay que hacer una llamada entre dos objetos de
  * diferentes clases, se necesita una interfaz.
+ * @author Julen
+ * @author Ander
+ * @author Markel
  * @author Paula
  */
 public interface ILogic {

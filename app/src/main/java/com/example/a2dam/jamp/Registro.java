@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 import messageuserbean.UserBean;
 
 /**
+ * Class that controller register view
  * @author Markel Oñate
  * @author Paula Lopez
  * @since 2018

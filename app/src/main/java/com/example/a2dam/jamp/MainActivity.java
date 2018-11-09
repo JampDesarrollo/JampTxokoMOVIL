@@ -1,13 +1,9 @@
 package com.example.a2dam.jamp;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
-
 import messageuserbean.UserBean;
+
+/**
+ * Class that controller Login view
+ *
+ * @author Julen
+ * @author Ander
+ */
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler {
 
@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo que indica que se va a hacer dependiendo del boton al que se pulse.
+     * Method that indicates that it is going to be done depending on the button that is pressed.
      *
-     * @param v Recibe el parametro v que es la vista.
+     * @param v Receive the v parameter that is the view.
      */
     @Override
     public void onClick(View v) {
@@ -90,8 +90,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo de logIn. En el momento en el que el usuario pulse en el boton Iniciar Sesion
-     * vendrá a este metodo y hará todas las comprobaciones necesarias para poder Iniciar Sesion.
+     * LogIn method. At the moment when the user clicks on the button Start Session
+     * will come to this method and will do all the necessary checks to be able to start a session.
      */
 
     private void logIn() {
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo para chekear que todos los campos estan llenos.
+     * Method to check that all fields are full.
      *
      * @return devuelve un boolean indicando si estan llenos o no.
      */
@@ -166,9 +166,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo para chekear los caracteres metiodos en el campo usuario y contraseña.
+     *Method to check the characters entered in the user and password field.
      *
-     * @return Devuelve un booleano indicando si se han pasado de 255 o no.
+     * @return Returns a Boolean indicating whether it has been passed 255 or not.
      */
 
     private Boolean maxCaracters() {
@@ -181,10 +181,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo que comprueba si el usuario existe y si dicha contraseña está con ese usuario.
-     * En caso de que el usuario sea incorrecto salta la excepcion UserNotExistException.
-     * Si la contraseña es incorrecta salta la excepcion PasswordNotOkException.
-     * Si hay error al conectar con la base de datos salta Exception.
+     * Method that checks if the user exists and if said password is with that user.
+     * In case the user is incorrect, the UserNotExistException exception jumps.
+     * If the password is incorrect, the PasswordNotOkException exception jumps.
+     * If there is an error connecting to the database, Exception will be thrown.
      *
      * @return Devuelve el usuario entero.
      */
@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metodo para hacer visible u ocultar la contraseña.
+     * Method that make visible or hide the password
      */
     private void showPassword() {
         if (!bTextVisible) { //si no esta visible la contraseña

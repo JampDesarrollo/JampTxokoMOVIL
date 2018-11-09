@@ -6,16 +6,12 @@
  */
 package com.example.a2dam.jamp;
 
-import android.util.Log;
 
 import messageuserbean.UserBean;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Locale;
-import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import messageuserbean.Message;
