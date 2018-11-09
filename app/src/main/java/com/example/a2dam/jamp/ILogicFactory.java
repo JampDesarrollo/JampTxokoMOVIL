@@ -12,6 +12,9 @@ package com.example.a2dam.jamp;
  * Class that returns the objects that implements the interface
  *
  * @author Julen
+ * @author Ander
+ * @author Markel
+ * @author Paula
  */
 public class ILogicFactory {
 

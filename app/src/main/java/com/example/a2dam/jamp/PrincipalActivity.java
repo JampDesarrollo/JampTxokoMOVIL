@@ -12,12 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
-
-
 import messageuserbean.UserBean;
 
+/**
+ * Class that controller PrincipalActivity
+ * @author Julen
+ */
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -124,7 +125,6 @@ public class PrincipalActivity extends AppCompatActivity
         int id = item.getItemId();
         Toast toast = Toast.makeText(getApplicationContext(),
                 "Boton desactivado en este momento", Toast.LENGTH_SHORT);
-        ;
 
         if (id == R.id.nav_camera) {
             toast.show();
