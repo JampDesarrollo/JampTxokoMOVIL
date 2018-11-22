@@ -79,7 +79,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
 
         correcto=true;
         bTextVisible=false;
-        allOK=true;
 
         //el progress bar es invisible desde un principio
         imLoading=findViewById(R.id.imLoading);
@@ -234,6 +233,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
 
     private void comprobarDatos(){
         try{
+            allOK = true;
             Long tsLong = System.currentTimeMillis();
             Timestamp now = new Timestamp(tsLong);
             UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
@@ -249,11 +249,11 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
                 Intent registrar = new Intent(Registro.this, PrincipalActivity.class);
                 registrar.putExtra("Usuario", user);
                 startActivity(registrar);
-                textLogin.setText("");
-                textFullName.setText("");
-                texteMail.setText("");
-                pass1.setText("");
-                pass2.setText("");
+//                textLogin.setText("");
+//                textFullName.setText("");
+//                texteMail.setText("");
+//                pass1.setText("");
+//                pass2.setText("");
                 finish();
             }
         }catch(InterruptedException e){

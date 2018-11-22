@@ -40,4 +40,5 @@
     <string name="pass_equals_error">Las Contraseña Deben Ser Iguales</string>
     <string name="pass_min_lenght_error">La Contraseña Debe Ser Mayor De 8</string>
     <string name="format_error">El formato no es el correcto</string>
+    <string name="no_hay_conexion">Error, No hay conexion</string>
 </resources>

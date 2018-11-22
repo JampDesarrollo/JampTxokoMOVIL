@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (e.getCause() instanceof com.example.a2dam.jamp.PasswordNotOkException) {
             lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
         } else {
-            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
+            lblError.setText(this.getResources().getString(R.string.no_hay_conexion));
         }
     }
 

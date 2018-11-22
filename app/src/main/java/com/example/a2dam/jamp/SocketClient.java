@@ -38,7 +38,7 @@ public class SocketClient {
     /**
      * IP address the server socket has to connect to.
      */
-    private final String IP = "192.168.21.43";
+    private final String IP = "10.22.82.131";
             //PropertyResourceBundle.getBundle("com.example.a2dam.jamp.config").getString("IP");
 
     /**
