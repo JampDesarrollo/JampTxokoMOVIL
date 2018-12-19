@@ -14,14 +14,14 @@ import com.example.a2dam.jamp.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OutgoingFragment.OnFragmentInteractionListener} interface
+ * {@link ExpenseFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class OutgoingFragment extends Fragment {
+public class ExpenseFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public OutgoingFragment() {
+    public ExpenseFragment() {
         // Required empty public constructor
     }
 
@@ -29,7 +29,7 @@ public class OutgoingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_outgoing, container, false);
+        final View view = inflater.inflate(R.layout.fragment_expense, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Gastos");
 

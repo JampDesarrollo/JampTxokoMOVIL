@@ -29,7 +29,7 @@ public class TelephonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_telephon, container, false);
+        final View view = inflater.inflate(R.layout.fragment_telephone, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
 

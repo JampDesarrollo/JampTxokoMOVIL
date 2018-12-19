@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.fragments.EventFragment;
-import com.example.a2dam.jamp.fragments.OutgoingFragment;
+import com.example.a2dam.jamp.fragments.ExpenseFragment;
 import com.example.a2dam.jamp.fragments.ProductFragment;
 import com.example.a2dam.jamp.fragments.TelephonFragment;
 
@@ -68,7 +68,7 @@ public class PrincipalActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-
+        navigationView.setNavigationItemSelectedListener(this);
         View hView = navigationView.getHeaderView(0);
 
         tfFullName = hView.findViewById(R.id.tfFullName);
@@ -139,14 +139,10 @@ public class PrincipalActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "Boton desactivado en este momento", Toast.LENGTH_SHORT);
 
         if (id == R.id.nav_product) {
             setFragment(0);
-            toast.show();
         } else if (id == R.id.nav_event) {
-            toast.show();
             setFragment(1);
         } else if (id == R.id.nav_telephon) {
             setFragment(2);
@@ -158,33 +154,6 @@ public class PrincipalActivity extends AppCompatActivity
         return true;
     }
 
- /*   private void setupNavigationDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                menuItem -> {
-                    switch (menuItem.getItemId()) {
-                        case R.id.nav_product:
-                            menuItem.setChecked(true);
-                            setFragment(0);
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                            return true;
-                        case R.id.nav_event:
-                            menuItem.setChecked(true);
-                            setFragment(1);
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                            return true;
-                        case R.id.nav_telephon:
-                            menuItem.setChecked(true);
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                            return true;
-                        case R.id.nav_outgoings:
-                            menuItem.setChecked(true);
-                            drawerLayout.closeDrawer(GravityCompat.START);
-                            return true;
-                    }
-                    return true;
-                });
-    }
-*/
     public void setFragment(int position) {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
@@ -213,8 +182,8 @@ public class PrincipalActivity extends AppCompatActivity
             case 3:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                OutgoingFragment outgoingFragment = new OutgoingFragment();
-                fragmentTransaction.replace(R.id.fragment, outgoingFragment);
+                ExpenseFragment expenseFragment = new ExpenseFragment();
+                fragmentTransaction.replace(R.id.fragment, expenseFragment);
                 fragmentTransaction.commit();
                 break;
         }
