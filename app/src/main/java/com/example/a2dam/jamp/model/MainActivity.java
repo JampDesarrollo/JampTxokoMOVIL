@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp;
+package com.example.a2dam.jamp.model;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
+import com.example.a2dam.jamp.exceptions.UserNotExistException;
+import com.example.a2dam.jamp.logic.ILogic;
+import com.example.a2dam.jamp.logic.ILogicFactory;
+import com.example.a2dam.jamp.logic.ThreadForSocketClient;
+
 import messageuserbean.UserBean;
 
 /**
@@ -219,9 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        if (e.getCause() instanceof com.example.a2dam.jamp.UserNotExistException) {
+        if (e.getCause() instanceof UserNotExistException) {
             lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else if (e.getCause() instanceof com.example.a2dam.jamp.PasswordNotOkException) {
+        } else if (e.getCause() instanceof PasswordNotOkException) {
             lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
         } else {
             lblError.setText(this.getResources().getString(R.string.no_hay_conexion));

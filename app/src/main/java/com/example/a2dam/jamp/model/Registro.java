@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp;
+package com.example.a2dam.jamp.model;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.logic.ILogic;
+import com.example.a2dam.jamp.logic.ILogicFactory;
+import com.example.a2dam.jamp.logic.ThreadForSocketClient;
 
 import java.sql.Timestamp;
 
@@ -268,7 +274,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
      */
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        if (e.getCause() instanceof com.example.a2dam.jamp.UserLoginExistException ) {
+        if (e.getCause() instanceof UserLoginExistException) {
             lblError.setText("Ese nombre de usuario existe");
             allOK=false;
         }else {

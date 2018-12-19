@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp;
+package com.example.a2dam.jamp.logic;
 
 /**
  * Method for comunication for server

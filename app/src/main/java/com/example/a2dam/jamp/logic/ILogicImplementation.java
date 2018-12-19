@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.a2dam.jamp;
+package com.example.a2dam.jamp.logic;
 
+
+import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
+import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.exceptions.UserNotExistException;
 
 import java.util.logging.Logger;
 

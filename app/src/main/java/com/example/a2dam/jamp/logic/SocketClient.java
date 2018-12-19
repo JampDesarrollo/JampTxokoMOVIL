@@ -4,8 +4,12 @@
  * 
  * 
  */
-package com.example.a2dam.jamp;
+package com.example.a2dam.jamp.logic;
 
+
+import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
+import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.exceptions.UserNotExistException;
 
 import messageuserbean.UserBean;
 import java.io.IOException;
@@ -38,7 +42,7 @@ public class SocketClient {
     /**
      * IP address the server socket has to connect to.
      */
-    private final String IP = "10.22.82.131";
+    private final String IP = "192.168.0.157";
             //PropertyResourceBundle.getBundle("com.example.a2dam.jamp.config").getString("IP");
 
     /**

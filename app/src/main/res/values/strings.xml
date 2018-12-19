@@ -30,6 +30,10 @@
     <string name="login">Login</string>
     <string name="last_connection">Ultima Conexion: 10/01/1988</string>
     <string name="action_logOut">Cerrar Sesion</string>
+    <string name="nav_outgoings">Gastos</string>
+    <string name="nav_products">Gastos</string>
+    <string name="nav_telephon">Gastos</string>
+    <string name="nav_events">Gastos</string>
 
     //Mensajes Error
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>
@@ -41,4 +45,7 @@
     <string name="pass_min_lenght_error">La Contraseña Debe Ser Mayor De 8</string>
     <string name="format_error">El formato no es el correcto</string>
     <string name="no_hay_conexion">Error, No hay conexion</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
