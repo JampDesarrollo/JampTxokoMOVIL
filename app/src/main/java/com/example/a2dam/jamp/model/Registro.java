@@ -102,7 +102,6 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         switch (v.getId()){
             // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-
                 controlarTodosLosCampos();
                 // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
@@ -111,7 +110,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
                 finish();
                 break;
             case R.id.btnShowPass2:
-                //
+                //Boton Mostrar Contraseña
                 showPassword();
                 break;
         }
