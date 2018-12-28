@@ -1,4 +1,5 @@
 <resources>
+    //General
     <string name="app_name">JAMP</string>
     <string name="title_activity_principal">Menu Principal</string>
     <string name="navigation_drawer_open">Abrir el menú</string>
@@ -8,16 +9,19 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Ajustes</string>
 
+    //SignUp Page
     <string name="registro_Login">Nombre Usuario</string>
     <string name="registro_Titulo">Registro</string>
     <string name="registro_FullName">Nombre y Apellidos</string>
     <string name="registro_email">Email</string>
+    <string name="registro_Txoko">Id del Txoko</string>
     <string name="registro_Contraseña">Contraseña</string>
     <string name="registro_Comprobante">La contraseña debe tener minimo 8 caracteres.</string>
     <string name="show_password_2">Show Password 2</string>
     <string name="registro_Atras">Atras</string>
     <string name="loadingImage">Imagen Cargando</string>
 
+    //LogIn Page
     <string name="registro_Registrarse">Registrarse</string>
     <string name="usuario">Usuario</string>
     <string name="contrase_a">Contraseña</string>
@@ -28,14 +32,49 @@
     <string name="registrarse">Registrarse</string>
     <string name="ojo">Mostrar Contraseña</string>
     <string name="login">Login</string>
+    <string name="passForgot">¿Ha Olvidado La Contraseña?</string>
+
+    //Navigation Drawer
     <string name="last_connection">Ultima Conexion: 10/01/1988</string>
     <string name="action_logOut">Cerrar Sesion</string>
     <string name="nav_outgoings">Gastos</string>
-    <string name="nav_products">Gastos</string>
-    <string name="nav_telephon">Gastos</string>
-    <string name="nav_events">Gastos</string>
+    <string name="nav_products">Productos</string>
+    <string name="nav_telephon">Telefonos</string>
+    <string name="nav_events">Eventos</string>
+    <string name="nav_change_pass">Cambiar Contraseña</string>
+    <string name="telepizza">Telepizza</string>
 
-    //Mensajes Error
+    //Fragments
+        //Change Password
+        <string name="fragment_change_password_title">Cambiar Contraseña</string>
+        <string name="fragment_change_password_actual_pass">Introduzca la contraseña actual</string>
+        <string name="fragment_change_password_new_pass">Introduzca la nueva contraseña</string>
+        <string name="fragment_change_password_new_pass_2">Repita la nueva contraseña</string>
+        <string name="fragment_change_password_button">Cambiar</string>
+
+        //Products
+
+        //Events
+
+        //expense
+
+        //telephones
+
+
+    //Dialogos
+        //Dialogo Registro
+        <string name="Dialogo_Registro_Title">Se ha registrado con exito</string>
+        <string name="Dialogo_Registro_Content">Por Favor, Comuniquese con el administrador del txoko para activar su cuenta</string>
+        //Dialogo Productos
+        <string name="Dialogo_Productos_Title">Producto Prueba</string>
+        <string name="Dialogo_Productos_Content">Este es un producto de prueba</string>
+        <string name="Dialogo_Productos_Añadir">Añadir</string>
+        <string name="Dialogo_Productos_Cancelar">Cancelar</string>
+        //Dialogo Cambio Contraseña
+        <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
+        <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
+
+    //Error Messages
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>
     <string name="conection_error">Ha habido un error con la conexion</string>
     <string name="other_error">Ha habido un error</string>

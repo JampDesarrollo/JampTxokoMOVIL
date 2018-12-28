@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
 import com.example.a2dam.jamp.fragments.EventFragment;
 import com.example.a2dam.jamp.fragments.ExpenseFragment;
 import com.example.a2dam.jamp.fragments.ProductFragment;
@@ -74,12 +75,12 @@ public class PrincipalActivity extends AppCompatActivity
         tfFullName = hView.findViewById(R.id.tfFullName);
         tfLogin = hView.findViewById(R.id.tfLogin);
         tfLastAcces = hView.findViewById(R.id.tfLastConnection);
-
+/*
         UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
         String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(user.getLastAccess());
         tfFullName.setText(user.getFullname());
         tfLogin.setText(user.getLogin());
-        tfLastAcces.setText("Ultimo acceso: " + date);
+        tfLastAcces.setText("Ultimo acceso: " + date);*/
 
 //        setupNavigationDrawerContent(navigationView);
 
@@ -148,6 +149,8 @@ public class PrincipalActivity extends AppCompatActivity
             setFragment(2);
         } else if (id == R.id.nav_outgoings) {
             setFragment(3);
+        } else if (id== R.id.nav_changepassword){
+            setFragment(4);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -184,6 +187,13 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ExpenseFragment expenseFragment = new ExpenseFragment();
                 fragmentTransaction.replace(R.id.fragment, expenseFragment);
+                fragmentTransaction.commit();
+                break;
+            case 4:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
+                fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
                 fragmentTransaction.commit();
                 break;
         }

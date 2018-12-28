@@ -1,6 +1,7 @@
 package com.example.a2dam.jamp.model;
 
-import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.dialogs.Dialogo_Registro;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
 import com.example.a2dam.jamp.logic.ThreadForSocketClient;
@@ -38,7 +40,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
      * @param textFullName User Full Name EditText
      * @param texteMail User eMail EditText
      */
-    EditText pass1, pass2,textLogin,textFullName,texteMail;
+    EditText pass1, pass2,textLogin,textFullName,texteMail,textTxoko;
 
     /**
      * @param btnRegistrarse User SignUp Button
@@ -69,15 +71,22 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         setContentView(R.layout.activity_registro);
 
         textLogin =findViewById(R.id.tfLogin);
+        textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         textFullName =findViewById(R.id.tfFullName);
+        textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         texteMail =findViewById(R.id.tfeMail);
+        texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textTxoko = findViewById(R.id.tfTxoko);
+        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1=findViewById(R.id.pfPassword1);
-        pass2=findViewById(R.id.pfPassword2);
+        pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        pass2=findViewById(R.id.pfNewPassword1);
+        pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
         btnRegistrarse=findViewById(R.id.btnRegistrarse);
         btnRegistrarse.setOnClickListener(this);
 
-        btnShowPass=findViewById(R.id.btnShowPass2);
+        btnShowPass=findViewById(R.id.btnShowNewPass1);
         btnShowPass.setOnClickListener(this);
 
         btnAtras=findViewById(R.id.btnAtras);
@@ -86,8 +95,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         correcto=true;
         bTextVisible=false;
 
-        //el progress bar es invisible desde un principio
-        imLoading=findViewById(R.id.imLoading);
+
         formatEmail=false;
         lblError=findViewById(R.id.lblComprobante);
         ilogic = ILogicFactory.getILogic();
@@ -102,14 +110,16 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         switch (v.getId()){
             // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-                controlarTodosLosCampos();
+                DialogFragment dialogo =new Dialogo_Registro();
+                dialogo.show(getSupportFragmentManager(),"Dialogo_Registro");
+                //controlarTodosLosCampos();
                 // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
             case R.id.btnAtras:
                 //si pulso en el boton atras que vaya a la ventana de inicio
                 finish();
                 break;
-            case R.id.btnShowPass2:
+            case R.id.btnShowNewPass1:
                 //Boton Mostrar Contraseña
                 showPassword();
                 break;
@@ -120,6 +130,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         correcto=true;
@@ -168,6 +179,19 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             //Cambiar color del campo de texto
             texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             texteMail.setError("Campo Requerido");
+            correcto=false;
+        }
+
+        if(textTxoko.getText().length()>0){
+            if(textTxoko.getText().length()>255){
+                textTxoko.setError("El Nombre De Ser Menor De 255");
+                textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                correcto=false;
+            }
+        }else{
+            //Cambiar color del campo de texto
+            textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            textTxoko.setError("Campo Requerido");
             correcto=false;
         }
 
@@ -241,8 +265,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             allOK = true;
             Long tsLong = System.currentTimeMillis();
             Timestamp now = new Timestamp(tsLong);
-            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),
-                    pass1.getText().toString(), now, now);
+            //UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),textTxoko.getText().toString(), pass1.getText().toString(), now, now);
+            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(), pass1.getText().toString(), now, now);
             //crear hilo
             ThreadForSocketClient thread = new ThreadForSocketClient(user, ilogic, 1);
             thread.setUncaughtExceptionHandler(this::uncaughtException);
@@ -251,15 +275,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             //esperar al que el hilo muera
             thread.join();
             if (allOK) {
-                Intent registrar = new Intent(Registro.this, PrincipalActivity.class);
-                registrar.putExtra("Usuario", user);
-                startActivity(registrar);
-//                textLogin.setText("");
-//                textFullName.setText("");
-//                texteMail.setText("");
-//                pass1.setText("");
-//                pass2.setText("");
-                finish();
+                Dialogo_Registro dial =new Dialogo_Registro();
+                dial.show(getSupportFragmentManager(),"Dialogo_Registro");
             }
         }catch(InterruptedException e){
             Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();

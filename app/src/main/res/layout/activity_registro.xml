@@ -6,201 +6,242 @@
     android:layout_height="match_parent"
     tools:context=".model.Registro">
 
-    <TextView
-        android:id="@+id/lblTitulo"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/alef"
-        android:text="@string/registro_Titulo"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="@color/colorJAMP"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toTopOf="@+id/tfLogin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/tfLogin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alef"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/registro_Login"
-        android:inputType="textAutoComplete|textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tfFullName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
-
-    <EditText
-        android:id="@+id/tfFullName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alef"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/registro_FullName"
-        android:inputType="textAutoComplete|textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/tfeMail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfLogin"
-        app:layout_constraintVertical_bias="0.848" />
-
-    <EditText
-        android:id="@+id/tfeMail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/alef"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/registro_email"
-        android:inputType="textAutoComplete|textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/pfPassword1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfFullName" />
-
-    <EditText
-        android:id="@+id/pfPassword1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:fontFamily="@font/alef"
-        android:hint="@string/registro_Contraseña"
-        android:inputType="textAutoComplete|textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfeMail" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/PasswordLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/lblComprobante"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pfPassword1">
-
-        <EditText
-            android:id="@+id/pfPassword2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:ems="10"
-            android:fontFamily="@font/alef"
-            android:hint="@string/registro_Contraseña"
-            android:inputType="textAutoComplete|textPassword"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnShowPass2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
-            android:id="@+id/btnShowPass2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:contentDescription="@string/show_password_2"
-            android:elevation="0dp"
-            android:foregroundGravity="center_vertical|center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pfPassword2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_view" />
-    </android.support.constraint.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/lblComprobante"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_red_dark"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonsLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordLayout" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/ButtonsLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblComprobante">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/btnAtras"
-            android:layout_width="0dp"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/colorJAMP"
-            android:fontFamily="@font/alef"
-            android:text="@string/registro_Atras"
-            android:textColor="@color/blanco"
-            android:textSize="18sp"
-            android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnRegistrarse"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnRegistrarse"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:backgroundTint="@color/colorJAMP"
-            android:fontFamily="@font/alef"
-            android:text="@string/registro_Registrarse"
-            android:textColor="@color/blanco"
-            android:textSize="18sp"
-            android:typeface="normal"
+            android:layout_gravity="center"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAtras"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/lblComprobante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/ButtonsLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/NewPassword2Layout" />
+
+            <EditText
+                android:id="@+id/tfLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/alef"
+                android:hint="@string/registro_Login"
+                android:inputType="textAutoComplete|textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/tfFullName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
+
+            <EditText
+                android:id="@+id/tfeMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/alef"
+                android:hint="@string/registro_email"
+                android:inputType="textAutoComplete|textEmailAddress"
+                app:layout_constraintBottom_toTopOf="@+id/tfTxoko"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tfFullName" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/NewPassword2Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/lblComprobante"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pfPassword1">
+
+                <EditText
+                    android:id="@+id/pfNewPassword1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:ems="10"
+                    android:fontFamily="@font/alef"
+                    android:hint="@string/registro_Contraseña"
+                    android:inputType="textAutoComplete|textPassword"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnShowNewPass1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/btnShowNewPass1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:contentDescription="@string/show_password_2"
+                    android:elevation="0dp"
+                    android:foregroundGravity="center_vertical|center_horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pfNewPassword1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_view" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/lblTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/alef"
+                android:text="@string/registro_Titulo"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorJAMP"
+                android:textSize="50sp"
+                app:layout_constraintBottom_toTopOf="@+id/tfLogin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/tfFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/alef"
+                android:hint="@string/registro_FullName"
+                android:inputType="textAutoComplete|textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/tfeMail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tfLogin"
+                app:layout_constraintVertical_bias="0.848" />
+
+            <EditText
+                android:id="@+id/pfPassword1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/alef"
+                android:hint="@string/registro_Contraseña"
+                android:inputType="textAutoComplete|textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/NewPassword2Layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tfTxoko" />
+
+            <EditText
+                android:id="@+id/tfTxoko"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:fontFamily="@font/alef"
+                android:hint="@string/registro_Txoko"
+                android:inputType="textAutoComplete|textEmailAddress"
+                app:layout_constraintBottom_toTopOf="@+id/pfPassword1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tfeMail" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/ButtonsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblComprobante">
+
+                <Button
+                    android:id="@+id/btnAtras"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:backgroundTint="@color/colorJAMP"
+                    android:fontFamily="@font/alef"
+                    android:text="@string/registro_Atras"
+                    android:textAlignment="center"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/btnRegistrarse"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnRegistrarse"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:backgroundTint="@color/colorJAMP"
+                    android:fontFamily="@font/alef"
+                    android:text="@string/registro_Registrarse"
+                    android:textAlignment="center"
+                    android:textColor="@color/blanco"
+                    android:textSize="18sp"
+                    android:typeface="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btnAtras"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

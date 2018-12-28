@@ -1,6 +1,7 @@
 package com.example.a2dam.jamp.model;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -57,10 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Los EditText
         tfUsuario = findViewById(R.id.tfUsuario);
+        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         pfContraseña = findViewById(R.id.pfContraseña);
-
-        //El ImageView
-        imLoading = findViewById(R.id.imLoading);
+        pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
         //Los Boolean
         visible = false;
@@ -81,7 +81,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //en el momento que pulsa
         switch (v.getId()) {
             case R.id.btnInicio: //cuando pulse en el metodo Inicio Sesion
-                logIn();
+
+                Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                startActivity(iniciarSesion);
+                //logIn();
                 break;
             case R.id.btnOjo: //cuando pulse en el ojo
                 showPassword();
@@ -113,10 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //si todos los campos estan llenos miramos los caracteres
             Boolean max = maxCaracters();
             if (max) {
-                //si los caracteres son los indicados
-                pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-                tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-
                 UserBean userReturn = comprobarDatos();
                 //si el usuario que devuelve no es null
                 if (userReturn.getId() != 0) {

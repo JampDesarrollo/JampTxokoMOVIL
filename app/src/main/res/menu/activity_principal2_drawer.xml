@@ -4,22 +4,30 @@
     tools:showIn="navigation_view">
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/all_group"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_product"
             android:icon="@drawable/ic_local_cafe_black_24dp"
-            android:title="Productos" />
+            android:title="@string/nav_products" />
         <item
             android:id="@+id/nav_event"
             android:icon="@drawable/ic_cake_black_24dp"
-            android:title="Eventos" />
+            android:title="@string/nav_events" />
         <item
             android:id="@+id/nav_telephon"
             android:icon="@drawable/ic_call_black_24dp"
-            android:title="Telefonos" />
+            android:title="@string/nav_telephon" />
         <item
             android:id="@+id/nav_outgoings"
             android:icon="@drawable/ic_attach_money_black_24dp"
-            android:title="Gastos" />
+            android:title="@string/nav_outgoings" />
+    </group>
+    <group android:id="@+id/password_group">
+        <item
+            android:id="@+id/nav_changepassword"
+            android:icon="@android:drawable/ic_lock_lock"
+            android:title="@string/nav_change_pass" />
     </group>
 </menu>
