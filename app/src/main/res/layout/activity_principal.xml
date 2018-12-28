@@ -16,7 +16,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/status_bar_kitkat_height"
+            android:layout_height="?attr/actionBarSize"
             android:background="?colorPrimary" />
 
         <FrameLayout
@@ -28,7 +28,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/status_bar_margin_top">
 
         <FrameLayout

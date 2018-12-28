@@ -6,23 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
-import com.example.a2dam.jamp.model.PrincipalActivity;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.model.PrincipalActivity;
 
+public class ChangePasswordFragment extends Fragment {
+    private ChangePasswordFragment.OnFragmentInteractionListener mListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TelephonFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- */
-public class TelephonFragment extends Fragment{
-
-    private OnFragmentInteractionListener mListener;
-
-    public TelephonFragment() {
+    public ChangePasswordFragment() {
         // Required empty public constructor
     }
 
@@ -30,14 +21,13 @@ public class TelephonFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_telephone, container, false);
+        final View view = inflater.inflate(R.layout.fragment_changepass, container, false);
 
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
 
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -72,7 +62,6 @@ public class TelephonFragment extends Fragment{
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
