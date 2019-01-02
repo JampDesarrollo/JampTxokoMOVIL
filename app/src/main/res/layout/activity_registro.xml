@@ -124,7 +124,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/alef"
@@ -171,7 +170,6 @@
                 android:inputType="textAutoComplete|textPassword"
                 app:layout_constraintBottom_toTopOf="@+id/NewPassword2Layout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tfTxoko" />
 
@@ -189,7 +187,6 @@
                 android:inputType="textAutoComplete|textEmailAddress"
                 app:layout_constraintBottom_toTopOf="@+id/pfPassword1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tfeMail" />
 
@@ -215,6 +212,7 @@
                     android:fontFamily="@font/alef"
                     android:text="@string/registro_Atras"
                     android:textAlignment="center"
+                    android:textAllCaps="false"
                     android:textColor="@color/blanco"
                     android:textSize="18sp"
                     android:typeface="normal"
@@ -232,6 +230,7 @@
                     android:fontFamily="@font/alef"
                     android:text="@string/registro_Registrarse"
                     android:textAlignment="center"
+                    android:textAllCaps="false"
                     android:textColor="@color/blanco"
                     android:textSize="18sp"
                     android:typeface="normal"

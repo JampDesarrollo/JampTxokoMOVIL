@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
@@ -21,9 +20,6 @@ import com.example.a2dam.jamp.fragments.EventFragment;
 import com.example.a2dam.jamp.fragments.ExpenseFragment;
 import com.example.a2dam.jamp.fragments.ProductFragment;
 import com.example.a2dam.jamp.fragments.TelephonFragment;
-
-import java.text.SimpleDateFormat;
-import messageuserbean.UserBean;
 
 /**
  * Class that controller PrincipalActivity
@@ -127,6 +123,9 @@ public class PrincipalActivity extends AppCompatActivity
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_logOut:
+                finish();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

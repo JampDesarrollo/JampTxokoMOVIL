@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.model;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -14,7 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dialogs.Dialogo_Registro;
+import com.example.a2dam.jamp.dialogs.Dialogo_Solicitud_Nueva_Contrasena;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
+import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
@@ -97,7 +101,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pfContraseña.setText("");
                 lblError.setText("");
                 break;
+            case R.id.tfChangePass:
+                changepass();
+                break;
         }
+    }
+
+    private void changepass() {
+        if(tfUsuario.getText().toString().trim().length() < 255){
+            if(tfUsuario.getText().toString().trim().length()>0){
+                comprobarUsuario();
+            }else{
+                tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
+                tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                lblError.setText(R.string.user_need_error);
+            }
+        }else{
+            tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            lblError.setText(R.string.user_need_error);
+
+        }
+    }
+
+    private void comprobarUsuario() {
+        DialogFragment dialogo =new Dialogo_Solicitud_Nueva_Contrasena();
+        dialogo.show(getSupportFragmentManager(),"Dialogo_Solicitud_Nueva_Contrasena");
+        lblError.setText("");
+        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        /*
+        //conectar con la base de datos
+        UserBean returnUser = null;
+
+        try {
+            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContraseña.getText().toString());
+            //crear hilo
+            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
+            thread.setUncaughtExceptionHandler(this::uncaughtException);
+            //inicializar hilo
+            thread.start();
+            //esperar a que el hilo muera
+            thread.join();
+            //coger el user que he recibido
+            returnUser = thread.getUser();
+        } catch (InterruptedException e) {
+            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
+        }*/
     }
 
     /**
@@ -119,8 +168,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UserBean userReturn = comprobarDatos();
                 //si el usuario que devuelve no es null
                 if (userReturn.getId() != 0) {
-                    //el gif se hara visible
-                    imLoading.setVisibility(View.VISIBLE);
                     //que vaya a la ventana principal
                     Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
                     iniciarSesion.putExtra("Usuario", userReturn);
@@ -128,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     tfUsuario.setText("");
                     pfContraseña.setText("");
                     lblError.setText("");
-                    imLoading.setVisibility(View.INVISIBLE);
+
                 }
             } else {
                 //si los caracteres se pasan del rango
@@ -230,7 +277,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
         } else if (e.getCause() instanceof PasswordNotOkException) {
             lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else {
+        } else if (e.getCause() instanceof UserLoginExistException){
+            //Proceso de mandar email
+
+            DialogFragment dialogo =new Dialogo_Solicitud_Nueva_Contrasena();
+            dialogo.show(getSupportFragmentManager(),"Dialogo_Solicitud_Nueva_Contrasena");
+            lblError.setText("");
+            lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        } else{
             lblError.setText(this.getResources().getString(R.string.no_hay_conexion));
         }
     }
