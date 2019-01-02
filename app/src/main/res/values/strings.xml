@@ -33,6 +33,8 @@
     <string name="ojo">Mostrar Contraseña</string>
     <string name="login">Login</string>
     <string name="passForgot">¿Ha Olvidado La Contraseña?</string>
+    <string name="tutorial_Text">¿No Sabe Como Funciona La Aplicacion?</string>
+    <string name="tutorial_Button">Boton del tutorial</string>
 
     //Navigation Drawer
     <string name="last_connection">Ultima Conexion: 10/01/1988</string>
@@ -45,34 +47,38 @@
     <string name="telepizza">Telepizza</string>
 
     //Fragments
-        //Change Password
-        <string name="fragment_change_password_title">Cambiar Contraseña</string>
-        <string name="fragment_change_password_actual_pass">Introduzca la contraseña actual</string>
-        <string name="fragment_change_password_new_pass">Introduzca la nueva contraseña</string>
-        <string name="fragment_change_password_new_pass_2">Repita la nueva contraseña</string>
-        <string name="fragment_change_password_button">Cambiar</string>
+    //Change Password
+    <string name="fragment_change_password_title">Cambiar Contraseña</string>
+    <string name="fragment_change_password_actual_pass">Introduzca la contraseña actual</string>
+    <string name="fragment_change_password_new_pass">Introduzca la nueva contraseña</string>
+    <string name="fragment_change_password_new_pass_2">Repita la nueva contraseña</string>
+    <string name="fragment_change_password_button">Cambiar</string>
 
-        //Products
+    //Products
 
-        //Events
+    //Events
 
-        //expense
+    //expense
 
-        //telephones
+    //telephones
 
 
     //Dialogos
-        //Dialogo Registro
-        <string name="Dialogo_Registro_Title">Se ha registrado con exito</string>
-        <string name="Dialogo_Registro_Content">Por Favor, Comuniquese con el administrador del txoko para activar su cuenta</string>
-        //Dialogo Productos
-        <string name="Dialogo_Productos_Title">Producto Prueba</string>
-        <string name="Dialogo_Productos_Content">Este es un producto de prueba</string>
-        <string name="Dialogo_Productos_Añadir">Añadir</string>
-        <string name="Dialogo_Productos_Cancelar">Cancelar</string>
-        //Dialogo Cambio Contraseña
-        <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
-        <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
+    <string name="Dialogos_Ok">Ok</string>
+    //Dialogo Solicitud De Nueva Contraseña
+    <string name="Dialogo_Solicitud_Nueva_Contrasena_Title">Solicitada la nueva contraseña</string>
+    <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Ha solicitado una nueva contraseña que se le mandara por email, Por Favor revise su bandeja de entrada</string>
+    //Dialogo Registro
+    <string name="Dialogo_Registro_Title">Se ha registrado con exito</string>
+    <string name="Dialogo_Registro_Content">Por Favor, Comuniquese con el administrador del txoko para activar su cuenta</string>
+    //Dialogo Productos
+    <string name="Dialogo_Productos_Title">Producto Prueba</string>
+    <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
+    <string name="Dialogo_Productos_Añadir">Añadir</string>
+    <string name="Dialogo_Productos_Cancelar">Cancelar</string>
+    //Dialogo Cambio Contraseña
+    <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
+    <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
 
     //Error Messages
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>
@@ -84,6 +90,9 @@
     <string name="pass_min_lenght_error">La Contraseña Debe Ser Mayor De 8</string>
     <string name="format_error">El formato no es el correcto</string>
     <string name="no_hay_conexion">Error, No hay conexion</string>
+    <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
+    <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
+    <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp.model;
 
-import android.content.pm.ActivityInfo;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,11 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dialogs.Dialog_Productos_Fragment;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.dialogs.Dialogo_Registro;
 import com.example.a2dam.jamp.logic.ILogic;
@@ -34,31 +33,30 @@ import messageuserbean.UserBean;
 
 public class Registro extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler{
     /**
-     * @param pass1 User Password EditText
-     * @param pass2 Repetition Of The User Password
-     * @param textLogin User Login EditText
-     * @param textFullName User Full Name EditText
-     * @param texteMail User eMail EditText
+     *  pass1 User Password EditText
+     *  pass2 Repetition Of The User Password
+     *  textLogin User Login EditText
+     *  textFullName User Full Name EditText
+     *  texteMail User eMail EditText
      */
     EditText pass1, pass2,textLogin,textFullName,texteMail,textTxoko;
 
     /**
-     * @param btnRegistrarse User SignUp Button
-     * @param btnAtras Go Back To Login View Button
+     *  btnRegistrarse User SignUp Button
+     *  btnAtras Go Back To Login View Button
      */
     Button btnRegistrarse,btnAtras;
 
     /**
-     * @param btnShowPass Show Written Password Button
+     *  btnShowPass Show Written Password Button
      */
     ImageButton btnShowPass;
     /**
-     * @param correcto User Data Correct Boolean
-     * @param format User email Correct format Boolean
+     *  correcto User Data Correct Boolean
+     *  format User email Correct format Boolean
      */
     Boolean correcto,formatEmail,bTextVisible, allOK;
 
-    ImageView imLoading;
     TextView lblError;
     private ILogic ilogic;
 
@@ -110,8 +108,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         switch (v.getId()){
             // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-                DialogFragment dialogo =new Dialogo_Registro();
-                dialogo.show(getSupportFragmentManager(),"Dialogo_Registro");
+                DialogFragment dialogo =new Dialog_Productos_Fragment();
+                dialogo.show(getSupportFragmentManager(),"Dialogo_Productos_2");
                 //controlarTodosLosCampos();
                 // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;
@@ -135,101 +133,101 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         correcto=true;
 
-        if(textLogin.getText().length()>0){// si el campo esta lleno
-            if(textLogin.getText().length()>255){//controlar que el campo sea menor de 255
+        if(textLogin.getText().toString().trim().length()>0){// si el campo esta lleno
+            if(textLogin.getText().toString().trim().length()>255){//controlar que el campo sea menor de 255
 
-                textLogin.setError("El Login De Ser Menor De 255");
+                textLogin.setError(this.getResources().getString(R.string.max_lenght_error));
                 textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textLogin.setError("Campo Requerido");
+            textLogin.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
 
-        if(textFullName.getText().length()>0){
-            if(textFullName.getText().length()>255){
-                textFullName.setError("El Nombre De Ser Menor De 255");
+        if(textFullName.getText().toString().trim().length()>0){
+            if(textFullName.getText().toString().trim().length()>255){
+                textFullName.setError(this.getResources().getString(R.string.max_lenght_error));
                 textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textFullName.setError("Campo Requerido");
+            textFullName.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
 
-        if(texteMail.getText().length()>0) {
-            if(texteMail.getText().length()<255){
+        if(texteMail.getText().toString().trim().length()>0) {
+            if(texteMail.getText().toString().trim().length()<255){
                 formatEmail = emailFormat(texteMail); // comprobar que tiene formato email
 
                 if(!formatEmail) {
-                    texteMail.setError("El formato no es el correcto");
+                    texteMail.setError(this.getResources().getString(R.string.format_error));
                     texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }else{
-                texteMail.setError("El Nombre De Ser Menor De 255");
+                texteMail.setError(this.getResources().getString(R.string.max_lenght_error));
                 texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            texteMail.setError("Campo Requerido");
+            texteMail.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
 
-        if(textTxoko.getText().length()>0){
-            if(textTxoko.getText().length()>255){
-                textTxoko.setError("El Nombre De Ser Menor De 255");
+        if(textTxoko.getText().toString().trim().length()>0){
+            if(textTxoko.getText().toString().trim().length()>255){
+                textTxoko.setError(this.getResources().getString(R.string.max_lenght_error));
                 textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            textTxoko.setError("Campo Requerido");
+            textTxoko.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
 
-        if(pass1.getText().length()>0){
-            if(pass1.getText().length()<8){
-                pass1.setError("La Contraseña Debe Ser Mayor De 8");
+        if(pass1.getText().toString().trim().length()>0){
+            if(pass1.getText().toString().trim().length()<8){
+                pass1.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
-            }else if(pass1.getText().length()>255){
-                pass1.setError("La Contraseña Debe Ser Menor De 255");
+            }else if(pass1.getText().toString().trim().length()>255){
+                pass1.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass1.setError("Campo Requerido");
+            pass1.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
 
-        if(pass2.getText().length()>0){
-            if(pass2.getText().length()<8){
-                pass2.setError("La Contraseña Debe Ser Mayor De 8");
+        if(pass2.getText().toString().trim().length()>0){
+            if(pass2.getText().toString().trim().length()<8){
+                pass2.setError(this.getResources().getString(R.string.pass_min_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
-            }else if(pass2.getText().length()>255){
-                pass2.setError("La Contraseña Debe Ser Menor De 255");
+            }else if(pass2.getText().toString().trim().length()>255){
+                pass2.setError(this.getResources().getString(R.string.max_lenght_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
-            }else if(pass1.getText().equals(pass2.getText())){
-                pass2.setError("Las Contraseña Deben Ser Iguales");
+            }else if(pass1.getText().toString().trim().equals(pass2.getText().toString().trim())){
+                pass2.setError(this.getResources().getString(R.string.pass_equals_error));
                 pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 correcto=false;
             }
         }else{
             //Cambiar color del campo de texto
             pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-            pass2.setError("Campo Requerido");
+            pass2.setError(this.getResources().getString(R.string.field_requiered_error));
             correcto=false;
         }
         if(correcto) {
@@ -279,7 +277,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
                 dial.show(getSupportFragmentManager(),"Dialogo_Registro");
             }
         }catch(InterruptedException e){
-            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -291,10 +289,10 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         if (e.getCause() instanceof UserLoginExistException) {
-            lblError.setText("Ese nombre de usuario existe");
+            lblError.setText(this.getResources().getString(R.string.user_login_exist_error));
             allOK=false;
         }else {
-            Toast.makeText(this,"Error al conectar con la base de datos", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
             allOK=false;
         }
     }
@@ -314,4 +312,9 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             bTextVisible = false;
         }
     }
+/*
+    @Override
+    public void FinalizaCuadroDialogo(String texto) {
+
+    }*/
 }
