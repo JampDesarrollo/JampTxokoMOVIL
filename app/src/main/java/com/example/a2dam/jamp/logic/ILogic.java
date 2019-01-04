@@ -62,4 +62,6 @@ public interface ILogic {
     public UserBean userLogin(UserBean user)
             throws UserNotExistException, PasswordNotOkException, Exception;
 
+    public List<Expense> findExpensesMonth(Integer idTxoko) throws Exception;
+
 }
