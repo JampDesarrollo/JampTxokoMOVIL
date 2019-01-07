@@ -1,7 +1,6 @@
 package com.example.a2dam.jamp.model;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dialogs.Dialogo_Registro;
-import com.example.a2dam.jamp.dialogs.Dialogo_Solicitud_Nueva_Contrasena;
+import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
@@ -36,7 +34,7 @@ import messageuserbean.UserBean;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler {
 
     Button btnInicio, btnRegistrarse;
-    EditText pfContraseña, tfUsuario;
+    EditText pfContrasena, tfUsuario;
     TextView lblError;
     ImageView imLoading;
     ImageButton btnShowPass;
@@ -63,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Los EditText
         tfUsuario = findViewById(R.id.tfUsuario);
         tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        pfContraseña = findViewById(R.id.pfContraseña);
-        pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        pfContrasena = findViewById(R.id.pfContraseña);
+        pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
 
         //Los Boolean
         visible = false;
@@ -98,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent registrar = new Intent(getApplicationContext(), Registro.class);
                 startActivity(registrar);
                 tfUsuario.setText("");
-                pfContraseña.setText("");
+                pfContrasena.setText("");
                 lblError.setText("");
                 break;
             case R.id.tfChangePass:
@@ -125,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void comprobarUsuario() {
-        DialogFragment dialogo =new Dialogo_Solicitud_Nueva_Contrasena();
-        dialogo.show(getSupportFragmentManager(),"Dialogo_Solicitud_Nueva_Contrasena");
+        DialogFragment dialogo =new Dialog_Request_New_Password();
+        dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
         lblError.setText("");
         tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         /*
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UserBean returnUser = null;
 
         try {
-            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContraseña.getText().toString());
+            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContrasena.getText().toString());
             //crear hilo
             ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
             thread.setUncaughtExceptionHandler(this::uncaughtException);
@@ -160,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (filled) { //si estan escritos
             //si todos los campos estan llenos, el label de error se va a poner invisible y se le quita el color rojo a los campos
 
-            pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+            pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
             //si todos los campos estan llenos miramos los caracteres
             Boolean max = maxCaracters();
@@ -173,22 +171,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     iniciarSesion.putExtra("Usuario", userReturn);
                     startActivity(iniciarSesion);
                     tfUsuario.setText("");
-                    pfContraseña.setText("");
+                    pfContrasena.setText("");
                     lblError.setText("");
 
                 }
             } else {
                 //si los caracteres se pasan del rango
-                if (pfContraseña.getText().toString().trim().length() > 255) {
-                    pfContraseña.setError(this.getResources().getString(R.string.max_lenght_error));
-                    pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                if (pfContrasena.getText().toString().trim().length() > 255) {
+                    pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
+                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 } else if (tfUsuario.getText().toString().trim().length() > 255) {
                     tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 } else {
-                    pfContraseña.setError(this.getResources().getString(R.string.max_lenght_error));
+                    pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
                     tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
-                    pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }
@@ -197,9 +195,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
                 tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
-            if (pfContraseña.getText().toString().trim().length() == 0) {
-                pfContraseña.setError(this.getResources().getString(R.string.field_requiered_error));
-                pfContraseña.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            if (pfContrasena.getText().toString().trim().length() == 0) {
+                pfContrasena.setError(this.getResources().getString(R.string.field_requiered_error));
+                pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
         }
     }
@@ -213,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mirar si todos los campos estan llenos
         Boolean isFilled = false;
 
-        if (tfUsuario.getText().toString().trim().length() > 0 && pfContraseña.getText().toString().trim().length() > 0) {
+        if (tfUsuario.getText().toString().trim().length() > 0 && pfContrasena.getText().toString().trim().length() > 0) {
             isFilled = true;
         }
         return isFilled;
@@ -228,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean maxCaracters() {
         Boolean maxCaracteres = false;
 
-        if (tfUsuario.getText().toString().trim().length() < 255 && pfContraseña.getText().toString().trim().length() < 255) {
+        if (tfUsuario.getText().toString().trim().length() < 255 && pfContrasena.getText().toString().trim().length() < 255) {
             maxCaracteres = true;
         }
         return maxCaracteres;
@@ -249,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UserBean returnUser = null;
 
         try {
-            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContraseña.getText().toString());
+            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContrasena.getText().toString());
             //crear hilo
             ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
             thread.setUncaughtExceptionHandler(this::uncaughtException);
@@ -268,8 +266,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      * method that catches exceptions
      *
-     * @param t
-     * @param e
+     * @param t Thread
+     * @param e Throwable
      */
     @Override
     public void uncaughtException(Thread t, Throwable e) {
@@ -280,8 +278,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (e.getCause() instanceof UserLoginExistException){
             //Proceso de mandar email
 
-            DialogFragment dialogo =new Dialogo_Solicitud_Nueva_Contrasena();
-            dialogo.show(getSupportFragmentManager(),"Dialogo_Solicitud_Nueva_Contrasena");
+            DialogFragment dialogo =new Dialog_Request_New_Password();
+            dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
             lblError.setText("");
             lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
         } else{
@@ -294,10 +292,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void showPassword() {
         if (!bTextVisible) { //si no esta visible la contraseña
-            pfContraseña.setInputType(InputType.TYPE_CLASS_TEXT);
+            pfContrasena.setInputType(InputType.TYPE_CLASS_TEXT);
             bTextVisible = true;
         } else {
-            pfContraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            pfContrasena.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
             bTextVisible = false;
         }
     }

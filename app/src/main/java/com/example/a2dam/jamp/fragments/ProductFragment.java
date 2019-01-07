@@ -44,6 +44,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         if(v.getId()==R.id.buttonProduct){
             Dialog_Productos_Fragment dialogo =new Dialog_Productos_Fragment();
             dialogo.show(getFragmentManager(),"Dialogo_Productos");
+
         }
     }
 
@@ -53,17 +54,6 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {

@@ -2,7 +2,10 @@ package com.example.a2dam.jamp.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dialogs.Dialogo_Cambio_Contrasena;
+import com.example.a2dam.jamp.dialogs.Dialog_Change_Password;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
 public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
@@ -30,7 +33,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_changepass, container, false);
 
@@ -67,29 +70,28 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                 newpass2boolean=showPassword(newpass2,newpass2boolean);
                 break;
             case R.id.btnCambiar:
-                cambiarPass();
+                Dialog_Change_Password dialog =new Dialog_Change_Password();
+                dialog.show(getFragmentManager(),"Dialog_Change_Password");
+                //cambiarPass();
                 break;
         }
     }
 
     private void cambiarPass() {
-        /*if(checkPasswords()){
-            Dialogo_Cambio_Contrasena dialog =new Dialogo_Cambio_Contrasena();
-            dialog.show(getFragmentManager(),"Dialogo_Cambio_Contrasena");
-        }*/
-        Dialogo_Cambio_Contrasena dialog =new Dialogo_Cambio_Contrasena();
-        dialog.show(getFragmentManager(),"Dialogo_Cambio_Contrasena");
+        if(checkPasswords()){
+            Dialog_Change_Password dialog =new Dialog_Change_Password();
+            dialog.show(getFragmentManager(),"Dialog_Change_Password");
 
+            //Cargar el fragment de productos
 
-        //Cargar el fragment de productos
-
-        /*FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-        fragmentManager = FragmentActivity.getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        ProductFragment productFragment = new ProductFragment();
-        fragmentTransaction.replace(R.id.fragment, productFragment);
-        fragmentTransaction.commit();*/
+            FragmentManager fragmentManager;
+            FragmentTransaction fragmentTransaction;
+            fragmentManager = getFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            ProductFragment productFragment = new ProductFragment();
+            fragmentTransaction.replace(R.id.fragment, productFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     private Boolean checkPasswords() {
@@ -146,7 +148,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                 newpass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 newpass2.setError(this.getResources().getString(R.string.new_pass_equals_error));
                 correcto=false;
-            }else if(!(actualpass.getText().toString().trim().equals(newpass2.getText().toString().trim()))){
+            }else if(actualpass.getText().toString().trim().equals(newpass2.getText().toString().trim())){
                 newpass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 newpass2.setError(this.getResources().getString(R.string.actual_pass_and_new_pass_equals_error));
                 correcto=false;

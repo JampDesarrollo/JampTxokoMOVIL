@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_Productos_Fragment;
+import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
-import com.example.a2dam.jamp.dialogs.Dialogo_Registro;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
 import com.example.a2dam.jamp.logic.ThreadForSocketClient;
@@ -273,8 +273,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             //esperar al que el hilo muera
             thread.join();
             if (allOK) {
-                Dialogo_Registro dial =new Dialogo_Registro();
-                dial.show(getSupportFragmentManager(),"Dialogo_Registro");
+                Dialog_SingUp dial =new Dialog_SingUp();
+                dial.show(getSupportFragmentManager(),"Dialog_SingUp");
             }
         }catch(InterruptedException e){
             Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
