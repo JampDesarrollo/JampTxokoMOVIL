@@ -37,6 +37,7 @@
             android:name=".model.Registro"
             android:label="Registro"
             android:screenOrientation="portrait" />
+        <activity android:name=".fragments.Product_Dialog_Fragment" />
     </application>
 
 </manifest>

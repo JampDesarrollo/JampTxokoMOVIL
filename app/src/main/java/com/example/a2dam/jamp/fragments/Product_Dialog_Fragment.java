@@ -16,7 +16,7 @@ public class Product_Dialog_Fragment extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_product_dialog);
-        btnMinus=findViewById(R.id.btnMinus);
+        /*btnMinus=findViewById(R.id.btnMinus);
         btnMinus.setOnClickListener(this);
 
         btnPlus=findViewById(R.id.btnPlus);
@@ -25,11 +25,11 @@ public class Product_Dialog_Fragment extends AppCompatActivity implements View.O
         textCount=findViewById(R.id.tfCount);
 
 
-        count=Integer.getInteger(textCount.getText().toString());
+        count=Integer.getInteger(textCount.getText().toString());*/
     }
     @Override
     public void onClick(View v) {
-
+/*
         switch(v.getId()){
             case R.id.btnMinus:
                 count++;
@@ -40,6 +40,6 @@ public class Product_Dialog_Fragment extends AppCompatActivity implements View.O
                 count--;
                 textCount.setText(count);
                 break;
-        }
+        }*/
     }
 }
