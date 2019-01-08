@@ -1,15 +1,16 @@
 package com.example.a2dam.jamp.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
+import android.widget.ImageButton;
 
-import com.example.a2dam.jamp.model.PrincipalActivity;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.model.PrincipalActivity;
 
 
 /**
@@ -18,7 +19,8 @@ import com.example.a2dam.jamp.R;
  * {@link TelephonFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TelephonFragment extends Fragment{
+public class TelephonFragment extends Fragment implements View.OnClickListener {
+    protected ImageButton btnTelefono;
 
     private OnFragmentInteractionListener mListener;
 
@@ -34,7 +36,19 @@ public class TelephonFragment extends Fragment{
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
 
+        btnTelefono=view.findViewById(R.id.TelepizzaCallButton);
+        btnTelefono.setOnClickListener(this);
         return view;
+    }
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.TelepizzaCallButton:
+                Uri number = Uri.parse(this.getResources().getString(R.string.Telepizza_Number));
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
+                break;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -44,22 +58,13 @@ public class TelephonFragment extends Fragment{
         }
     }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this

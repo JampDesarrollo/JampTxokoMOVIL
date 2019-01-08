@@ -1,15 +1,17 @@
 package com.example.a2dam.jamp.model;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,8 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnInicio, btnRegistrarse;
     EditText pfContrasena, tfUsuario;
     TextView lblError;
-    ImageView imLoading;
-    ImageButton btnShowPass;
+    ImageButton btnShowPass,btnVideo;
     Boolean visible, bTextVisible;
     private ILogic ilogic;
 
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnRegistrarse.setOnClickListener(this);
         btnShowPass = findViewById(R.id.btnOjo);
         btnShowPass.setOnClickListener(this);
+        btnVideo=findViewById(R.id.btnVideo);
+        btnVideo.setOnClickListener(this);
 
         //El TextView
         lblError = findViewById(R.id.lblError);
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //
         ilogic = ILogicFactory.getILogic();
+
 
     }
 
@@ -102,7 +106,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.tfChangePass:
                 changepass();
                 break;
+            case R.id.btnVideo:
+                animacion();
+                Uri webpage = Uri.parse(this.getResources().getString(R.string.Video_Tutorial));
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
+                startActivity(webIntent);
         }
+    }
+
+    private void animacion() {
+        AnimatorSet animador=new AnimatorSet();
+        ObjectAnimator animacion=ObjectAnimator.ofFloat(btnVideo,"alpha",0f,1f);
+        animacion.setDuration(3000);
+        animador.play(animacion);
+        animador.start();
     }
 
     private void changepass() {
@@ -127,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
         lblError.setText("");
         tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        /*
+
         //conectar con la base de datos
         UserBean returnUser = null;
 
@@ -144,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             returnUser = thread.getUser();
         } catch (InterruptedException e) {
             Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }*/
+        }
     }
 
     /**

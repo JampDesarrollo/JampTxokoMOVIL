@@ -61,6 +61,7 @@
     //expense
 
     //telephones
+    <string name="fragment_telephones_titulo">Telefonos De Interes</string>
 
 
     //Dialogos
@@ -96,4 +97,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    //Recursos
+    <string name="Video_Tutorial">https://www.youtube.com/watch?v=_hjf8fE_W0Q</string>
+    <string name="Telepizza_Number">tel:902122122</string>
 </resources>

@@ -36,7 +36,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_changepass, container, false);
-
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
 
         actualpass=vista.findViewById(R.id.pfActualPassword);
         btnShowActualpass=vista.findViewById(R.id.btnShowActualPass);
@@ -53,7 +53,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         btnCambiar=vista.findViewById(R.id.btnCambiar);
         btnCambiar.setOnClickListener(this);
 
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
+
         return vista;
     }
 
