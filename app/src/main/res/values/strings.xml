@@ -96,4 +96,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="coin_sprite">Coin sprite</string>
+    <string name="gastos_este_mes">Gastos este mes:</string>
 </resources>
