@@ -3,13 +3,15 @@ package com.example.a2dam.jamp.fragments;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dialogs.Dialog_Productos_Fragment;
+import com.example.a2dam.jamp.dialogs.Dialog_Product;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
 
@@ -33,21 +35,31 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_product, container, false);
-        btnProductos=view.findViewById(R.id.buttonProduct);
-        btnProductos.setOnClickListener(this);
+
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Productos");
 
         return view;
     }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        btnProductos=view.findViewById(R.id.buttonProduct);
+        btnProductos.setOnClickListener(this);
+    }
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.buttonProduct){
-            Dialog_Productos_Fragment dialogo =new Dialog_Productos_Fragment();
-            dialogo.show(getFragmentManager(),"Dialogo_Productos");
-
+            ok();
         }
     }
-
+    public void ok(){
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        fragmentManager= getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Dialog_Product Dialog_Product= new Dialog_Product();
+        fragmentTransaction.add(R.id.fragment, Dialog_Product);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

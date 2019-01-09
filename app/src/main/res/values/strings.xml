@@ -76,7 +76,7 @@
     <string name="Dialogo_Productos_Title">Producto Prueba</string>
     <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="Dialogo_Productos_Añadir">Añadir</string>
-    <string name="Dialogo_Productos_Cancelar">Cancelar</string>
+    <string name="Dialogo_Productos_Min_Error">Introduce un valor mayor a 0</string>
     //Dialogo Cambio Contraseña
     <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
     <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
