@@ -6,11 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 
@@ -18,7 +14,7 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class Dialog_Productos_Fragment extends DialogFragment implements DialogInterface.OnClickListener {
     protected Button btnPlus,btnMinus;
-    protected EditText textCount;
+    //protected EditText textCount;
     //protected Integer count;
 
     @NonNull

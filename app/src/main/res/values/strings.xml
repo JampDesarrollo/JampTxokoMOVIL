@@ -61,6 +61,7 @@
     //expense
 
     //telephones
+    <string name="fragment_telephones_titulo">Telefonos De Interes</string>
 
 
     //Dialogos
@@ -93,9 +94,10 @@
     <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+  
+    //Recursos
+    <string name="Video_Tutorial">https://www.youtube.com/watch?v=_hjf8fE_W0Q</string>
+    <string name="Telepizza_Number">tel:902122122</string>
     <string name="cantidad">Cantidad</string>
     <string name="coin_sprite">Coin sprite</string>
     <string name="gastos_este_mes">Gastos este mes:</string>
