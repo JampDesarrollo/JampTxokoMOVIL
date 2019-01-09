@@ -38,18 +38,18 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Gastos");
 
         lblAmount = view.findViewById(R.id.cantidad);
-        imgCoins.setImageResource(R.drawable.coins);
-        coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
+//        imgCoins.setImageResource(R.drawable.coins);
+//        coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
         fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this::onClick);
         ilogic = ILogicFactory.getILogic();
 
-        imgCoins.post(new Runnable() {
-            @Override
-            public void run() {
-                coinAnimation.start();
-            }
-        });
+//        imgCoins.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                coinAnimation.start();
+//            }
+//        });
 
         //HACERLO en otro thread?
         //List<Expense> expenseList = ilogic.findExpensesMonth(null);
