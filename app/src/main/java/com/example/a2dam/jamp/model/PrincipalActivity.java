@@ -165,6 +165,7 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ProductFragment productFragment = new ProductFragment();
                 fragmentTransaction.replace(R.id.fragment, productFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 1:
@@ -172,6 +173,7 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 EventFragment eventFragment = new EventFragment();
                 fragmentTransaction.replace(R.id.fragment, eventFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 2:
@@ -179,6 +181,7 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 TelephonFragment telephonFragment = new TelephonFragment();
                 fragmentTransaction.replace(R.id.fragment, telephonFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 3:
@@ -186,6 +189,7 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ExpenseFragment expenseFragment = new ExpenseFragment();
                 fragmentTransaction.replace(R.id.fragment, expenseFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
             case 4:
@@ -193,6 +197,7 @@ public class PrincipalActivity extends AppCompatActivity
                 fragmentTransaction = fragmentManager.beginTransaction();
                 ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
                 fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
                 break;
         }

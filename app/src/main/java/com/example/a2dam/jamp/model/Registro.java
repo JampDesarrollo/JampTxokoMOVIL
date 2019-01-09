@@ -1,8 +1,8 @@
 package com.example.a2dam.jamp.model;
 
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dialogs.Dialog_Productos_Fragment;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.logic.ILogic;
@@ -108,8 +107,8 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         switch (v.getId()){
             // si le da al boton de registro, vaya al metodo para comprobar todos los campos
             case R.id.btnRegistrarse:
-                DialogFragment dialogo =new Dialog_Productos_Fragment();
-                dialogo.show(getSupportFragmentManager(),"Dialogo_Productos_2");
+                DialogFragment dialogo =new Dialog_SingUp();
+                dialogo.show(getSupportFragmentManager(),"Dialog_SingUp");
                 //controlarTodosLosCampos();
                 // si todos los campos estan llenos, el length es el que deberia y las contraseñas concuerdan haces el progress bar
                 break;

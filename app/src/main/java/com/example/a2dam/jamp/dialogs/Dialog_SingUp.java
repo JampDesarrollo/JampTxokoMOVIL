@@ -29,6 +29,7 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
         switch (which){
             case BUTTON_POSITIVE:
                 dialog.dismiss();
+                getActivity().finish();
                 break;
         }
     }
