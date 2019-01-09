@@ -31,13 +31,16 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
     private ILogic ilogic;
 
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_expense, container, false);
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Gastos");
 
-        lblAmount = getActivity().findViewById(R.id.cantidad);
+        lblAmount = view.findViewById(R.id.cantidad);
         imgCoins.setImageResource(R.drawable.coins);
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
-        fLayout = getActivity().findViewById(R.id.expenseLayout);
+        fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this::onClick);
         ilogic = ILogicFactory.getILogic();
 
@@ -48,17 +51,8 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-
         //HACERLO en otro thread?
         //List<Expense> expenseList = ilogic.findExpensesMonth(null);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_expense, container, false);
-
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Gastos");
 
         return view;
     }
