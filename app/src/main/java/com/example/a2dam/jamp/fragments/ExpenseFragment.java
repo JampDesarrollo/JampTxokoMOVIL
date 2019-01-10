@@ -1,31 +1,28 @@
 package com.example.a2dam.jamp.fragments;
 
 import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
 import com.example.a2dam.jamp.model.PrincipalActivity;
-import com.example.a2dam.jamp.R;
-
-import java.util.List;
 
 
 public class ExpenseFragment extends Fragment implements View.OnClickListener {
 
-    TextView lblAmount;
-    AnimationDrawable coinAnimation;
-    ImageView imgCoins;
-    FrameLayout fLayout;
+    private TextView lblAmount;
+    private AnimationDrawable coinAnimation;
+    private ImageView imgCoins;
+    private FrameLayout fLayout;
+    protected Boolean max;
     float x;
     float y;
     private ILogic ilogic;
@@ -38,18 +35,15 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Gastos");
 
         lblAmount = view.findViewById(R.id.cantidad);
-        imgCoins.setImageResource(R.drawable.coins);
+        imgCoins=view.findViewById(R.id.coin);
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
+        coinAnimation.run();
+
         fLayout = view.findViewById(R.id.expenseLayout);
-        fLayout.setOnClickListener(this::onClick);
+        fLayout.setOnClickListener(this);
         ilogic = ILogicFactory.getILogic();
 
-        imgCoins.post(new Runnable() {
-            @Override
-            public void run() {
-                coinAnimation.start();
-            }
-        });
+        max=false;
 
         //HACERLO en otro thread?
         //List<Expense> expenseList = ilogic.findExpensesMonth(null);
@@ -60,10 +54,27 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.expenseLayout:
+                animacion();
+                break;
+        }
+
+    }
+
+    private void animacion() {
+        if(!max){
+            lblAmount.animate().scaleX(2).scaleY(2).setDuration(1000);
+            max=true;
+        }else{
+            lblAmount.animate().scaleX(1).scaleY(1).setDuration(1000);
+            max=false;
+        }
+        /*
         x = lblAmount.getTranslationX();
         y = lblAmount.getTranslationY();
         lblAmount.animate().translationXBy(10f).translationYBy(-600f).scaleXBy(2f).scaleYBy(2f).setDuration(1000);
         lblAmount.setTranslationX(x);
-        lblAmount.setTranslationY(y);
+        lblAmount.setTranslationY(y);*/
     }
 }

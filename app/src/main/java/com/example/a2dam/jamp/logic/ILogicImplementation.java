@@ -57,9 +57,9 @@ public class ILogicImplementation implements ILogic {
         return returnUser;
     }
 
-    @Override
+    /*@Override
     public List<Expense> findExpensesMonth(Integer idTxoko) throws Exception {
         return null;
-    }
+    }*/
 
 }
