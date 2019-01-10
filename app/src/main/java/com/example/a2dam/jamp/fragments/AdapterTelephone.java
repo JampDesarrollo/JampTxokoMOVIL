@@ -1,11 +1,11 @@
 package com.example.a2dam.jamp.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
@@ -38,18 +38,19 @@ public class AdapterTelephone extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.telephone_category, null);
+            v = inf.inflate(R.layout.telephone_item, null);
         }
         Telephone dir = items.get(position);
-        TextView title = (TextView) v.findViewById(R.id.category);
+        TextView title = v.findViewById(R.id.category);
         title.setText(dir.getNombre());
-        TextView description = (TextView) v.findViewById(R.id.texto);
-        description.setText(dir.getDescription());
+        TextView description = v.findViewById(R.id.texto);
+        description.setText(dir.getTelephon().toString());
 //        ImageView imagen = (ImageView) v.findViewById(R.id.imageView);
 //        imagen.setImageDrawable(dir.getImage());
         return v;
