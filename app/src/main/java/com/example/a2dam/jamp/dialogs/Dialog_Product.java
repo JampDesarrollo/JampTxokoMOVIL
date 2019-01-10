@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
@@ -66,6 +65,6 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
     }
 
     private void añadirProductos() {
-
+        getFragmentManager().beginTransaction().remove(this).commit();
     }
 }

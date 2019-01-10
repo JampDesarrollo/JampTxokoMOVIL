@@ -9,5 +9,6 @@
     <color name="rojo">#EF0000</color>
     <color name="verde">#05A50A</color>
     <color name="black">#000000</color>
+    <color name="gris_fondo">#25000000</color>
 
 </resources>
