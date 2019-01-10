@@ -7,24 +7,35 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TelephonFragment.OnFragmentInteractionListener} interface
+ * {@link TelephoneFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TelephonFragment extends Fragment implements View.OnClickListener {
+public class TelephoneFragment extends Fragment implements View.OnClickListener {
+
     protected ImageButton btnTelefono;
+
+    private static final Logger LOGGER
+            = Logger.getLogger("socketClient");
 
     private OnFragmentInteractionListener mListener;
 
-    public TelephonFragment() {
+    public TelephoneFragment() {
         // Required empty public constructor
     }
 
@@ -34,21 +45,43 @@ public class TelephonFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_telephone, container, false);
 
+        ArrayList<Telephone> telephone = new ArrayList<>();
+
+        for(int i=0; i<20; i++){
+            Telephone tel = new Telephone();
+
+            tel.setNombre("Telepizza" +i);
+            tel.setTelephon(944644465);
+
+            telephone.add(tel);
+        }
+
+
+        ListView lv = view.findViewById(R.id.listView);
+        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
+        lv.setAdapter(adapter);
+
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
 
-        btnTelefono=view.findViewById(R.id.TelepizzaCallButton);
-        btnTelefono.setOnClickListener(this);
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvNumber = view.findViewById(R.id.texto);
+                Uri number = Uri.parse("tel:"+ tvNumber.getText());
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
+
+//CODIGO AQUI
+            }
+        });
+
         return view;
     }
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.TelepizzaCallButton:
-                Uri number = Uri.parse(this.getResources().getString(R.string.Telepizza_Number));
-                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
-                startActivity(callIntent);
-                break;
-        }
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -3,19 +3,14 @@ package com.example.a2dam.jamp.dialogs;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
-import com.example.a2dam.jamp.fragments.EventFragment;
-import com.example.a2dam.jamp.fragments.ExpenseFragment;
+
 import com.example.a2dam.jamp.fragments.ProductFragment;
-import com.example.a2dam.jamp.fragments.TelephonFragment;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.fragments.ProductFragment;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 

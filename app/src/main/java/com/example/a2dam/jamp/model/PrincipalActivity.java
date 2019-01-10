@@ -19,7 +19,7 @@ import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
 import com.example.a2dam.jamp.fragments.EventFragment;
 import com.example.a2dam.jamp.fragments.ExpenseFragment;
 import com.example.a2dam.jamp.fragments.ProductFragment;
-import com.example.a2dam.jamp.fragments.TelephonFragment;
+import com.example.a2dam.jamp.fragments.TelephoneFragment;
 
 /**
  * Class that controller PrincipalActivity
@@ -181,7 +181,7 @@ public class PrincipalActivity extends AppCompatActivity
             case 2:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                TelephonFragment telephonFragment = new TelephonFragment();
+                TelephoneFragment telephonFragment = new TelephoneFragment();
                 fragmentTransaction.replace(R.id.fragment, telephonFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();

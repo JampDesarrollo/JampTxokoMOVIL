@@ -23,8 +23,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
     private ImageView imgCoins;
     private FrameLayout fLayout;
     protected Boolean max;
-    float x;
-    float y;
     private ILogic ilogic;
 
 
@@ -39,10 +37,11 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
         coinAnimation.run();
 
+
         fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this);
         ilogic = ILogicFactory.getILogic();
-
+      
         max=false;
 
         //HACERLO en otro thread?
@@ -70,11 +69,5 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
             lblAmount.animate().scaleX(1).scaleY(1).setDuration(1000);
             max=false;
         }
-        /*
-        x = lblAmount.getTranslationX();
-        y = lblAmount.getTranslationY();
-        lblAmount.animate().translationXBy(10f).translationYBy(-600f).scaleXBy(2f).scaleYBy(2f).setDuration(1000);
-        lblAmount.setTranslationX(x);
-        lblAmount.setTranslationY(y);*/
     }
 }

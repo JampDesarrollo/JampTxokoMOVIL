@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/coins" />
 
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
