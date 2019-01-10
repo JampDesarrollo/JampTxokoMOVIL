@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
@@ -39,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText pfContrasena, tfUsuario;
     TextView lblError;
     ImageButton btnShowPass,btnVideo;
-    Boolean visible, bTextVisible;
+    Boolean visible, bTextVisible,videoPlaying;
+    VideoView video;
     private ILogic ilogic;
 
     @Override
@@ -70,10 +73,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Los Boolean
         visible = false;
         bTextVisible = false;
+        videoPlaying=false;
 
+        //El Video
+        video=findViewById(R.id.videoView);
         //
         ilogic = ILogicFactory.getILogic();
-
 
     }
 
@@ -108,13 +113,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnVideo:
                 animacion();
-                Uri webpage = Uri.parse(this.getResources().getString(R.string.Video_Tutorial));
+                crearVideo();
+               // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+                /*Uri webpage = Uri.parse(this.getResources().getString(R.string.Video_Tutorial));
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-                startActivity(webIntent);
+                startActivity(webIntent);*/
+        }
+    }
+
+    private void crearVideo() {
+        video.setVisibility(View.VISIBLE);
+        video.setMediaController(new MediaController(this));
+        video.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video));
+        video.start();
+        videoPlaying=true;
+    }
+
+    public void onBackPressed(){
+        if(videoPlaying){
+            video.stopPlayback();
+            video.setVisibility(View.INVISIBLE);
+            videoPlaying=false;
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
 
     private void animacion() {
+
         AnimatorSet animador=new AnimatorSet();
         ObjectAnimator animacion=ObjectAnimator.ofFloat(btnVideo,"alpha",0f,1f);
         animacion.setDuration(3000);

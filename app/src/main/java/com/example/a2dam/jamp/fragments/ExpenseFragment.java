@@ -58,8 +58,12 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
                 animacion();
                 break;
         }
+    }
+
+    public void onOrientationChanged (int orientation){
 
     }
+
 
     private void animacion() {
         if(!max){

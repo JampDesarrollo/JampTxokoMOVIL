@@ -11,8 +11,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@color/blanco">
 
 
         <TextView
@@ -29,7 +29,7 @@
             android:textColor="@android:color/black"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/scrollTelephones"
+            app:layout_constraintBottom_toTopOf="@+id/listView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,68 +37,74 @@
 
         <ListView
             android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/blanco"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitulo"></ListView>
 
         <!--<ScrollView-->
-            <!--android:id="@+id/scrollTelephones"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/textTitulo">-->
-            <!---->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="vertical">-->
+        <!--android:id="@+id/scrollTelephones"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/textTitulo">-->
+        <!---->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
 
-                <!--<android.support.constraint.ConstraintLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent">-->
+        <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-                    <!--<Button-->
-                        <!--android:id="@+id/TelepizzaButton"-->
-                        <!--style="@style/Widget.AppCompat.Button.Borderless"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginStart="2dp"-->
-                        <!--android:layout_marginTop="2dp"-->
-                        <!--android:layout_marginEnd="8dp"-->
-                        <!--android:layout_marginBottom="2dp"-->
-                        <!--android:fontFamily="@font/alef"-->
-                        <!--android:text="@string/telepizza"-->
-                        <!--android:textAlignment="viewStart"-->
-                        <!--android:textSize="18sp"-->
-                        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                        <!--app:layout_constraintEnd_toStartOf="@+id/TelepizzaCallButton"-->
-                        <!--app:layout_constraintStart_toStartOf="parent"-->
-                        <!--app:layout_constraintTop_toTopOf="parent" />-->
+        <!--<Button-->
+        <!--android:id="@+id/TelepizzaButton"-->
+        <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="2dp"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginBottom="2dp"-->
+        <!--android:fontFamily="@font/alef"-->
+        <!--android:text="@string/telepizza"-->
+        <!--android:textAlignment="viewStart"-->
+        <!--android:textSize="18sp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/TelepizzaCallButton"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <!--<ImageButton-->
-                        <!--android:id="@+id/TelepizzaCallButton"-->
-                        <!--style="@android:style/Widget.DeviceDefault.ImageButton"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_marginStart="8dp"-->
-                        <!--android:layout_marginEnd="8dp"-->
-                        <!--android:background="@drawable/boton_telefono_redondo"-->
-                        <!--android:backgroundTint="@color/verde"-->
-                        <!--android:contentDescription="@string/telepizza"-->
-                        <!--android:scaleType="fitCenter"-->
-                        <!--android:scaleX="1.2"-->
-                        <!--android:scaleY="1.2"-->
-                        <!--android:src="@drawable/ic_call_black_24dp"-->
-                        <!--android:tint="@color/blanco"-->
-                        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                        <!--app:layout_constraintEnd_toEndOf="parent"-->
-                        <!--app:layout_constraintStart_toEndOf="@+id/TelepizzaButton"-->
-                        <!--app:layout_constraintTop_toTopOf="parent" />-->
-                <!--</android.support.constraint.ConstraintLayout>-->
+        <!--<ImageButton-->
+        <!--android:id="@+id/TelepizzaCallButton"-->
+        <!--style="@android:style/Widget.DeviceDefault.ImageButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:background="@drawable/boton_telefono_redondo"-->
+        <!--android:backgroundTint="@color/verde"-->
+        <!--android:contentDescription="@string/telepizza"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:scaleX="1.2"-->
+        <!--android:scaleY="1.2"-->
+        <!--android:src="@drawable/ic_call_black_24dp"-->
+        <!--android:tint="@color/blanco"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/TelepizzaButton"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+        <!--</android.support.constraint.ConstraintLayout>-->
 
-            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
         <!--</ScrollView>-->
 
     </android.support.constraint.ConstraintLayout>

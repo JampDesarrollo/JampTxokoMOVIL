@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class AdapterTelephone extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-    @SuppressLint("SetTextI18n")
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
@@ -47,12 +47,10 @@ public class AdapterTelephone extends BaseAdapter {
             v = inf.inflate(R.layout.telephone_item, null);
         }
         Telephone dir = items.get(position);
-        TextView title = v.findViewById(R.id.category);
+        TextView title = v.findViewById(R.id.textTelephoneName);
         title.setText(dir.getNombre());
-        TextView description = v.findViewById(R.id.texto);
+        TextView description = v.findViewById(R.id.textTelephoneNum);
         description.setText(dir.getTelephon().toString());
-//        ImageView imagen = (ImageView) v.findViewById(R.id.imageView);
-//        imagen.setImageDrawable(dir.getImage());
         return v;
     }
 }
