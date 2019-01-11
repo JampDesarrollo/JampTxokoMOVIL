@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.a2dam.jamp.adapters.AdapterTelephone;
 import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.model.PrincipalActivity;

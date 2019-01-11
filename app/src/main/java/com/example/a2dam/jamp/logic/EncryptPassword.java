@@ -27,12 +27,13 @@ public class EncryptPassword {
 
     /**
      *
-     * @param password
+     * @param passwordString
      * @return
      * @author ander
      */
-    public static String encrypt(byte[] password) {
-        byte[] encodedMessage = null;
+    public static String encrypt(String passwordString) {
+
+        byte[] encodedMessage = null,password=passwordString.getBytes();
         try {
             FileInputStream fis = new FileInputStream("public.key");
             byte[] byteA = new byte[fis.available()];

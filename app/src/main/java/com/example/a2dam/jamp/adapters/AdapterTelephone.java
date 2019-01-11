@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp.fragments;
+package com.example.a2dam.jamp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.Telephone;
+import com.example.a2dam.jamp.fragments.TelephoneFragment;
 
 import java.util.ArrayList;
 public class AdapterTelephone extends BaseAdapter {

@@ -24,6 +24,7 @@ import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
+import com.example.a2dam.jamp.logic.EncryptPassword;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
 import com.example.a2dam.jamp.logic.ThreadForSocketClient;
@@ -86,13 +87,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         resto=findViewById(R.id.scrollInicio);
         ilogic = ILogicFactory.getILogic();
 
-        /*if(state.getBoolean("state")){
-            crearVideo();
-        }*/
 
         if (savedInstanceState != null) {
             if (savedInstanceState.getBoolean("state")) {
-                getSupportActionBar().hide();
+                try {
+                    getSupportActionBar().hide();
+                }catch (NullPointerException e){
+                    lblError.setText(R.string.null_pointer_exception_error);
+                    e.printStackTrace();
+                }
                 crearVideo();
             }
         }
@@ -114,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //logIn();
                 break;
             case R.id.btnOjo: //cuando pulse en el ojo
+                animacion();
                 showPassword();
                 break;
             case R.id.btnRegistrar:
@@ -128,15 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changepass();
                 break;
             case R.id.btnVideo:
-                //animacion();
-                //crearVideo();
-                //state.putBoolean("state",true);
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
-                /*Uri webpage = Uri.parse(this.getResources().getString(R.string.Video_Tutorial));
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
-                startActivity(webIntent);*/
         }
     }
 
@@ -165,13 +161,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             video.setVisibility(View.INVISIBLE);
             videoPlaying=false;
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }else{
+            finish();
         }
     }
 
     private void animacion() {
-
         AnimatorSet animador=new AnimatorSet();
-        ObjectAnimator animacion=ObjectAnimator.ofFloat(btnVideo,"alpha",0f,1f);
+        ObjectAnimator animacion=ObjectAnimator.ofFloat(btnShowPass,"alpha",0f,1f);
         animacion.setDuration(3000);
         animador.play(animacion);
         animador.start();
@@ -319,7 +316,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         UserBean returnUser = null;
 
         try {
-            UserBean usuario = new UserBean(tfUsuario.getText().toString(), pfContrasena.getText().toString());
+
+            UserBean usuario = new UserBean(tfUsuario.getText().toString(), EncryptPassword.encrypt(pfContrasena.getText().toString()));
             //crear hilo
             ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
             thread.setUncaughtExceptionHandler(this::uncaughtException);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.logic.EncryptPassword;
 import com.example.a2dam.jamp.logic.ILogic;
 import com.example.a2dam.jamp.logic.ILogicFactory;
 import com.example.a2dam.jamp.logic.ThreadForSocketClient;
@@ -263,7 +264,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
             Long tsLong = System.currentTimeMillis();
             Timestamp now = new Timestamp(tsLong);
             //UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),textTxoko.getText().toString(), pass1.getText().toString(), now, now);
-            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(), pass1.getText().toString(), now, now);
+            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),EncryptPassword.encrypt(pass1.getText().toString()), now, now);
             //crear hilo
             ThreadForSocketClient thread = new ThreadForSocketClient(user, ilogic, 1);
             thread.setUncaughtExceptionHandler(this::uncaughtException);

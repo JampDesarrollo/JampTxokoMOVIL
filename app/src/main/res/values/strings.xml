@@ -97,6 +97,7 @@
     <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
+    <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception...</string>
   
     //Recursos
     <string name="Video_Tutorial">https://www.youtube.com/watch?v=_hjf8fE_W0Q</string>
