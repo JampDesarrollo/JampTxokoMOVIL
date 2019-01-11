@@ -68,9 +68,9 @@ public class EncryptPassword {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalBlockSizeException ex) {
-
+            ex.printStackTrace();
         } catch (BadPaddingException ex) {
-
+            ex.printStackTrace();
         }
         return encodedMessage.toString();
     }

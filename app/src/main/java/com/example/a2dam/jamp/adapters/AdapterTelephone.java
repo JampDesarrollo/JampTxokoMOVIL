@@ -45,7 +45,7 @@ public class AdapterTelephone extends BaseAdapter {
         View v = convertView;
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.telephone_item, null);
+            v = inf.inflate(R.layout.item_telephone, null);
         }
         Telephone dir = items.get(position);
         TextView title = v.findViewById(R.id.textTelephoneName);

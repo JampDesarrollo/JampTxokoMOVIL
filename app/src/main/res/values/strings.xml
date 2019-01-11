@@ -80,6 +80,10 @@
     <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="Dialogo_Productos_Añadir">Añadir</string>
     <string name="Dialogo_Productos_Min_Error">Introduce un valor mayor a 0</string>
+    <string name="Dialogo_Productos_Max_Error">Introduce un valor menor a 25</string>
+    <string name="Dialogo_Productos_Toast_1">Se ha añadido</string>
+    <string name="Dialogo_Productos_Toast_2">productos de</string>
+    <string name="Dialogo_Productos_Toast_3">a tus gastos mensuales.</string>
     //Dialogo Cambio Contraseña
     <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
     <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
