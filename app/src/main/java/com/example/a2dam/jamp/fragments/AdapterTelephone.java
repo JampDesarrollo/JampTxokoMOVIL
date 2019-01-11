@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.Telephone;
 
 import java.util.ArrayList;
 public class AdapterTelephone extends BaseAdapter {

@@ -7,6 +7,7 @@
     tools:context=".model.MainActivity">
 
     <ScrollView
+        android:id="@+id/scrollInicio"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -236,7 +237,6 @@
         android:id="@+id/videoView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:rotation="90"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

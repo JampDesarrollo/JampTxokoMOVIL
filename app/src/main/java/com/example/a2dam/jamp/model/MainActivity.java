@@ -3,6 +3,7 @@ package com.example.a2dam.jamp.model;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.MediaController;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -41,8 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText pfContrasena, tfUsuario;
     TextView lblError;
     ImageButton btnShowPass,btnVideo;
-    Boolean visible, bTextVisible,videoPlaying;
+    Boolean visible, bTextVisible,videoPlaying,state;
     VideoView video;
+    ScrollView resto;
+    //Bundle state;
     private ILogic ilogic;
 
     @Override
@@ -77,9 +81,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //El Video
         video=findViewById(R.id.videoView);
-        //
+
+        //El Layout Con el resto de cosas
+        resto=findViewById(R.id.scrollInicio);
         ilogic = ILogicFactory.getILogic();
 
+        /*if(state.getBoolean("state")){
+            crearVideo();
+        }*/
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean("state")) {
+                getSupportActionBar().hide();
+                crearVideo();
+            }
+        }
     }
 
     /**
@@ -112,9 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 changepass();
                 break;
             case R.id.btnVideo:
-                animacion();
-                crearVideo();
-               // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                //animacion();
+                //crearVideo();
+                //state.putBoolean("state",true);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
 
                 /*Uri webpage = Uri.parse(this.getResources().getString(R.string.Video_Tutorial));
                 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -122,8 +140,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            outState.putBoolean("state", true);
+        }else if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            outState.putBoolean("state", false);
+        }
+    }
+
     private void crearVideo() {
         video.setVisibility(View.VISIBLE);
+        resto.setVisibility(View.INVISIBLE);
         video.setMediaController(new MediaController(this));
         video.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video));
         video.start();
@@ -133,9 +161,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed(){
         if(videoPlaying){
             video.stopPlayback();
+            resto.setVisibility(View.VISIBLE);
             video.setVisibility(View.INVISIBLE);
             videoPlaying=false;
-            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
 
