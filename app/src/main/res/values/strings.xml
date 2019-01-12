@@ -44,7 +44,7 @@
     <string name="nav_telephon">Telefonos</string>
     <string name="nav_events">Eventos</string>
     <string name="nav_change_pass">Cambiar Contraseña</string>
-    <string name="telepizza">Telepizza</string>
+
 
     //Fragments
     //Change Password
@@ -58,6 +58,7 @@
     <string name="fragment_products_title">Productos</string>
     <string name="fragment_products_product">Fanta de naranja</string>
     <string name="fragment_products_price">0,50</string>
+
     //Events
     <string name="fragment_events_title">Eventos</string>
     <string name="fragment_events_search_event">Introduce el evento a buscar</string>
@@ -66,6 +67,7 @@
     <string name="fragment_event_event_date">25/06/2019</string>
     <string name="fragment_events_event_description">Las fiestas de erandio por san juan seran este año en la plaza mayor</string>
     <string name="fragment_events_event_price">15</string>
+    <string name="fragment_events_event_toast">Se han encontrado los siguientes eventos</string>
 
 
     //expense
@@ -76,10 +78,13 @@
 
     //telephones
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
+    <string name="telepizza">Telepizza</string>
 
 
     //Dialogos
     <string name="Dialogos_Ok">Ok</string>
+    <string name="Dialogos_Cancelar">Cancelar</string>
+
     //Dialogo Solicitud De Nueva Contraseña
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Title">Solicitada la nueva contraseña</string>
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Ha solicitado una nueva contraseña que se le mandara por email, Por Favor revise su bandeja de entrada</string>
@@ -98,6 +103,10 @@
     //Dialogo Cambio Contraseña
     <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
     <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
+    //Dialogo Asistir al evento
+    <string name="Dialogo_Asistir_Al_Evento_Title">Asistir Al Evento</string>
+    <string name="Dialogo_Asistir_Al_Evento_Content">Seguro que desea asistir al evento seleccionado?</string>
+    <string name="Dialogo_Asistir_Al_Evento_Toast">Se ha añadido el gasto del evento a sus gastos mensuales</string>
 
     //Error Messages
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>

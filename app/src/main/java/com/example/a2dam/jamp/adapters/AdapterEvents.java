@@ -49,14 +49,13 @@ public class AdapterEvents extends BaseAdapter {
             v = inf.inflate(R.layout.item_events, null);
         }
         Event dir = items.get(position);
-        TextView title = v.findViewById(R.id.tfEventTitle) ,description=v.findViewById(R.id.tfEventDescription);
-
-        //date=v.findViewById(R.id.tfEventDate);
-
+        TextView title = v.findViewById(R.id.tfEventTitle) ,description=v.findViewById(R.id.tfEventDescription),date=v.findViewById(R.id.tfEventDate),price=v.findViewById(R.id.tfEventPrice);
 
         title.setText(dir.getName());
-        //date.setText(dir.getDate().toString());
+        date.setText(dir.getDate().toString());
         description.setText(dir.getDescription());
+        price.setText(dir.getPrice().toString() + v.getResources().getString(R.string.country_coin));
+
         return v;
     }
 }
