@@ -82,7 +82,9 @@ public class PrincipalActivity extends AppCompatActivity
 
 //        setupNavigationDrawerContent(navigationView);
 
-        setFragment(1);
+        if(savedInstanceState == null) {
+            setFragment(1);
+        }
     }
 
 
