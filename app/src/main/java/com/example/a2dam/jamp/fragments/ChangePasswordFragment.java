@@ -36,6 +36,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_changepass, container, false);
+        //vista.setRotation(Configuration.ORIENTATION_PORTRAIT);
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
 
         actualpass=vista.findViewById(R.id.pfActualPassword);

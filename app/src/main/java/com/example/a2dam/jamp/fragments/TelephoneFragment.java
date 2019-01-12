@@ -59,11 +59,11 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener 
         }
 
 
-        ListView lv = view.findViewById(R.id.listView);
+        ListView lv = view.findViewById(R.id.TelephoneListView);
         AdapterTelephone adapter = new AdapterTelephone(this, telephone);
         lv.setAdapter(adapter);
 
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
 
 
 

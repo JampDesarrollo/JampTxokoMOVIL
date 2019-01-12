@@ -11,53 +11,38 @@
         android:layout_height="50dp">
 
         <TextView
-            android:id="@+id/textTelephoneName"
+            android:id="@+id/textProduct_Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/alef"
+            android:text="@string/fragment_products_product"
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/rojo"
+            android:textColor="@color/black"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textTelephoneNum"
+            app:layout_constraintEnd_toStartOf="@+id/textProductPrice"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textTelephoneNum"
+            android:id="@+id/textProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textTelephoneName"
+            android:layout_below="@+id/textProduct_Name"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="24dp"
             android:fontFamily="@font/alef"
             android:gravity="center_vertical|center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/TelepizzaCallButton"
-            app:layout_constraintStart_toEndOf="@+id/textTelephoneName"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/TelepizzaCallButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textTelephoneNum"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/boton_telefono_redondo"
-            android:backgroundTint="@color/verde"
-            android:contentDescription="@string/telepizza"
-            android:scaleType="fitCenter"
-            android:scaleX="1.2"
-            android:scaleY="1.2"
-            android:src="@drawable/ic_call_black_24dp"
-            android:tint="@color/blanco"
+            android:text="@string/fragment_products_price"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textTelephoneNum"
+            app:layout_constraintStart_toEndOf="@+id/textProduct_Name"
             app:layout_constraintTop_toTopOf="parent" />
+
     </android.support.constraint.ConstraintLayout>
 
 </RelativeLayout>

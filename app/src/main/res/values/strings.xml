@@ -55,13 +55,24 @@
     <string name="fragment_change_password_button">Cambiar</string>
 
     //Products
-
+    <string name="fragment_products_title">Productos</string>
+    <string name="fragment_products_product">Fanta de naranja</string>
+    <string name="fragment_products_price">0,50</string>
     //Events
+    <string name="fragment_events_title">Eventos</string>
+    <string name="fragment_events_search_event">Introduce el evento a buscar</string>
+    <string name="fragment_events_go">Asistir al Evento</string>
+    <string name="fragment_events_event_title">Fiestas de Erandio</string>
+    <string name="fragment_event_event_date">25/06/2019</string>
+    <string name="fragment_events_event_description">Las fiestas de erandio por san juan seran este año en la plaza mayor</string>
+    <string name="fragment_events_event_price">15</string>
+
 
     //expense
-    <string name="cantidad">Cantidad</string>
-    <string name="coin_sprite">Coin sprite</string>
-    <string name="gastos_este_mes">Gastos este mes:</string>
+    <string name="fragment_expense_title">Gastos</string>
+    <string name="fragment_expense_cantidad">Cantidad</string>
+    <string name="fragment_expense_coin_sprite">Coin sprite</string>
+    <string name="fragment_expense_month_expenses">Gastos este mes:</string>
 
     //telephones
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
@@ -104,7 +115,9 @@
     <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception...</string>
   
     //Recursos
-    <string name="Video_Tutorial">https://www.youtube.com/watch?v=_hjf8fE_W0Q</string>
+    <string name="country_coin">€</string>
+    <string name="search">Buscar Por:</string>
+
 
 
 </resources>

@@ -31,8 +31,8 @@
         <activity
             android:name=".model.PrincipalActivity"
             android:label="@string/title_activity_principal"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+            //android:screenOrientation="portrait"/>
         <activity
             android:name=".model.Registro"
             android:label="Registro"
