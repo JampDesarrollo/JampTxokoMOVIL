@@ -82,6 +82,9 @@ public class PrincipalActivity extends AppCompatActivity
 
 //        setupNavigationDrawerContent(navigationView);
 
+        /*si el savedInstanceState es igual a null significa que es la primera vez que se carga la actividad entonces llama al metodo setFragment() y le manda el fragmento que queremos que se muestre, en este caso
+        es la actividad de productos (la 0), si es distinto de null significa que la actividad ya estaba cargada y no queremos que nos vuelva a cargar el fragment de productos sino que queremos quedarnos en el
+        fragmento que ya estabamos*/
         if(savedInstanceState == null) {
             setFragment(1);
         }
@@ -162,49 +165,36 @@ public class PrincipalActivity extends AppCompatActivity
 
     public void setFragment(int position) {
         FragmentManager fragmentManager;
+        fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction;
+        fragmentTransaction = fragmentManager.beginTransaction();
         switch (position) {
             case 0:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
                 ProductFragment productFragment = new ProductFragment();
                 fragmentTransaction.replace(R.id.fragment, productFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                 break;
             case 1:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
                 EventFragment eventFragment = new EventFragment();
                 fragmentTransaction.replace(R.id.fragment, eventFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                 break;
             case 2:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
                 TelephoneFragment telephonFragment = new TelephoneFragment();
                 fragmentTransaction.replace(R.id.fragment, telephonFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
                 break;
             case 3:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
                 ExpenseFragment expenseFragment = new ExpenseFragment();
                 fragmentTransaction.replace(R.id.fragment, expenseFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+
                 break;
             case 4:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
                 ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
                 fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+
                 break;
         }
+        //Hace que los fragment se añadan a la cola de ejecucion (es para cuando cliquemos el boton de atras no te cierre el activity y te muestre el de login sino que te vaya al anterior fragment)
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }

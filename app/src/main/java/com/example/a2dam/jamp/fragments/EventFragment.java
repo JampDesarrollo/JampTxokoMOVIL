@@ -125,7 +125,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
             event.setName(getResources().getString(R.string.fragment_events_event_title) + " "+ i);
             java.sql.Date sql=null;
             try {
-                sql = new java.sql.Date(formatter.parse(getResources().getString(R.string.fragment_event_event_date)).getTime());
+                sql = new java.sql.Date(formatter.parse(getResources().getString(R.string.fragment_event_event_date)).getTime()+i);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
