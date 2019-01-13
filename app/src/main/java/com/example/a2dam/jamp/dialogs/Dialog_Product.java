@@ -1,5 +1,6 @@
 package com.example.a2dam.jamp.dialogs;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,22 +8,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.Product;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
+import java.util.ArrayList;
+
+@SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {
     private Button btnPlus,btnMinus,btnOk;
     protected EditText textCount;
     protected Integer count;
-    public Dialog_Product() {
-        // Required empty public constructor
-    }
-
+    protected TextView productName, productDescription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         final View view = inflater.inflate(R.layout.fragment_product_dialog, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Productos");
@@ -30,6 +34,12 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
         return view;
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        productName = view.findViewById(R.id.tfDialogTitle);
+        productDescription = view.findViewById(R.id.tfDialogContent);
+
+        productName.setText("hola");
+        productDescription.setText("hola");
+
         btnPlus=view.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(this);
 

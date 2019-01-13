@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp.fragments;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.GridView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.adapters.AdapterProducts;
@@ -30,7 +27,6 @@ import java.util.ArrayList;
  * to handle interaction events.
  */
 public class ProductFragment extends Fragment implements View.OnClickListener {
-    protected Button btnProductos; 
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,14 +49,13 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
 
             prod.setDescription(getResources().getString(R.string.fragment_products_title));
             prod.setName(getResources().getString(R.string.fragment_products_product));
-            prod.setPrice(Float.valueOf(getResources().getString(R.string.fragment_products_price)));
-
+            prod.setPrice((float) 1);
 
             products.add(prod);
         }
 
 
-        ListView lv = view.findViewById(R.id.ProductGridLayout);
+        GridView lv = view.findViewById(R.id.ProductGridView);
         AdapterProducts adapter = new AdapterProducts(this, products);
         lv.setAdapter(adapter);
 
@@ -71,37 +66,20 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tvNumber = view.findViewById(R.id.textTelephoneNum);
-                Uri number = Uri.parse("tel:"+ tvNumber.getText());
-                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
-                startActivity(callIntent);
-
-//CODIGO AQUI
+                FragmentManager fragmentManager;
+                FragmentTransaction fragmentTransaction;
+                fragmentManager = getFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                Dialog_Product dialog_Product= new Dialog_Product();
+                fragmentTransaction.add(R.id.fragment, dialog_Product);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
         return view;
     }
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        //btnProductos=view.findViewById(R.id.buttonProduct);
-        //btnProductos.setOnClickListener(this);
-    }
-    @Override
-    public void onClick(View v) {
-        /*if(v.getId()==R.id.buttonProduct){
-            ok();
-        }*/
-    }
-    public void ok(){
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-        fragmentManager= getFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        Dialog_Product Dialog_Product= new Dialog_Product();
-        fragmentTransaction.add(R.id.fragment, Dialog_Product);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -115,7 +93,11 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
         mListener = null;
     }
 
-    
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
