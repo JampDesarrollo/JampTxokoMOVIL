@@ -44,7 +44,7 @@
     <string name="nav_telephon">Telefonos</string>
     <string name="nav_events">Eventos</string>
     <string name="nav_change_pass">Cambiar Contraseña</string>
-    <string name="telepizza">Telepizza</string>
+
 
     //Fragments
     //Change Password
@@ -55,17 +55,36 @@
     <string name="fragment_change_password_button">Cambiar</string>
 
     //Products
+    <string name="fragment_products_title">Productos</string>
+    <string name="fragment_products_product">Fanta de naranja</string>
+    <string name="fragment_products_price">0,50</string>
 
     //Events
+    <string name="fragment_events_title">Eventos</string>
+    <string name="fragment_events_search_event">Introduce el evento a buscar</string>
+    <string name="fragment_events_go">Asistir al Evento</string>
+    <string name="fragment_events_event_title">Fiestas de Erandio</string>
+    <string name="fragment_event_event_date">25/06/2019</string>
+    <string name="fragment_events_event_description">Las fiestas de erandio por san juan seran este año en la plaza mayor</string>
+    <string name="fragment_events_event_price">15</string>
+    <string name="fragment_events_event_toast">Se han encontrado los siguientes eventos</string>
+
 
     //expense
+    <string name="fragment_expense_title">Gastos</string>
+    <string name="fragment_expense_cantidad">Cantidad</string>
+    <string name="fragment_expense_coin_sprite">Coin sprite</string>
+    <string name="fragment_expense_month_expenses">Gastos este mes:</string>
 
     //telephones
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
+    <string name="telepizza">Telepizza</string>
 
 
     //Dialogos
     <string name="Dialogos_Ok">Ok</string>
+    <string name="Dialogos_Cancelar">Cancelar</string>
+
     //Dialogo Solicitud De Nueva Contraseña
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Title">Solicitada la nueva contraseña</string>
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Ha solicitado una nueva contraseña que se le mandara por email, Por Favor revise su bandeja de entrada</string>
@@ -77,9 +96,17 @@
     <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
     <string name="Dialogo_Productos_Añadir">Añadir</string>
     <string name="Dialogo_Productos_Min_Error">Introduce un valor mayor a 0</string>
+    <string name="Dialogo_Productos_Max_Error">Introduce un valor menor a 25</string>
+    <string name="Dialogo_Productos_Toast_1">Se ha añadido</string>
+    <string name="Dialogo_Productos_Toast_2">productos de</string>
+    <string name="Dialogo_Productos_Toast_3">a tus gastos mensuales.</string>
     //Dialogo Cambio Contraseña
     <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
     <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
+    //Dialogo Asistir al evento
+    <string name="Dialogo_Asistir_Al_Evento_Title">Asistir Al Evento</string>
+    <string name="Dialogo_Asistir_Al_Evento_Content">Seguro que desea asistir al evento seleccionado?</string>
+    <string name="Dialogo_Asistir_Al_Evento_Toast">Se ha añadido el gasto del evento a sus gastos mensuales</string>
 
     //Error Messages
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>
@@ -94,11 +121,12 @@
     <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
+    <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception...</string>
   
     //Recursos
-    <string name="Video_Tutorial">https://www.youtube.com/watch?v=_hjf8fE_W0Q</string>
-    <string name="Telepizza_Number">tel:669201170</string>
-    <string name="cantidad">Cantidad</string>
-    <string name="coin_sprite">Coin sprite</string>
-    <string name="gastos_este_mes">Gastos este mes:</string>
+    <string name="country_coin">€</string>
+    <string name="search">Buscar Por:</string>
+
+
+
 </resources>

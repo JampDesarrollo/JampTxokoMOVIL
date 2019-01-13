@@ -1,5 +1,7 @@
 package com.example.a2dam.jamp.fragments;
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,6 +29,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     protected Button btnCambiar;
 
 
+
     public ChangePasswordFragment() {
         // Required empty public constructor
     }
@@ -35,7 +38,13 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_changepass, container, false);
+
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+            vista= inflater.inflate(R.layout.fragment_changepass_landscape, container, false);
+        }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
+            vista= inflater.inflate(R.layout.fragment_changepass, container, false);
+        }
+
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
 
         actualpass=vista.findViewById(R.id.pfActualPassword);
@@ -74,6 +83,14 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                 dialog.show(getFragmentManager(),"Dialog_Change_Password");
                 //cambiarPass();
                 break;
+        }
+    }
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            outState.putBoolean("state", true);
+        }else if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            outState.putBoolean("state", false);
         }
     }
 

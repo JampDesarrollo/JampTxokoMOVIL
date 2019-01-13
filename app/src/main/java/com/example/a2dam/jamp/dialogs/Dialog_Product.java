@@ -46,21 +46,38 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnPlus:
-                count++;
-                textCount.setText(count.toString());
+                plus();
                 break;
             case R.id.btnMinus:
-                if(count>1) {
-                    count--;
-                    textCount.setText(count.toString());
-                }else{
-                    Toast toast1 = Toast.makeText(getContext(),R.string.Dialogo_Productos_Min_Error, Toast.LENGTH_LONG);
-                    toast1.show();
-                }
+                minus();
                 break;
             case R.id.btnOk:
+                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + count.toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + this.getResources().getString(R.string.Dialogo_Productos_Title) + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
+                Toast toast = Toast.makeText(getContext(),toasttext,Toast.LENGTH_LONG);
+                toast.show();
                 añadirProductos();
                 break;
+        }
+    }
+
+    private void plus() {
+        if(count<25) {
+            count++;
+            textCount.setText(count.toString());
+        }else{
+            Toast toast1 = Toast.makeText(getContext(),R.string.Dialogo_Productos_Max_Error, Toast.LENGTH_LONG);
+            toast1.show();
+        }
+
+    }
+
+    private void minus() {
+        if(count>1) {
+            count--;
+            textCount.setText(count.toString());
+        }else{
+            Toast toast1 = Toast.makeText(getContext(),R.string.Dialogo_Productos_Min_Error, Toast.LENGTH_LONG);
+            toast1.show();
         }
     }
 

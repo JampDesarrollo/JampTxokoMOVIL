@@ -1,5 +1,6 @@
 package com.example.a2dam.jamp.fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,18 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.adapters.AdapterProducts;
+import com.example.a2dam.jamp.dataClasses.Product;
 import com.example.a2dam.jamp.dialogs.Dialog_Product;
 import com.example.a2dam.jamp.model.PrincipalActivity;
+
+import java.util.ArrayList;
 
 
 /**
@@ -36,19 +44,53 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_product, container, false);
 
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Productos");
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_products_title);
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        for(int i=0; i<20; i++){
+            Product prod = new Product();
+
+            prod.setDescription(getResources().getString(R.string.fragment_products_title));
+            prod.setName(getResources().getString(R.string.fragment_products_product));
+            prod.setPrice(Float.valueOf(getResources().getString(R.string.fragment_products_price)));
+
+
+            products.add(prod);
+        }
+
+
+        ListView lv = view.findViewById(R.id.ProductGridLayout);
+        AdapterProducts adapter = new AdapterProducts(this, products);
+        lv.setAdapter(adapter);
+
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
+
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvNumber = view.findViewById(R.id.textTelephoneNum);
+                Uri number = Uri.parse("tel:"+ tvNumber.getText());
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                startActivity(callIntent);
+
+//CODIGO AQUI
+            }
+        });
 
         return view;
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        btnProductos=view.findViewById(R.id.buttonProduct);
-        btnProductos.setOnClickListener(this);
+        //btnProductos=view.findViewById(R.id.buttonProduct);
+        //btnProductos.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.buttonProduct){
+        /*if(v.getId()==R.id.buttonProduct){
             ok();
-        }
+        }*/
     }
     public void ok(){
         FragmentManager fragmentManager;

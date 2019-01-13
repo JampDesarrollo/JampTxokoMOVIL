@@ -12,6 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.a2dam.jamp.adapters.AdapterTelephone;
+import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
@@ -57,18 +59,18 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener 
         }
 
 
-        ListView lv = view.findViewById(R.id.listView);
+        ListView lv = view.findViewById(R.id.TelephoneListView);
         AdapterTelephone adapter = new AdapterTelephone(this, telephone);
         lv.setAdapter(adapter);
 
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Telefonos");
+        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
 
 
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tvNumber = view.findViewById(R.id.texto);
+                TextView tvNumber = view.findViewById(R.id.textTelephoneNum);
                 Uri number = Uri.parse("tel:"+ tvNumber.getText());
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                 startActivity(callIntent);
