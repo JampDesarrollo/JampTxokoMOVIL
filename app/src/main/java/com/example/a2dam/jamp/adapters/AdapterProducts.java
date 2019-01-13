@@ -46,18 +46,14 @@ public class AdapterProducts extends BaseAdapter {
         View v = convertView;
         if (convertView == null) {
             LayoutInflater inf = (LayoutInflater) activity.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inf.inflate(R.layout.item_telephone, null);
+            v = inf.inflate(R.layout.item_products, null);
         }
 
-        Product dir=items.get(position);
-        TextView title=v.findViewById(R.id.textProduct_Name),price=v.findViewById(R.id.textProductPrice);
-        title.setText(dir.getName());
-        price.setText(dir.getPrice().toString());
-        /*Telephone dir = items.get(position);
-        TextView title = v.findViewById(R.id.textTelephoneName);
-        title.setText(dir.getNombre());
-        TextView description = v.findViewById(R.id.textTelephoneNum);
-        description.setText(dir.getTelephon().toString());*/
+        Product product=items.get(position);
+        TextView title=v.findViewById(R.id.textProduct_Name), price=v.findViewById(R.id.textProductPrice);
+        title.setText("Hola");
+        price.setText(product.getPrice().toString());
+
         return v;
     }
 }
