@@ -51,7 +51,7 @@ public class AdapterProducts extends BaseAdapter {
 
         Product product=items.get(position);
         TextView title=v.findViewById(R.id.textProduct_Name), price=v.findViewById(R.id.textProductPrice);
-        title.setText("Hola");
+        title.setText(product.getName().toString());
         price.setText(product.getPrice().toString());
 
         return v;

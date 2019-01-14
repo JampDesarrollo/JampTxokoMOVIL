@@ -85,7 +85,7 @@ public class PrincipalActivity extends AppCompatActivity
         es la actividad de productos (la 0), si es distinto de null significa que la actividad ya estaba cargada y no queremos que nos vuelva a cargar el fragment de productos sino que queremos quedarnos en el
         fragmento que ya estabamos*/
         if(savedInstanceState == null) {
-            setFragment(1);
+            setFragment(0);
         }
     }
 
@@ -96,10 +96,13 @@ public class PrincipalActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }else if (backStackEntryCount == 1) {
+            this.finish();
+        }else{
             super.onBackPressed();
         }
     }
@@ -183,12 +186,10 @@ public class PrincipalActivity extends AppCompatActivity
             case 3:
                 ExpenseFragment expenseFragment = new ExpenseFragment();
                 fragmentTransaction.replace(R.id.fragment, expenseFragment);
-
                 break;
             case 4:
                 ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
                 fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
-
                 break;
         }
         //Hace que los fragment se añadan a la cola de ejecucion (es para cuando cliquemos el boton de atras no te cierre el activity y te muestre el de login sino que te vaya al anterior fragment)

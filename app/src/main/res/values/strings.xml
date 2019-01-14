@@ -55,9 +55,12 @@
     <string name="fragment_change_password_button">Cambiar</string>
 
     //Products
+    <string name="fragment_products_search_product">Introduce el producto a buscar</string>
     <string name="fragment_products_title">Productos</string>
     <string name="fragment_products_product">Fanta de naranja</string>
     <string name="fragment_products_price">0,50</string>
+    <string name="fragment_products_product_toast">Se han encontrado los siguientes productos</string>
+
 
     //Events
     <string name="fragment_events_title">Eventos</string>
@@ -69,7 +72,6 @@
     <string name="fragment_events_event_price">15</string>
     <string name="fragment_events_event_toast">Se han encontrado los siguientes eventos</string>
 
-
     //expense
     <string name="fragment_expense_title">Gastos</string>
     <string name="fragment_expense_cantidad">Cantidad</string>
@@ -77,8 +79,10 @@
     <string name="fragment_expense_month_expenses">Gastos este mes:</string>
 
     //telephones
+    <string name="fragment_telephones_search_telephone">Introduce el telefono a buscar</string>
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
     <string name="telepizza">Telepizza</string>
+    <string name="fragment_telephones_telephone_toast">Se han encontrado los siguientes telefonos</string>
 
 
     //Dialogos
