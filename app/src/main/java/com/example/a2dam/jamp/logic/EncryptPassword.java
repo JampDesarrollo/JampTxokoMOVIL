@@ -32,10 +32,10 @@ public class EncryptPassword {
      * @author ander
      */
     public static String encrypt(String passwordString) {
-
+        String message=null;
         byte[] encodedMessage = null,password=passwordString.getBytes();
         try {
-            FileInputStream fis = new FileInputStream("public.key");
+            FileInputStream fis = new FileInputStream("public.crt");
             byte[] byteA = new byte[fis.available()];
             fis.read(byteA);
             fis.close();
@@ -48,6 +48,7 @@ public class EncryptPassword {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publick);
             encodedMessage = cipher.doFinal(password);
+            message=encodedMessage.toString();
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
@@ -71,7 +72,9 @@ public class EncryptPassword {
             ex.printStackTrace();
         } catch (BadPaddingException ex) {
             ex.printStackTrace();
+        } catch (NullPointerException e){
+            e.printStackTrace();
         }
-        return encodedMessage.toString();
+        return message;
     }
 }
