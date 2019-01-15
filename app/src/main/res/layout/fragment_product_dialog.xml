@@ -2,10 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/gris_fondo">
+    android:background="@color/gris_fondo"
+    android:clickable="true"
+    android:focusable="true"
+    android:visibility="visible">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="wrap_content"
@@ -17,18 +21,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
+            android:id="@+id/btnCancelar"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="124dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/Dialogos_Cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnOk"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
             android:id="@+id/btnOk"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
             android:text="@android:string/ok"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnCancelar"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <TextView
@@ -100,7 +118,6 @@
                 android:id="@+id/tfCount"
                 android:layout_width="100dp"
                 android:layout_height="0dp"
-                android:editable="false"
                 android:gravity="center"
                 android:inputType="numberDecimal"
                 android:text="1"

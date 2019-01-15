@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
         ArrayList<Product> products = cargarProductos();
 
+
         lv = view.findViewById(R.id.ProductGridView);
         AdapterProducts adapter = new AdapterProducts(this, products);
         lv.setAdapter(adapter);
@@ -106,6 +108,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
         }
         AdapterProducts adapter = new AdapterProducts(this, products);
         lv.setAdapter(adapter);
+        lv.setEnabled(true);
         lv.setOnItemClickListener(this);
     }
 
