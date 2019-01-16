@@ -7,6 +7,7 @@
 package com.example.a2dam.jamp.logic;
 
 
+import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
@@ -37,13 +38,11 @@ public class SocketClient {
     /**
      * Port from which the connection to the server socket will be done.
      */
-    private final String PORT ="5000";
-    // PropertyResourceBundle.getBundle("comººexample.a2dam.jamp.config").getString("PORT");
+    private final String PORT=String.valueOf(R.string.PORT);
     /**
      * IP address the server socket has to connect to.
      */
-    private final String IP = "192.168.0.157";
-            //PropertyResourceBundle.getBundle("com.example.a2dam.jamp.config").getString("IP");
+    private final String IP=String.valueOf(R.string.IP);
 
     /**
      * Method for login in a user.
@@ -52,7 +51,6 @@ public class SocketClient {
      * @return UserBean Whole information of the user who has logged in
      */
     public UserBean logIn(UserBean user) throws PasswordNotOkException, UserNotExistException,IOException {
-
         Socket client = null;
         ObjectInputStream input = null;
         ObjectOutputStream output = null;

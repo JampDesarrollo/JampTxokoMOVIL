@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a2dam.jamp.adapters.AdapterTelephone;
 import com.example.a2dam.jamp.dataClasses.Telephone;
@@ -28,12 +30,11 @@ import java.util.logging.Logger;
  * {@link TelephoneFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TelephoneFragment extends Fragment implements View.OnClickListener {
-
-    protected ImageButton btnTelefono;
-
-    private static final Logger LOGGER
-            = Logger.getLogger("socketClient");
+public class TelephoneFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private EditText search;
+    private ImageButton btnSearch;
+    private ListView lv;
+    private View view;
 
     private OnFragmentInteractionListener mListener;
 
@@ -41,56 +42,79 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener 
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_telephone, container, false);
-
-        ArrayList<Telephone> telephone = new ArrayList<>();
-
-        for(int i=0; i<20; i++){
-            Telephone tel = new Telephone();
-
-            tel.setNombre("Telepizza" +i);
-            tel.setTelephon(944644465);
-
-            telephone.add(tel);
-        }
-
-
-        ListView lv = view.findViewById(R.id.TelephoneListView);
-        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
-        lv.setAdapter(adapter);
-
+        view = inflater.inflate(R.layout.fragment_telephone, container, false);
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
 
+        btnSearch=view.findViewById(R.id.btnSearchTelephone);
+        btnSearch.setOnClickListener(this);
 
+        search=view.findViewById(R.id.tfSearchTelephone);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView tvNumber = view.findViewById(R.id.textTelephoneNum);
-                Uri number = Uri.parse("tel:"+ tvNumber.getText());
-                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
-                startActivity(callIntent);
+        ArrayList<Telephone> telephone = cargarTelefonos();
 
-//CODIGO AQUI
-            }
-        });
+        lv = view.findViewById(R.id.TelephoneListView);
+        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(this);
 
         return view;
     }
-    @Override
-    public void onClick(View v) {
 
+    private ArrayList<Telephone> cargarTelefonos() {
+        ArrayList<Telephone> telephone = new ArrayList<>();
+        for(int i=0; i<20; i++){
+            Telephone tel = new Telephone();
+
+            tel.setNombre("Telepizza" +" "+i);
+            tel.setTelephon(944644465 + i);
+
+            telephone.add(tel);
+        }
+        return telephone;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnSearchTelephone:
+                if(search.getText().toString().trim().isEmpty()){
+                    search.setError(this.getResources().getString(R.string.field_requiered_error));
+                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                }else{
+                    cargarEventosCondicional();
+                    Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                break;
         }
+    }
+
+    private void cargarEventosCondicional() {
+        ArrayList<Telephone> telephone = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            Telephone tel = new Telephone();
+
+            tel.setNombre("Telepizza" +" "+ i);
+            tel.setTelephon(944644465);
+
+            if (tel.getNombre().trim().toLowerCase().contains(search.getText().toString().trim().toLowerCase())) {
+                telephone.add(tel);
+            }
+        }
+        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        TextView tvNumber = view.findViewById(R.id.textTelephoneNum);
+        Uri number = Uri.parse("tel:"+ tvNumber.getText());
+        Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+        startActivity(callIntent);
     }
 
     @Override
@@ -98,8 +122,6 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener 
         super.onDetach();
         mListener = null;
     }
-
-
 
     /**
      * This interface must be implemented by activities that contain this

@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,11 +31,12 @@ import java.util.ArrayList;
  * to handle interaction events.
  */
 public class EventFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private GridView lv;
-    private OnFragmentInteractionListener mListener;
     private ImageButton btnSearch;
     private EditText search;
     private View view;
+    private GridView lv;
+
+    private OnFragmentInteractionListener mListener;
 
     public EventFragment() {
         // Required empty public constructor
@@ -51,8 +53,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
 
         search=view.findViewById(R.id.tfSearchEvent);
 
-        ArrayList<Event> events;
-        events=cargarEventos();
+        ArrayList<Event> events=cargarEventos();
 
 
         lv = view.findViewById(R.id.EventsListView);
@@ -76,6 +77,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
             case R.id.btnSearchEvent:
                 if(search.getText().toString().trim().isEmpty()){
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
+                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{
                     cargarEventosCondicional();
                     Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
@@ -84,7 +86,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
                 break;
         }
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

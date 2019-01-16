@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.model;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -43,6 +44,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     DrawerLayout drawerLayout;
 
+    private NavigationView navigationView;
 
     /**
      * Method that create Principal Activity
@@ -64,7 +66,7 @@ public class PrincipalActivity extends AppCompatActivity
 
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View hView = navigationView.getHeaderView(0);
 
@@ -85,7 +87,8 @@ public class PrincipalActivity extends AppCompatActivity
         es la actividad de productos (la 0), si es distinto de null significa que la actividad ya estaba cargada y no queremos que nos vuelva a cargar el fragment de productos sino que queremos quedarnos en el
         fragmento que ya estabamos*/
         if(savedInstanceState == null) {
-            setFragment(1);
+            setFragment(0);
+            navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
 
@@ -96,11 +99,29 @@ public class PrincipalActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
+        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }else if (backStackEntryCount == 1) {
+            this.finish();
+        }else{
+            FragmentManager manager = getSupportFragmentManager();
+            if(manager.getBackStackEntryCount() > 1) {
+                super.onBackPressed();
+                Fragment currentFragment =manager.findFragmentById(R.id.fragment);
+                if(currentFragment instanceof ProductFragment){
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }else if(currentFragment instanceof EventFragment){
+                    navigationView.getMenu().getItem(1).setChecked(true);
+                }else if(currentFragment instanceof TelephoneFragment){
+                    navigationView.getMenu().getItem(2).setChecked(true);
+                }else if(currentFragment instanceof ExpenseFragment){
+                    navigationView.getMenu().getItem(3).setChecked(true);
+                }else if(currentFragment instanceof ChangePasswordFragment){
+                    navigationView.getMenu().getItem(4).setChecked(true);
+                }
+            }
         }
     }
 
@@ -183,12 +204,10 @@ public class PrincipalActivity extends AppCompatActivity
             case 3:
                 ExpenseFragment expenseFragment = new ExpenseFragment();
                 fragmentTransaction.replace(R.id.fragment, expenseFragment);
-
                 break;
             case 4:
                 ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
                 fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
-
                 break;
         }
         //Hace que los fragment se añadan a la cola de ejecucion (es para cuando cliquemos el boton de atras no te cierre el activity y te muestre el de login sino que te vaya al anterior fragment)

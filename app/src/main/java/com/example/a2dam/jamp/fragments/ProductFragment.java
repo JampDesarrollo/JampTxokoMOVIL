@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.adapters.AdapterProducts;
@@ -26,7 +30,12 @@ import java.util.ArrayList;
  * {@link ProductFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class ProductFragment extends Fragment implements View.OnClickListener {
+public class ProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private EditText search;
+    private ImageButton btnSearch;
+    private View view;
+    private GridView lv;
+    private ArrayList<Product> products;
 
     private OnFragmentInteractionListener mListener;
 
@@ -38,66 +47,95 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_product, container, false);
+        view = inflater.inflate(R.layout.fragment_product, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_products_title);
 
-        ArrayList<Product> products = new ArrayList<>();
+        btnSearch=view.findViewById(R.id.btnSearchProduct);
+        btnSearch.setOnClickListener(this);
 
-        for(int i=0; i<20; i++){
-            Product prod = new Product();
+        search=view.findViewById(R.id.tfSearchProduct);
 
-            prod.setDescription(getResources().getString(R.string.fragment_products_title));
-            prod.setName(getResources().getString(R.string.fragment_products_product));
-            prod.setPrice((float) 1);
-
-            products.add(prod);
-        }
+        products = cargarProductos();
 
 
-        GridView lv = view.findViewById(R.id.ProductGridView);
+        lv = view.findViewById(R.id.ProductGridView);
         AdapterProducts adapter = new AdapterProducts(this, products);
         lv.setAdapter(adapter);
-
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
-
-
-
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FragmentManager fragmentManager;
-                FragmentTransaction fragmentTransaction;
-                fragmentManager = getFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                Dialog_Product dialog_Product= new Dialog_Product();
-                fragmentTransaction.add(R.id.fragment, dialog_Product);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+        lv.setOnItemClickListener(this);
 
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnSearchProduct:
+                if(search.getText().toString().trim().isEmpty()){
+                    search.setError(this.getResources().getString(R.string.field_requiered_error));
+                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                }else{
+                    cargarEventosCondicional();
+                    Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                break;
         }
     }
+
+    private ArrayList<Product> cargarProductos() {
+        products =new ArrayList<>();
+        for(int i=0; i<20; i++){
+            Product prod = new Product();
+
+            prod.setDescription(getResources().getString(R.string.fragment_products_description)+ i);
+            prod.setName(getResources().getString(R.string.fragment_products_product) + i);
+            prod.setPrice((float) (1+i));
+
+            products.add(prod);
+        }
+        return products;
+    }
+
+    private void cargarEventosCondicional() {
+        products =new ArrayList<>();
+        for(int i=0; i<20; i++){
+            Product prod = new Product();
+
+            prod.setDescription(getResources().getString(R.string.fragment_products_description)+ i);
+            prod.setName(getResources().getString(R.string.fragment_products_product) + i);
+            prod.setPrice((float) (1+i));
+            if(prod.getName().trim().toLowerCase().contains(search.getText().toString().toLowerCase())) {
+                products.add(prod);
+            }
+        }
+        AdapterProducts adapter = new AdapterProducts(this, products);
+        lv.setAdapter(adapter);
+        lv.setEnabled(true);
+        lv.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bundle datosProducto=new Bundle();
+        datosProducto.putString("nombre",products.get(position).getName());
+        datosProducto.putString("descripcion",products.get(position).getDescription());
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Dialog_Product dialog_Product= new Dialog_Product();
+        dialog_Product.setArguments(datosProducto);
+        fragmentTransaction.add(R.id.fragment, dialog_Product);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
 
     /**
      * This interface must be implemented by activities that contain this

@@ -2,23 +2,26 @@ package com.example.a2dam.jamp.dialogs;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.constraint.Constraints;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.Product;
+import com.example.a2dam.jamp.fragments.ProductFragment;
 import com.example.a2dam.jamp.model.PrincipalActivity;
 
 import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {
-    private Button btnPlus,btnMinus,btnOk;
+    private Button btnPlus,btnMinus,btnOk,btnCancelar;
     protected EditText textCount;
     protected Integer count;
     protected TextView productName, productDescription;
@@ -30,15 +33,15 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fragment_product_dialog, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Productos");
-
-        return view;
-    }
-    public void onViewCreated(View view, Bundle savedInstanceState) {
         productName = view.findViewById(R.id.tfDialogTitle);
         productDescription = view.findViewById(R.id.tfDialogContent);
 
-        productName.setText("hola");
-        productDescription.setText("hola");
+        productName.setText(this.getArguments().getString("nombre"));
+        productDescription.setText(this.getArguments().getString("descripcion"));
+        return view;
+    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
 
         btnPlus=view.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(this);
@@ -48,6 +51,9 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
 
         btnOk=view.findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
+
+        btnCancelar=view.findViewById(R.id.btnCancelar);
+        btnCancelar.setOnClickListener(this);
 
         textCount=view.findViewById(R.id.tfCount);
         count=1;
@@ -62,10 +68,13 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
                 minus();
                 break;
             case R.id.btnOk:
-                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + count.toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + this.getResources().getString(R.string.Dialogo_Productos_Title) + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
+                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + textCount.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + productName.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
                 Toast toast = Toast.makeText(getContext(),toasttext,Toast.LENGTH_LONG);
                 toast.show();
                 añadirProductos();
+                break;
+            case R.id.btnCancelar:
+                getFragmentManager().beginTransaction().remove(this).commit();
                 break;
         }
     }

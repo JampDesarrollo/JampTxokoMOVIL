@@ -14,11 +14,11 @@
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout6"
+            android:id="@+id/constraintLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/ProductGridView"
@@ -26,30 +26,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/ProductsSearchBy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/tfSearchProduct"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/alef"
-                android:text="@string/search"
-                android:textAlignment="viewStart"
-                android:textColor="@color/colorJAMP"
+                android:hint="@string/fragment_products_search_product"
+                android:inputType="text"
+                android:textAlignment="textStart"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/ProductsSpinner"
+                app:layout_constraintEnd_toStartOf="@+id/btnSearchProduct"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
-                android:id="@+id/ProductsSpinner"
-                android:layout_width="0dp"
+            <ImageButton
+                android:id="@+id/btnSearchProduct"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/colorJAMP"
+                android:contentDescription="@string/search"
+                android:src="@android:drawable/ic_menu_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ProductsSearchBy"
+                app:layout_constraintStart_toEndOf="@+id/tfSearchProduct"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
 
         <GridView
@@ -60,7 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
 
         </GridView>
 
