@@ -35,6 +35,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
     private ImageButton btnSearch;
     private View view;
     private GridView lv;
+    private ArrayList<Product> products;
 
     private OnFragmentInteractionListener mListener;
 
@@ -55,7 +56,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
         search=view.findViewById(R.id.tfSearchProduct);
 
-        ArrayList<Product> products = cargarProductos();
+        products = cargarProductos();
 
 
         lv = view.findViewById(R.id.ProductGridView);
@@ -71,6 +72,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
             case R.id.btnSearchProduct:
                 if(search.getText().toString().trim().isEmpty()){
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
+                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{
                     cargarEventosCondicional();
                     Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
@@ -81,11 +83,11 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
     }
 
     private ArrayList<Product> cargarProductos() {
-        ArrayList<Product> products =new ArrayList<>();
+        products =new ArrayList<>();
         for(int i=0; i<20; i++){
             Product prod = new Product();
 
-            prod.setDescription(getResources().getString(R.string.fragment_products_title)+ i);
+            prod.setDescription(getResources().getString(R.string.fragment_products_description)+ i);
             prod.setName(getResources().getString(R.string.fragment_products_product) + i);
             prod.setPrice((float) (1+i));
 
@@ -95,11 +97,11 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void cargarEventosCondicional() {
-        ArrayList<Product> products =new ArrayList<>();
+        products =new ArrayList<>();
         for(int i=0; i<20; i++){
             Product prod = new Product();
 
-            prod.setDescription(getResources().getString(R.string.fragment_products_title)+ i);
+            prod.setDescription(getResources().getString(R.string.fragment_products_description)+ i);
             prod.setName(getResources().getString(R.string.fragment_products_product) + i);
             prod.setPrice((float) (1+i));
             if(prod.getName().trim().toLowerCase().contains(search.getText().toString().toLowerCase())) {
@@ -114,11 +116,15 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bundle datosProducto=new Bundle();
+        datosProducto.putString("nombre",products.get(position).getName());
+        datosProducto.putString("descripcion",products.get(position).getDescription());
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         Dialog_Product dialog_Product= new Dialog_Product();
+        dialog_Product.setArguments(datosProducto);
         fragmentTransaction.add(R.id.fragment, dialog_Product);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

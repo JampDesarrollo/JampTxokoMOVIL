@@ -58,6 +58,7 @@
     <string name="fragment_products_search_product">Introduce el producto a buscar</string>
     <string name="fragment_products_title">Productos</string>
     <string name="fragment_products_product">Fanta de naranja</string>
+    <string name="fragment_products_description">Esto es una lata de Fanta de naranja</string>
     <string name="fragment_products_price">0,50</string>
     <string name="fragment_products_product_toast">Se han encontrado los siguientes productos</string>
 

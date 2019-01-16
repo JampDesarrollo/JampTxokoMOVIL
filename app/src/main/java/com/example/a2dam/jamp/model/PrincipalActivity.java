@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.model;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -43,6 +44,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     DrawerLayout drawerLayout;
 
+    private NavigationView navigationView;
 
     /**
      * Method that create Principal Activity
@@ -64,7 +66,7 @@ public class PrincipalActivity extends AppCompatActivity
 
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View hView = navigationView.getHeaderView(0);
 
@@ -86,6 +88,7 @@ public class PrincipalActivity extends AppCompatActivity
         fragmento que ya estabamos*/
         if(savedInstanceState == null) {
             setFragment(0);
+            navigationView.getMenu().getItem(0).setChecked(true);
         }
     }
 
@@ -103,7 +106,22 @@ public class PrincipalActivity extends AppCompatActivity
         }else if (backStackEntryCount == 1) {
             this.finish();
         }else{
-            super.onBackPressed();
+            FragmentManager manager = getSupportFragmentManager();
+            if(manager.getBackStackEntryCount() > 1) {
+                super.onBackPressed();
+                Fragment currentFragment =manager.findFragmentById(R.id.fragment);
+                if(currentFragment instanceof ProductFragment){
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                }else if(currentFragment instanceof EventFragment){
+                    navigationView.getMenu().getItem(1).setChecked(true);
+                }else if(currentFragment instanceof TelephoneFragment){
+                    navigationView.getMenu().getItem(2).setChecked(true);
+                }else if(currentFragment instanceof ExpenseFragment){
+                    navigationView.getMenu().getItem(3).setChecked(true);
+                }else if(currentFragment instanceof ChangePasswordFragment){
+                    navigationView.getMenu().getItem(4).setChecked(true);
+                }
+            }
         }
     }
 

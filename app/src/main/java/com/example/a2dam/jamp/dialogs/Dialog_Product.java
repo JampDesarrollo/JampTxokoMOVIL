@@ -33,15 +33,15 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
         final View view = inflater.inflate(R.layout.fragment_product_dialog, container, false);
 
         ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle("Productos");
-
-        return view;
-    }
-    public void onViewCreated(View view, Bundle savedInstanceState) {
         productName = view.findViewById(R.id.tfDialogTitle);
         productDescription = view.findViewById(R.id.tfDialogContent);
 
-        productName.setText("hola");
-        productDescription.setText("hola");
+        productName.setText(this.getArguments().getString("nombre"));
+        productDescription.setText(this.getArguments().getString("descripcion"));
+        return view;
+    }
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+
 
         btnPlus=view.findViewById(R.id.btnPlus);
         btnPlus.setOnClickListener(this);
@@ -68,7 +68,7 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
                 minus();
                 break;
             case R.id.btnOk:
-                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + textCount.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + this.getResources().getString(R.string.Dialogo_Productos_Title) + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
+                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + textCount.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + productName.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
                 Toast toast = Toast.makeText(getContext(),toasttext,Toast.LENGTH_LONG);
                 toast.show();
                 añadirProductos();
