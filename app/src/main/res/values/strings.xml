@@ -47,6 +47,7 @@
 
 
     //Fragments
+    <string name="search">Buscar Por:</string>
     //Change Password
     <string name="fragment_change_password_title">Cambiar Contraseña</string>
     <string name="fragment_change_password_actual_pass">Introduzca la contraseña actual</string>
@@ -130,7 +131,9 @@
   
     //Recursos
     <string name="country_coin">€</string>
-    <string name="search">Buscar Por:</string>
+    <string name="IP">192.168.1.1</string>
+    <string name="PORT">5000</string>
+
 
 
 

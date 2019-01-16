@@ -68,7 +68,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         for(int i=0; i<20; i++){
             Telephone tel = new Telephone();
 
-            tel.setNombre("Telepizza" +i);
+            tel.setNombre("Telepizza" +" "+i);
             tel.setTelephon(944644465 + i);
 
             telephone.add(tel);
@@ -97,7 +97,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         for (int i = 0; i < 20; i++) {
             Telephone tel = new Telephone();
 
-            tel.setNombre("Telepizza" + i);
+            tel.setNombre("Telepizza" +" "+ i);
             tel.setTelephon(944644465);
 
             if (tel.getNombre().trim().toLowerCase().contains(search.getText().toString().trim().toLowerCase())) {
@@ -115,13 +115,6 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         Uri number = Uri.parse("tel:"+ tvNumber.getText());
         Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
         startActivity(callIntent);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
