@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,14 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.adapters.AdapterProducts;
 import com.example.a2dam.jamp.dataClasses.Product;
 import com.example.a2dam.jamp.dialogs.Dialog_Product;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 import java.util.ArrayList;
 
@@ -32,6 +32,7 @@ import java.util.ArrayList;
  */
 public class ProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private EditText search;
+    private TextView productError;
     private ImageButton btnSearch;
     private View view;
     private GridView lv;
@@ -56,14 +57,17 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
         search=view.findViewById(R.id.tfSearchProduct);
 
+        productError=view.findViewById(R.id.lblSearchProductError);
         products = cargarProductos();
 
-
-        lv = view.findViewById(R.id.ProductGridView);
-        AdapterProducts adapter = new AdapterProducts(this, products);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
-
+        if(products.isEmpty()) {
+            lv = view.findViewById(R.id.ProductGridView);
+            AdapterProducts adapter = new AdapterProducts(this, products);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+        }else{
+            productError.setVisibility(View.VISIBLE);
+        }
         return view;
     }
     @Override
@@ -75,8 +79,6 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{
                     cargarEventosCondicional();
-                    Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
-                    toast.show();
                 }
                 break;
         }
@@ -108,10 +110,17 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
                 products.add(prod);
             }
         }
-        AdapterProducts adapter = new AdapterProducts(this, products);
-        lv.setAdapter(adapter);
-        lv.setEnabled(true);
-        lv.setOnItemClickListener(this);
+        if(products.isEmpty()) {
+            lv = view.findViewById(R.id.ProductGridView);
+            AdapterProducts adapter = new AdapterProducts(this, products);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+
+            Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            productError.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

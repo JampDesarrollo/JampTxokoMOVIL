@@ -2,22 +2,16 @@ package com.example.a2dam.jamp.dialogs;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.constraint.Constraints;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dataClasses.Product;
-import com.example.a2dam.jamp.fragments.ProductFragment;
-import com.example.a2dam.jamp.model.PrincipalActivity;
-
-import java.util.ArrayList;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {

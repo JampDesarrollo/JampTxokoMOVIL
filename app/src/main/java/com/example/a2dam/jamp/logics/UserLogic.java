@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.a2dam.jamp.logic;
+package com.example.a2dam.jamp.logics;
 
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
@@ -19,24 +19,7 @@ import messageuserbean.UserBean;
  * @author Markel
  * @author Paula
  */
-public interface ILogic {
-
-    /**
-     * Metodo para el registro de un usuario. Comprobará con la base de datos
-     * si ese usuario existe o no.
-     * @param user Usuario que recibe.
-     * @throws UserLoginExistException excepcion que salta si el usuario que se
-     * quiere registrar existe.
-     * @throws Exception excepcion que salta si no hay conexion con la base de datos.
-     *
-     * Method for the registration of an user. It goes to the database to check if the user
-     * already exist or not.
-     * @param user user that receives.
-     * @throws UserLoginExistException If the user exist it throws this exception.
-     * @throws Exception If there is not connection with the database jumps this exception.
-     */
-    public void userSignUp(UserBean user) throws UserLoginExistException, Exception;
-
+public interface UserLogic {
     /**
      * Metodo para hacer el login del usuario. Comprueba con la base de datos si el usuario
      * y la contraseña de ese usuario son correctas.
@@ -59,11 +42,25 @@ public interface ILogic {
      * exception
      *
      */
-    public UserBean userLogin(UserBean user)
-            throws UserNotExistException, PasswordNotOkException, Exception;
+    UserBean userLogin(UserBean user) throws UserNotExistException, PasswordNotOkException, Exception;
 
+    /**
+     * Metodo para el registro de un usuario. Comprobará con la base de datos
+     * si ese usuario existe o no.
+     * @param user Usuario que recibe.
+     * @throws UserLoginExistException excepcion que salta si el usuario que se
+     * quiere registrar existe.
+     * @throws Exception excepcion que salta si no hay conexion con la base de datos.
+     *
+     * Method for the registration of an user. It goes to the database to check if the user
+     * already exist or not.
+     * @param user user that receives.
+     * @throws UserLoginExistException If the user exist it throws this exception.
+     * @throws Exception If there is not connection with the database jumps this exception.
+     */
+    void userSignUp(UserBean user) throws UserLoginExistException, Exception;
 
-    //public List<Expense> findExpensesMonth(Integer idTxoko) throws Exception;
+    void userRequestPassword(String login) throws UserLoginExistException, Exception;
 
-
+    void UserChangePassword(UserBean user) throws UserLoginExistException, Exception;
 }

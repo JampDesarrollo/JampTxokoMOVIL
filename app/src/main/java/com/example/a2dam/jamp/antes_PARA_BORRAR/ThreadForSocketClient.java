@@ -1,9 +1,11 @@
-package com.example.a2dam.jamp.logic;
+package com.example.a2dam.jamp.antes_PARA_BORRAR;
 
 /**
  * Method for comunication for server
  * @autor Ander
  */
+
+import com.example.a2dam.jamp.logics.UserLogic;
 
 import messageuserbean.UserBean;
 
@@ -13,14 +15,14 @@ import messageuserbean.UserBean;
 public class ThreadForSocketClient extends Thread {
 
     private UserBean user;
-    private ILogic ilogic;
+    private UserLogic ilogic;
     private int code;
 
     public UserBean getUser(){
      return user;
     }
 
-    public ThreadForSocketClient(UserBean receivedUser, ILogic ilogic, int i){
+    public ThreadForSocketClient(UserBean receivedUser, UserLogic ilogic, int i){
         this.user=receivedUser;
         this.ilogic=ilogic;
         this.code=i;

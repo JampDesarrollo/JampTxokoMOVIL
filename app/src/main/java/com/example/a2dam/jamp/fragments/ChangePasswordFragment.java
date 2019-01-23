@@ -18,7 +18,7 @@ import android.widget.ImageButton;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_Change_Password;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
     private ChangePasswordFragment.OnFragmentInteractionListener mListener;

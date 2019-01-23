@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".model.MainActivity"
+            android:name=".models.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -31,12 +31,12 @@
             android:resource="@array/preloaded_fonts"/>
 
         <activity
-            android:name=".model.PrincipalActivity"
+            android:name=".models.PrincipalActivity"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"/>
         <activity
-            android:name=".model.Registro"
+            android:name=".models.Registro"
             android:label="Registro"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"/>

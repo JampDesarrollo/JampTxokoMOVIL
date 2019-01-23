@@ -128,11 +128,18 @@
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
     <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception...</string>
+    <string name="telephone_search_error">No Se Han Encontrado Telefonos</string>
+    <string name="product_search_error">No Se Han Encontrado Productos</string>
+    <string name="event_search_error">No Se Han Encontrado Eventos</string>
   
     //Recursos
     <string name="country_coin">€</string>
     <string name="IP">192.168.1.1</string>
     <string name="PORT">5000</string>
+    <string name="MongoDBIP">10.22.82.135</string>
+    <string name="MongoDBPort">27017</string>
+    <string name="MongoDBName">jamp</string>
+    <string name="MongoDBCollectionName">telephones</string>
 
 
 
