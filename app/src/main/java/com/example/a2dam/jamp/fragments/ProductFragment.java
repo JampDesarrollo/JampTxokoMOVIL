@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
  */
 public class ProductFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private EditText search;
+    private TextView productError;
     private ImageButton btnSearch;
     private View view;
     private GridView lv;
@@ -55,14 +57,17 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
         search=view.findViewById(R.id.tfSearchProduct);
 
+        productError=view.findViewById(R.id.lblSearchProductError);
         products = cargarProductos();
 
-
-        lv = view.findViewById(R.id.ProductGridView);
-        AdapterProducts adapter = new AdapterProducts(this, products);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
-
+        if(products.isEmpty()) {
+            lv = view.findViewById(R.id.ProductGridView);
+            AdapterProducts adapter = new AdapterProducts(this, products);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+        }else{
+            productError.setVisibility(View.VISIBLE);
+        }
         return view;
     }
     @Override
@@ -74,8 +79,6 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{
                     cargarEventosCondicional();
-                    Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
-                    toast.show();
                 }
                 break;
         }
@@ -107,10 +110,17 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
                 products.add(prod);
             }
         }
-        AdapterProducts adapter = new AdapterProducts(this, products);
-        lv.setAdapter(adapter);
-        lv.setEnabled(true);
-        lv.setOnItemClickListener(this);
+        if(products.isEmpty()) {
+            lv = view.findViewById(R.id.ProductGridView);
+            AdapterProducts adapter = new AdapterProducts(this, products);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+
+            Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
+            toast.show();
+        }else{
+            productError.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

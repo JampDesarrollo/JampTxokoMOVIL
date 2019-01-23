@@ -33,6 +33,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
     private EditText search;
     private ImageButton btnSearch;
     private ListView lv;
+    TextView telephoneError;
     private View view;
 
     private OnFragmentInteractionListener mListener;
@@ -50,16 +51,36 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         btnSearch=view.findViewById(R.id.btnSearchTelephone);
         btnSearch.setOnClickListener(this);
 
-        search=view.findViewById(R.id.tfSearchTelephone);
+        search=view.findViewById(R.id.tfSearchTelephoneName);
 
-        ArrayList<Telephone> telephone = cargarTelefonos();
+        telephoneError= view.findViewById(R.id.lblSearchError);
 
-        lv = view.findViewById(R.id.TelephoneListView);
-        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        ArrayList<Telephone> telephones = cargarTelefonos();
+        if(telephones.isEmpty()) {
+            telephoneError.setVisibility(View.INVISIBLE);
+            lv = view.findViewById(R.id.TelephoneListView);
+            AdapterTelephone adapter = new AdapterTelephone(this, telephones);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+        }else{
+            telephoneError.setVisibility(View.VISIBLE);
+        }
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnSearchTelephone:
+                if(search.getText().toString().trim().isEmpty()){
+                    search.setError(this.getResources().getString(R.string.field_requiered_error));
+                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                }else{
+                    cargarTelefonosCondicional();
+                }
+                break;
+        }
     }
 
     private ArrayList<Telephone> cargarTelefonos() {
@@ -75,24 +96,8 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         return telephone;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnSearchTelephone:
-                if(search.getText().toString().trim().isEmpty()){
-                    search.setError(this.getResources().getString(R.string.field_requiered_error));
-                    search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                }else{
-                    cargarEventosCondicional();
-                    Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                break;
-        }
-    }
-
-    private void cargarEventosCondicional() {
-        ArrayList<Telephone> telephone = new ArrayList<>();
+    private void cargarTelefonosCondicional() {
+        ArrayList<Telephone> telephones = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             Telephone tel = new Telephone();
 
@@ -100,12 +105,20 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
             tel.setTelephon(944644465);
 
             if (tel.getNombre().trim().toLowerCase().contains(search.getText().toString().trim().toLowerCase())) {
-                telephone.add(tel);
+                telephones.add(tel);
             }
         }
-        AdapterTelephone adapter = new AdapterTelephone(this, telephone);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(this);
+        if(telephones.isEmpty()){
+            telephoneError.setVisibility(View.VISIBLE);
+        }else {
+            telephoneError.setVisibility(View.INVISIBLE);
+            AdapterTelephone adapter = new AdapterTelephone(this, telephones);
+            lv.setAdapter(adapter);
+            lv.setOnItemClickListener(this);
+
+            Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
     @Override

@@ -1,7 +1,10 @@
 package com.example.a2dam.jamp.sockets;
 
+import android.widget.TextView;
+
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.antes_PARA_BORRAR.SocketClient;
+import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -10,6 +13,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 import org.bson.Document;
+import org.json.JSONArray;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -69,18 +73,20 @@ public class SocketTelephone {
     }
 
     public void mongoConnect(){
-        MongoClient mongoclient = MongoClients.create("mongodb://10.22.82.135:27017/jamp");
-        MongoDatabase mongoDB = mongoDB = mongoclient.getDatabase("jamp");
-        MongoCollection<Document> collection = mongoDB.getCollection("telephones");
+        MongoClient mongoclient = MongoClients.create("mongodb://"+ R.string.MongoDBIP+":"+R.string.MongoDBPort+"/"+R.string.MongoDBName);
+        MongoDatabase mongoDB = mongoclient.getDatabase(String.valueOf(R.string.MongoDBName));
+        MongoCollection<Document> collection = mongoDB.getCollection(String.valueOf(R.string.MongoDBCollectionName));
 
         FindIterable<Document> fi = collection.find();
         MongoCursor<Document> cursor = fi.iterator();
+        ArrayList<Telephone> telephones=new ArrayList<>();
         try {
             if (!cursor.hasNext()) {
                 System.out.println("No se ha encontrado ningún documento");
             }
             int i = 0;
             while (cursor.hasNext()) {
+
                 System.out.println(++i + cursor.next().toJson());
             }
         } finally {

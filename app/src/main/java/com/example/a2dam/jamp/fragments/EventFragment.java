@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
  */
 public class EventFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private ImageButton btnSearch;
+    private TextView eventError;
     private EditText search;
     private View view;
     private GridView lv;
@@ -50,18 +52,23 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
         btnSearch=view.findViewById(R.id.btnSearchEvent);
         btnSearch.setOnClickListener(this);
 
+        eventError=view.findViewById(R.id.lblSearchEventError);
         search=view.findViewById(R.id.tfSearchEvent);
 
         ArrayList<Event> events=cargarEventos();
 
-        //referenciar el listview
-        lv = view.findViewById(R.id.EventsListView);
-        //crear un nuevo tipo de dato adapterevents y pasamos el array
-        AdapterEvents adapter = new AdapterEvents(this, events);
-        //llamamos al setadapter del listview con el adapter que hemos creado antes
-        lv.setAdapter(adapter);
-        //definimos el onintemclick
-        lv.setOnItemClickListener(this);
+        if(events.isEmpty()) {
+            //referenciar el listview
+            lv = view.findViewById(R.id.EventsListView);
+            //crear un nuevo tipo de dato adapterevents y pasamos el array
+            AdapterEvents adapter = new AdapterEvents(this, events);
+            //llamamos al setadapter del listview con el adapter que hemos creado antes
+            lv.setAdapter(adapter);
+            //definimos el onintemclick
+            lv.setOnItemClickListener(this);
+        }else{
+            eventError.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
@@ -82,8 +89,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{
                     cargarEventosCondicional();
-                    Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
-                    toast.show();
                 }
                 break;
         }
@@ -138,10 +143,21 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
                 events.add(event);
             }
 
-            lv = view.findViewById(R.id.EventsListView);
-            AdapterEvents adapter = new AdapterEvents(this, events);
-            lv.setAdapter(adapter);
-            lv.setOnItemClickListener(this);
+            if(events.isEmpty()) {
+                //referenciar el listview
+                lv = view.findViewById(R.id.EventsListView);
+                //crear un nuevo tipo de dato adapterevents y pasamos el array
+                AdapterEvents adapter = new AdapterEvents(this, events);
+                //llamamos al setadapter del listview con el adapter que hemos creado antes
+                lv.setAdapter(adapter);
+                //definimos el onintemclick
+                lv.setOnItemClickListener(this);
+
+                Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
+                toast.show();
+            }else{
+                eventError.setVisibility(View.VISIBLE);
+            }
         }
     }
 
