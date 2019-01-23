@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp.model;
+package com.example.a2dam.jamp.models;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -24,10 +24,10 @@ import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
-import com.example.a2dam.jamp.logic.EncryptPassword;
-import com.example.a2dam.jamp.logic.ILogic;
-import com.example.a2dam.jamp.logic.ILogicFactory;
-import com.example.a2dam.jamp.logic.ThreadForSocketClient;
+import com.example.a2dam.jamp.others.EncryptPassword;
+import com.example.a2dam.jamp.logics.UserLogic;
+import com.example.a2dam.jamp.others.ILogicFactory;
+import com.example.a2dam.jamp.antes_PARA_BORRAR.ThreadForSocketClient;
 
 import messageuserbean.UserBean;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean bTextVisible,videoPlaying,allOK;
     private VideoView video;
     private ScrollView resto;
-    private ILogic ilogic;
+    private UserLogic ilogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

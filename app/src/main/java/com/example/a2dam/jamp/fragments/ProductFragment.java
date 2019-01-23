@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.adapters.AdapterProducts;
 import com.example.a2dam.jamp.dataClasses.Product;
 import com.example.a2dam.jamp.dialogs.Dialog_Product;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 import java.util.ArrayList;
 

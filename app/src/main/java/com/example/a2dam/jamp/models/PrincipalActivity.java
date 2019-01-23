@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp.model;
+package com.example.a2dam.jamp.models;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

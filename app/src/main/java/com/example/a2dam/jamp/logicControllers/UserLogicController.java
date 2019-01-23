@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.a2dam.jamp.logic;
+package com.example.a2dam.jamp.logicControllers;
 
 
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
+import com.example.a2dam.jamp.logics.UserLogic;
+import com.example.a2dam.jamp.sockets.SocketUser;
 
 import java.util.logging.Logger;
 
@@ -22,10 +24,9 @@ import messageuserbean.UserBean;
  * @author Markel
  * @author Paula
  */
-public class ILogicImplementation implements ILogic {
+public class UserLogicController implements UserLogic {
 
-    private final SocketClient socket = new SocketClient();
-    private UserBean returnUser;
+    private final SocketUser socket = new SocketUser();
     private static final Logger LOGGER
             = Logger.getLogger("socketClient");
 
@@ -37,9 +38,8 @@ public class ILogicImplementation implements ILogic {
      */
     @Override
     public void userSignUp(UserBean user) throws UserLoginExistException, Exception {
-        LOGGER.info("userSignUp in ILogicImplementation");
-
-        socket.signUp(user);
+        LOGGER.info("userSignUp in UserLogicController");
+        socket.userSignUp(user);
     }
 
     /**
@@ -50,16 +50,20 @@ public class ILogicImplementation implements ILogic {
      * @throws UserNotExistException, PasswordNotOkException, Exception
      */
     @Override
-    public UserBean userLogin(UserBean user)
-            throws UserNotExistException, PasswordNotOkException, Exception {
-        returnUser = socket.logIn(user);
-
-        return returnUser;
+    public UserBean userLogin(UserBean user)throws UserNotExistException, PasswordNotOkException, Exception {
+        LOGGER.info("userLogin in UserLogicController");
+        return socket.userLogIn(user);
     }
 
-    /*@Override
-    public List<Expense> findExpensesMonth(Integer idTxoko) throws Exception {
-        return null;
-    }*/
+    @Override
+    public void userRequestPassword(String login) {
+        LOGGER.info("userRequestPassword in UserLogicController");
+        socket.userRequestPassword(login);
+    }
 
+    @Override
+    public void UserChangePassword(UserBean user) {
+        LOGGER.info("UserChangePassword in UserLogicController");
+        socket.UserChangePassword(user);
+    }
 }

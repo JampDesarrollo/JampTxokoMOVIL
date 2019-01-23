@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.logic.ILogic;
-import com.example.a2dam.jamp.logic.ILogicFactory;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.logics.UserLogic;
+import com.example.a2dam.jamp.others.ILogicFactory;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 
 public class ExpenseFragment extends Fragment implements View.OnClickListener {
@@ -25,7 +25,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
     protected ImageView imgCoins;
     protected FrameLayout fLayout;
     protected Boolean max;
-    protected ILogic ilogic;
+    protected UserLogic ilogic;
     protected View view ;
 
 

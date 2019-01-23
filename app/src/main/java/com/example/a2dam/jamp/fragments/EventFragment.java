@@ -2,7 +2,6 @@ package com.example.a2dam.jamp.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,7 @@ import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.adapters.AdapterEvents;
 import com.example.a2dam.jamp.dataClasses.Event;
 import com.example.a2dam.jamp.dialogs.Dialog_Go_To_Event;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,10 +54,13 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
 
         ArrayList<Event> events=cargarEventos();
 
-
+        //referenciar el listview
         lv = view.findViewById(R.id.EventsListView);
+        //crear un nuevo tipo de dato adapterevents y pasamos el array
         AdapterEvents adapter = new AdapterEvents(this, events);
+        //llamamos al setadapter del listview con el adapter que hemos creado antes
         lv.setAdapter(adapter);
+        //definimos el onintemclick
         lv.setOnItemClickListener(this);
         return view;
     }

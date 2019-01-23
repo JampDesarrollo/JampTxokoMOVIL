@@ -17,11 +17,10 @@ import android.widget.Toast;
 import com.example.a2dam.jamp.adapters.AdapterTelephone;
 import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.model.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivity;
 
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 
 /**

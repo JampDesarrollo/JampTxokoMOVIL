@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp.model;
+package com.example.a2dam.jamp.models;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -14,10 +14,10 @@ import android.widget.Toast;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
-import com.example.a2dam.jamp.logic.EncryptPassword;
-import com.example.a2dam.jamp.logic.ILogic;
-import com.example.a2dam.jamp.logic.ILogicFactory;
-import com.example.a2dam.jamp.logic.ThreadForSocketClient;
+import com.example.a2dam.jamp.others.EncryptPassword;
+import com.example.a2dam.jamp.logics.UserLogic;
+import com.example.a2dam.jamp.others.ILogicFactory;
+import com.example.a2dam.jamp.antes_PARA_BORRAR.ThreadForSocketClient;
 
 import java.sql.Timestamp;
 
@@ -58,7 +58,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
     Boolean correcto,formatEmail,bTextVisible, allOK;
 
     TextView lblError;
-    private ILogic ilogic;
+    private UserLogic ilogic;
 
     /**
      * Method that create the Registro View
