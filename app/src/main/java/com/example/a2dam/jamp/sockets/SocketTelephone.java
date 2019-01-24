@@ -86,7 +86,8 @@ public class SocketTelephone {
             }
             int i = 0;
             while (cursor.hasNext()) {
-
+                //añadir la coleccion a un array
+                //telephones.add(cursor,fi);
                 System.out.println(++i + cursor.next().toJson());
             }
         } finally {
