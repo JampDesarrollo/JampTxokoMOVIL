@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".models.MainActivity">
+    tools:context=".models.MainActivity"
+    android:background="@drawable/bluegradient">
 
     <ScrollView
         android:id="@+id/scrollInicio"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/bluegradient"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
