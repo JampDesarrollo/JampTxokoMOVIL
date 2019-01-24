@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize"
-    tools:context=".fragments.ExpenseFragment"
-    android:background="@drawable/bluegradient">
+    tools:context=".fragments.ExpenseFragment">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bluegradient">
 
         <ImageView
             android:id="@+id/coin"

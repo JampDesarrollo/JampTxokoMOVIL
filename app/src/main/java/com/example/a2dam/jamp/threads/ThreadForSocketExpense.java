@@ -1,11 +1,6 @@
 package com.example.a2dam.jamp.threads;
 
-import com.example.a2dam.jamp.logics.ExpenseLogic;
-import com.example.a2dam.jamp.logics.UserLogic;
-
-import messageuserbean.UserBean;
-
-public class ThreadForSocketExpense extends Thread {
+public class ThreadForSocketExpense extends Thread {/*
     private ExpenseBean expense;
     private ExpenseLogic ilogic;
     private int code;
@@ -19,13 +14,13 @@ public class ThreadForSocketExpense extends Thread {
         this.ilogic=ilogic;
         this.code=i;
     }
-
+*/
     /**
      * Method that start the thread
      */
     @Override
     public void run() {
-        switch (code){
+  /*      switch (code){
             case 1:
                 try {
                     ilogic.findMonthExpenses(expense);
@@ -33,6 +28,6 @@ public class ThreadForSocketExpense extends Thread {
                     throw new RuntimeException(e);
                 }
                 break;
-        }
+        }*/
     }
 }

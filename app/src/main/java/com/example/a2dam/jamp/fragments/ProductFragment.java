@@ -61,12 +61,12 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
         products = cargarProductos();
 
         if(products.isEmpty()) {
+            productError.setVisibility(View.VISIBLE);
+        }else{
             lv = view.findViewById(R.id.ProductGridView);
             AdapterProducts adapter = new AdapterProducts(this, products);
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(this);
-        }else{
-            productError.setVisibility(View.VISIBLE);
         }
         return view;
     }

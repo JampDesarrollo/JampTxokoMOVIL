@@ -4,15 +4,6 @@
  * and open the template in the editor.
  */
 package com.example.a2dam.jamp.others;
-import com.example.a2dam.jamp.logicControllers.EventLogicController;
-import com.example.a2dam.jamp.logicControllers.ExpenseLogicController;
-import com.example.a2dam.jamp.logicControllers.TelephoneLogicController;
-import com.example.a2dam.jamp.logicControllers.UserLogicController;
-import com.example.a2dam.jamp.logics.EventLogic;
-import com.example.a2dam.jamp.logics.ExpenseLogic;
-import com.example.a2dam.jamp.logics.ProductLogic;
-import com.example.a2dam.jamp.logics.TelephoneLogic;
-import com.example.a2dam.jamp.logics.UserLogic;
 
 /**
  * Clase que devuelve objetos que implementan la interfaz. Si yo necesito
@@ -31,7 +22,7 @@ public class ILogicFactory {
      * Method that returns the new object of the implementation
      *
      * @return the logicImplementation
-     */
+     *//*
     public static UserLogic getUserLogic() {
         return new UserLogicController();
     }
@@ -48,6 +39,6 @@ public class ILogicFactory {
 
     public static TelephoneLogic getTelephoneLogic() {
         return new TelephoneLogicController();
-    }
+    }*/
 
 }

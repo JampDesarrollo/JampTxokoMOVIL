@@ -1,8 +1,6 @@
 package com.example.a2dam.jamp.threads;
 
-import com.example.a2dam.jamp.logics.TelephoneLogic;
-
-public class ThreadForSocketTelephone extends Thread {
+public class ThreadForSocketTelephone extends Thread {/*
     private TelephoneBean telephone;
     private TelephoneLogic ilogic;
     private int code;
@@ -16,13 +14,13 @@ public class ThreadForSocketTelephone extends Thread {
         this.ilogic=ilogic;
         this.code=i;
     }
-
+*/
     /**
      * Method that start the thread
      */
     @Override
     public void run() {
-        switch (code){
+        /*switch (code){
             case 1:
                 try {
                     ilogic.findAllTelephones(telephone);
@@ -30,6 +28,6 @@ public class ThreadForSocketTelephone extends Thread {
                     throw new RuntimeException(e);
                 }
                 break;
-        }
+        }*/
     }
 }

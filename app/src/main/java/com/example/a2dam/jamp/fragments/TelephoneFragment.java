@@ -53,17 +53,17 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
 
         search=view.findViewById(R.id.tfSearchTelephoneName);
 
-        telephoneError= view.findViewById(R.id.lblSearchError);
+        telephoneError= view.findViewById(R.id.lblSearchTelephoneError);
 
         ArrayList<Telephone> telephones = cargarTelefonos();
         if(telephones.isEmpty()) {
+            telephoneError.setVisibility(View.VISIBLE);
+        }else{
             telephoneError.setVisibility(View.INVISIBLE);
             lv = view.findViewById(R.id.TelephoneListView);
             AdapterTelephone adapter = new AdapterTelephone(this, telephones);
             lv.setAdapter(adapter);
             lv.setOnItemClickListener(this);
-        }else{
-            telephoneError.setVisibility(View.VISIBLE);
         }
 
         return view;

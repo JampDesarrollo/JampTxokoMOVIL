@@ -58,6 +58,8 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
         ArrayList<Event> events=cargarEventos();
 
         if(events.isEmpty()) {
+            eventError.setVisibility(View.VISIBLE);
+        }else{
             //referenciar el listview
             lv = view.findViewById(R.id.EventsListView);
             //crear un nuevo tipo de dato adapterevents y pasamos el array
@@ -66,8 +68,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
             lv.setAdapter(adapter);
             //definimos el onintemclick
             lv.setOnItemClickListener(this);
-        }else{
-            eventError.setVisibility(View.VISIBLE);
         }
         return view;
     }

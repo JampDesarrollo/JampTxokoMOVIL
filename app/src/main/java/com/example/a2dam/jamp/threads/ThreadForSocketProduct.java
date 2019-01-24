@@ -1,8 +1,6 @@
 package com.example.a2dam.jamp.threads;
 
-import com.example.a2dam.jamp.logics.ProductLogic;
-
-public class ThreadForSocketProduct extends Thread {
+public class ThreadForSocketProduct extends Thread {/*
     private ProductBean product;
     private ProductLogic ilogic;
     private int code;
@@ -16,13 +14,13 @@ public class ThreadForSocketProduct extends Thread {
         this.ilogic=ilogic;
         this.code=i;
     }
-
+*/
     /**
      * Method that start the thread
      */
     @Override
     public void run() {
-        switch (code){
+        /*switch (code){
             case 1:
                 try {
                     ilogic.findAllProducts(product);
@@ -37,6 +35,6 @@ public class ThreadForSocketProduct extends Thread {
                     throw new RuntimeException(e);
                 }
                 break;
-        }
+        }*/
     }
 }
