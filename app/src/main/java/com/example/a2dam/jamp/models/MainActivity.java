@@ -16,7 +16,6 @@ import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.a2dam.jamp.R;
@@ -24,11 +23,6 @@ import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
-import com.example.a2dam.jamp.others.EncryptPassword;
-import com.example.a2dam.jamp.logics.UserLogic;
-import com.example.a2dam.jamp.others.ILogicFactory;
-import com.example.a2dam.jamp.antes_PARA_BORRAR.ThreadForSocketClient;
-
 import messageuserbean.UserBean;
 
 /**
@@ -47,10 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Boolean bTextVisible,videoPlaying,allOK;
     private VideoView video;
     private ScrollView resto;
-    private UserLogic ilogic;
+    //private UserLogic ilogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -90,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         allOK=true;
 
         //inicializar la logica de la factoria
-        ilogic = ILogicFactory.getILogic();
+        //ilogic = ILogicFactory.getILogic();
 
         //si el savedinstanceState es distinto de null significa que no es la primera vez que se ejecuta el onCreate, seguramente sea porque hemos girado el movil, entonces busca si dentro del saved hay una variable
         // llamada estado, si estado es igual a true significa que el video se tiene que reproducir asique quitamos la barra de titulo para que el videoview tenga el maximo tamaño posible y vamos al etodo crearVideo.
@@ -357,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private UserBean comprobarDatos() {
         //conectar con la base de datos
         UserBean returnUser = null;
-
+/*
         try {
             //crear una variable userbean con todos los campos que ha metido el usuario para mandar al servidor
             UserBean usuario = new UserBean(tfUsuario.getText().toString(), EncryptPassword.encrypt(pfContrasena.getText().toString()));
@@ -373,7 +368,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             returnUser = thread.getUser();
         } catch (InterruptedException e) {
             Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }
+        }*/
         return returnUser;
     }
 

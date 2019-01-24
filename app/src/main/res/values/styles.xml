@@ -6,6 +6,11 @@
         <item name="colorPrimary">@color/colorJAMP</item>
         <item name="colorPrimaryDark">@color/colorJAMP</item>
         <item name="colorAccent">@color/colorJAMP</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:navigationBarColor">@color/colorJAMP</item>
+        <item name="android:colorForeground">@color/blanco</item>
+        <item name="android:textColorPrimaryInverse">@android:color/white</item>
+        <item name="android:colorBackground">@color/colorJAMP</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +21,9 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 
 </resources>

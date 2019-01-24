@@ -10,17 +10,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.others.EncryptPassword;
-import com.example.a2dam.jamp.logics.UserLogic;
 import com.example.a2dam.jamp.others.ILogicFactory;
-import com.example.a2dam.jamp.antes_PARA_BORRAR.ThreadForSocketClient;
-
 import java.sql.Timestamp;
-
 import messageuserbean.UserBean;
 
 /**
@@ -58,13 +53,14 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
     Boolean correcto,formatEmail,bTextVisible, allOK;
 
     TextView lblError;
-    private UserLogic ilogic;
+    //private UserLogic ilogic;
 
     /**
      * Method that create the Registro View
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
@@ -118,7 +114,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         lblError=findViewById(R.id.lblComprobante);
 
         //inicializar la logica de la factoria
-        ilogic = ILogicFactory.getILogic();
+        //ilogic = ILogicFactory.getILogic();
     }
 
     /**
@@ -325,7 +321,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
      * Method that connect to the ilogic class to connect with the database
      */
 
-    private void conectar(){
+    private void conectar(){/*
         try{
             //boolean que comprueba que la conexion con el servidor a ido ok
             allOK = true;
@@ -355,7 +351,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         }catch(InterruptedException e){//captura la exception de interrupcion
             //muestra un toaste diciendo que ha habido un problema con la conexion al servidor
             Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     /**

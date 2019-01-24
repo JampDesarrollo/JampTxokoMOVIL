@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -77,8 +76,6 @@
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/fragment_events_go"
                 android:scaleType="fitCenter"
-                android:scaleX="1.5"
-                android:scaleY="1.5"
                 android:tint="@color/colorJAMP"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tfEventGo"

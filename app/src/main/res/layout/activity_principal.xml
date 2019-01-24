@@ -29,7 +29,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/status_bar_margin_top">
+        android:layout_marginTop="@dimen/status_bar_margin_top"
+        android:background="@drawable/bluegradient">
 
         <FrameLayout
             android:id="@+id/fragment"
@@ -47,9 +48,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/bluegradient"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_principal"
-        app:menu="@menu/activity_principal2_drawer" >
+        app:menu="@menu/activity_principal2_drawer">
 
     </android.support.design.widget.NavigationView>
 

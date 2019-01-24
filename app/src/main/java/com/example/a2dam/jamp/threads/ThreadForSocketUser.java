@@ -1,10 +1,9 @@
 package com.example.a2dam.jamp.threads;
 
-import com.example.a2dam.jamp.logics.UserLogic;
-
 import messageuserbean.UserBean;
 
 public class ThreadForSocketUser extends Thread {
+    /*
     private UserBean user;
     private UserLogic ilogic;
     private int code;
@@ -18,12 +17,12 @@ public class ThreadForSocketUser extends Thread {
         this.ilogic=ilogic;
         this.code=i;
     }
-
+*/
     /**
      * Method that start the thread
      */
     @Override
-    public void run() {
+    public void run() {/*
         switch (code){
             case 1:
                 try {
@@ -53,6 +52,6 @@ public class ThreadForSocketUser extends Thread {
                     throw new RuntimeException(e);
                 }
                 break;
-        }
+        }*/
     }
 }

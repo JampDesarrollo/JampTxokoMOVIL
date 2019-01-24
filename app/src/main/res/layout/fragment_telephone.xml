@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="?attr/actionBarSize"
-    tools:context=".fragments.TelephoneFragment"
-    android:background="@drawable/bluegradient">
+    tools:context=".fragments.TelephoneFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/blanco">
+        android:background="@drawable/bluegradient">
 
 
         <TextView
@@ -51,6 +50,7 @@
 
             <EditText
                 android:id="@+id/tfSearchTelephoneName"
+                style="@style/Widget.AppCompat.EditText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
@@ -58,6 +58,9 @@
                 android:hint="@string/fragment_telephones_search_telephone"
                 android:inputType="text"
                 android:textAlignment="textStart"
+                android:textColor="@color/blanco"
+                android:textColorHint="@color/blanco"
+                android:textColorLink="@color/blanco"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -84,74 +87,11 @@
             android:id="@+id/TelephoneListView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/blanco"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"></ListView>
-
-        <!--<ScrollView-->
-        <!--android:id="@+id/scrollTelephones"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textTitulo">-->
-        <!---->
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<android.support.constraint.ConstraintLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
-
-        <!--<Button-->
-        <!--android:id="@+id/TelepizzaButton"-->
-        <!--style="@style/Widget.AppCompat.Button.Borderless"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="2dp"-->
-        <!--android:layout_marginTop="2dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="2dp"-->
-        <!--android:fontFamily="@font/alef"-->
-        <!--android:text="@string/telepizza"-->
-        <!--android:textAlignment="viewStart"-->
-        <!--android:textSize="18sp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/TelepizzaCallButton"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-        <!--<ImageButton-->
-        <!--android:id="@+id/TelepizzaCallButton"-->
-        <!--style="@android:style/Widget.DeviceDefault.ImageButton"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:background="@drawable/boton_telefono_redondo"-->
-        <!--android:backgroundTint="@color/verde"-->
-        <!--android:contentDescription="@string/telepizza"-->
-        <!--android:scaleType="fitCenter"-->
-        <!--android:scaleX="1.2"-->
-        <!--android:scaleY="1.2"-->
-        <!--android:src="@drawable/ic_call_black_24dp"-->
-        <!--android:tint="@color/blanco"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/TelepizzaButton"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-        <!--</android.support.constraint.ConstraintLayout>-->
-
-        <!--</LinearLayout>-->
-        <!--</ScrollView>-->
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

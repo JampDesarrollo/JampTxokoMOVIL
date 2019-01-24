@@ -13,7 +13,8 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bluegradient">
 
         <TextView
             android:id="@+id/lblSearchEventError"
@@ -57,6 +58,8 @@
                 android:hint="@string/fragment_events_search_event"
                 android:inputType="text"
                 android:textAlignment="textStart"
+                android:textColorHint="@color/blanco"
+                android:textColorLink="@color/blanco"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
