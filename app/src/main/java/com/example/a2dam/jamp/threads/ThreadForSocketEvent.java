@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp.threads;
 
-import messageuserbean.UserBean;
 
 public class ThreadForSocketEvent extends Thread {
     /*
