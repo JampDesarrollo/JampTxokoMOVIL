@@ -113,9 +113,9 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
     private Boolean checkPasswords() {
         Boolean correcto=true;
-        actualpass.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        newpass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        newpass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        actualpass.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        newpass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        newpass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         if(actualpass.getText().toString().trim().length()>0){
             if(actualpass.getText().toString().trim().length()<8){

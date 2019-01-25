@@ -15,6 +15,8 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        //Establecer en el activity el estilo Dialog_custom diseñado para los dialogos
+        getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.Dialogo_Registro_Title)
@@ -32,5 +34,12 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
                 getActivity().finish();
                 break;
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        //volver a establecer en el activity el tema por defecto
+        getActivity().setTheme(R.style.AppTheme);
     }
 }

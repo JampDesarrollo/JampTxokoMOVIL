@@ -52,17 +52,19 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         btnSearch.setOnClickListener(this);
 
         search=view.findViewById(R.id.tfSearchTelephoneName);
-
+        //referenciar el listview
         telephoneError= view.findViewById(R.id.lblSearchTelephoneError);
 
         ArrayList<Telephone> telephones = cargarTelefonos();
         if(telephones.isEmpty()) {
             telephoneError.setVisibility(View.VISIBLE);
         }else{
-            telephoneError.setVisibility(View.INVISIBLE);
             lv = view.findViewById(R.id.TelephoneListView);
+            //crear un nuevo tipo de dato adapterevents y pasamos el array
             AdapterTelephone adapter = new AdapterTelephone(this, telephones);
+            //llamamos al setadapter del listview con el adapter que hemos creado antes
             lv.setAdapter(adapter);
+            //definimos el onintemclick
             lv.setOnItemClickListener(this);
         }
 
@@ -73,6 +75,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnSearchTelephone:
+                search.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
                 if(search.getText().toString().trim().isEmpty()){
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
@@ -109,11 +112,15 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
             }
         }
         if(telephones.isEmpty()){
+            lv.setAdapter(null);
             telephoneError.setVisibility(View.VISIBLE);
         }else {
             telephoneError.setVisibility(View.INVISIBLE);
+            //crear un nuevo tipo de dato adapterevents y pasamos el array
             AdapterTelephone adapter = new AdapterTelephone(this, telephones);
+            //llamamos al setadapter del listview con el adapter que hemos creado antes
             lv.setAdapter(adapter);
+            //definimos el onintemclick
             lv.setOnItemClickListener(this);
 
             Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
