@@ -19,7 +19,7 @@
             android:text="@string/fragment_products_product"
             android:textAlignment="viewStart"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black"
+            android:textColor="@android:color/black"
             android:textSize="21sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textProductPrice"

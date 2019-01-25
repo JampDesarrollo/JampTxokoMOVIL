@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.fragments;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,13 +56,13 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
         eventError=view.findViewById(R.id.lblSearchEventError);
         search=view.findViewById(R.id.tfSearchEvent);
 
+        //referenciar el listview
+        lv = view.findViewById(R.id.EventsListView);
         ArrayList<Event> events=cargarEventos();
 
         if(events.isEmpty()) {
             eventError.setVisibility(View.VISIBLE);
         }else{
-            //referenciar el listview
-            lv = view.findViewById(R.id.EventsListView);
             //crear un nuevo tipo de dato adapterevents y pasamos el array
             AdapterEvents adapter = new AdapterEvents(this, events);
             //llamamos al setadapter del listview con el adapter que hemos creado antes
@@ -84,6 +85,7 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnSearchEvent:
+                search.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
                 if(search.getText().toString().trim().isEmpty()){
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
@@ -144,8 +146,10 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
             }
 
             if(events.isEmpty()) {
-                //referenciar el listview
-                lv = view.findViewById(R.id.EventsListView);
+                lv.setAdapter(null);
+                eventError.setVisibility(View.VISIBLE);
+            }else{
+                eventError.setVisibility(View.INVISIBLE);
                 //crear un nuevo tipo de dato adapterevents y pasamos el array
                 AdapterEvents adapter = new AdapterEvents(this, events);
                 //llamamos al setadapter del listview con el adapter que hemos creado antes
@@ -155,8 +159,6 @@ public class EventFragment extends Fragment implements View.OnClickListener, Ada
 
                 Toast toast = Toast.makeText(getContext(),R.string.fragment_events_event_toast,Toast.LENGTH_LONG);
                 toast.show();
-            }else{
-                eventError.setVisibility(View.VISIBLE);
             }
         }
     }

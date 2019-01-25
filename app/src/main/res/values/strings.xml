@@ -113,6 +113,10 @@
     <string name="Dialogo_Asistir_Al_Evento_Title">Asistir Al Evento</string>
     <string name="Dialogo_Asistir_Al_Evento_Content">Seguro que desea asistir al evento seleccionado?</string>
     <string name="Dialogo_Asistir_Al_Evento_Toast">Se ha añadido el gasto del evento a sus gastos mensuales</string>
+    //Dialogo Cerrar Sesion
+    <string name="Dialogo_LogOut_Title">¿Desea Cerrar Sesion?</string>
+    <string name="Dialogo_LogOut_yes">Si</string>
+    <string name="Dialogo_LogOut_no">No</string>
 
     //Error Messages
     <string name="user_login_exist_error">Ese nombre de usuario ya existe</string>

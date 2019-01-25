@@ -67,27 +67,27 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
         //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color jamp (azul oscuro) en la rayas inferiores de los campos de texto
         //texto de login de usuario
         textLogin =findViewById(R.id.tfLogin);
-        textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //texto del nombre completo de usuario
         textFullName =findViewById(R.id.tfFullName);
-        textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //texto del email del usuario
         texteMail =findViewById(R.id.tfeMail);
-        texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //texto del id del txoko del usuario
         textTxoko = findViewById(R.id.tfTxoko);
-        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //texto de la primera contraseña del usuario
         pass1=findViewById(R.id.pfPassword1);
-        pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //texto de la segunda contraseña del usuario
         pass2=findViewById(R.id.pfNewPassword1);
-        pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
 
         //referenciar las variables de botones y botones de imagen declaradas arriba con los campos del diseño grafico y establecer el action listener de dichos botones
         //boton de registrarse
@@ -144,12 +144,12 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
 
     private void controlarTodosLosCampos() {
         //pinta las lineas inferiores de todos los campos de texto
-        textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-        pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        textLogin.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        textFullName.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        texteMail.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        textTxoko.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        pass1.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+        pass2.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
         //inicializa la variable otra vez para poder comprobar varias veces que los campos esten correctos
         correcto=true;
 

@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
@@ -14,11 +15,15 @@ import static android.content.DialogInterface.BUTTON_NEGATIVE;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class Dialog_Go_To_Event extends DialogFragment implements DialogInterface.OnClickListener {
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        //Establecer en el activity el estilo Dialog_custom diseñado para los dialogos
+        getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
         builder.setTitle(R.string.Dialogo_Asistir_Al_Evento_Title)
                 .setMessage(R.string.Dialogo_Asistir_Al_Evento_Content)
                 .setPositiveButton(R.string.Dialogos_Ok, this)
@@ -40,5 +45,12 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
                 this.dismiss();
                 break;
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        //volver a establecer en el activity el tema por defecto
+        getActivity().setTheme(R.style.AppTheme);
     }
 }

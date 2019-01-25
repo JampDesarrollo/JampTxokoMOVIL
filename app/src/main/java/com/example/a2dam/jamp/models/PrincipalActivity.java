@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.models;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dialogs.Dialog_LogOut;
 import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
 import com.example.a2dam.jamp.fragments.EventFragment;
 import com.example.a2dam.jamp.fragments.ExpenseFragment;
@@ -104,7 +106,8 @@ public class PrincipalActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }else if (backStackEntryCount == 1) {
-            this.finish();
+            DialogFragment dialogo =new Dialog_LogOut();
+            dialogo.show(getSupportFragmentManager(),"Dialog_LogOut");
         }else{
             FragmentManager manager = getSupportFragmentManager();
             if(manager.getBackStackEntryCount() > 1) {

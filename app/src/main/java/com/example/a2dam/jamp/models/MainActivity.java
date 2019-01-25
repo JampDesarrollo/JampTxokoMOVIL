@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color jamp (azul oscuro) en la rayas inferiores de los campos de texto
         tfUsuario = findViewById(R.id.tfUsuario);
-        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
         pfContrasena = findViewById(R.id.pfContraseña);
-        pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+        pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
         lblError = findViewById(R.id.lblError);
 
         //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
@@ -264,8 +264,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void logIn() {
         if (chkAllFieldsFilled()) { //si todos los campos estan llenos:
             //se pintan las lineas inferiores de los campos de texto en azul
-            pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+            pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
             if (maxCaracters()) {
                 UserBean userReturn = comprobarDatos();
@@ -394,7 +394,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
             //vacia el campo de error y lo pinta de azul
             lblError.setText("");
-            lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
+            lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
         } else{//si es alguna otra excepcion
             //muestra el mensaje en el campo destinado a los errores con la base de datos
             lblError.setText(this.getResources().getString(R.string.no_hay_conexion));

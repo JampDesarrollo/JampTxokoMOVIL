@@ -59,13 +59,17 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
 
         productError=view.findViewById(R.id.lblSearchProductError);
         products = cargarProductos();
+        //referenciar el listview
+        lv = view.findViewById(R.id.ProductGridView);
 
         if(products.isEmpty()) {
             productError.setVisibility(View.VISIBLE);
         }else{
-            lv = view.findViewById(R.id.ProductGridView);
+            //crear un nuevo tipo de dato adapterevents y pasamos el array
             AdapterProducts adapter = new AdapterProducts(this, products);
+            //llamamos al setadapter del listview con el adapter que hemos creado antes
             lv.setAdapter(adapter);
+            //definimos el onintemclick
             lv.setOnItemClickListener(this);
         }
         return view;
@@ -74,6 +78,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnSearchProduct:
+                search.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
                 if(search.getText().toString().trim().isEmpty()){
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
@@ -111,15 +116,19 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
             }
         }
         if(products.isEmpty()) {
-            lv = view.findViewById(R.id.ProductGridView);
+            productError.setVisibility(View.VISIBLE);
+        }else{
+            productError.setVisibility(View.INVISIBLE);
+            //crear un nuevo tipo de dato adapterevents y pasamos el array
             AdapterProducts adapter = new AdapterProducts(this, products);
+            //llamamos al setadapter del listview con el adapter que hemos creado antes
             lv.setAdapter(adapter);
+            //definimos el onintemclick
             lv.setOnItemClickListener(this);
 
             Toast toast = Toast.makeText(getContext(),R.string.fragment_products_product_toast,Toast.LENGTH_LONG);
             toast.show();
-        }else{
-            productError.setVisibility(View.VISIBLE);
+
         }
     }
 
