@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.logic.ExpenseLogic;
 import com.example.a2dam.jamp.others.ILogicFactory;
 import com.example.a2dam.jamp.models.PrincipalActivity;
 
@@ -24,8 +26,9 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
     protected ImageView imgCoins;
     protected FrameLayout fLayout;
     protected Boolean max;
-    //protected UserLogic ilogic;
+    protected ExpenseLogic ilogic;
     protected View view ;
+    protected Float cant;
 
 
     @Override
@@ -53,15 +56,19 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
 
         fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this);
-        //ilogic = ILogicFactory.getILogic();
+        ilogic = ILogicFactory.getExpenseLogic();
       
         max=false;
 
 
 
         //HACERLO en otro thread?
-        //List<Expense> expenseList = ilogic.findExpensesMonth(null);
-
+        try {
+            cant = ilogic.findMonthExpensesSingleUser(1);
+        } catch (BusinessLogicException e) {
+            e.printStackTrace();
+        }
+        lblAmount.setText(Float.toString(cant));
         return view;
     }
 

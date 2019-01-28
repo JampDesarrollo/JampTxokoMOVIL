@@ -14,6 +14,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -24,18 +27,20 @@ import javax.crypto.NoSuchPaddingException;
  * @author Ander
  */
 public class EncryptPassword {
-
+    /**
+     * Logger for the class.
+     */
+    private static final Logger LOGGER = Logger.getLogger("jampclientside.ui.controller");
     /**
      *
-     * @param passwordString
+     * @param password
      * @return
      * @author ander
      */
-    public static String encrypt(String passwordString) {
-        String message=null;
-        byte[] encodedMessage = null,password=passwordString.getBytes();
+    public static byte[] encrypt(byte[] password) {
+        byte[] encodedMessage = null;
         try {
-            FileInputStream fis = new FileInputStream("public.crt");
+            FileInputStream fis = new FileInputStream("public.key");
             byte[] byteA = new byte[fis.available()];
             fis.read(byteA);
             fis.close();
@@ -48,33 +53,24 @@ public class EncryptPassword {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publick);
             encodedMessage = cipher.doFinal(password);
-            message=encodedMessage.toString();
 
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "EncryptPassw: File not found", e.getMessage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "EncryptPassw: IO exception", e.getMessage());
         } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "EncryptPassw: No such algorithm", e.getMessage());
         } catch (InvalidKeySpecException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Invalid key specification", e.getMessage());
         } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "EncryptPassw: No such padding", e.getMessage());
         } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException ex) {
-            ex.printStackTrace();
-        } catch (BadPaddingException ex) {
-            ex.printStackTrace();
-        } catch (NullPointerException e){
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "EncryptPassw: Invalid key", e.getMessage());
+        } catch (IllegalBlockSizeException e) {
+            LOGGER.log(Level.SEVERE, "EncryptPassw: Illegal block size", e.getMessage());
+        } catch (BadPaddingException e) {
+            LOGGER.log(Level.SEVERE, "EncryptPassw: Bad padding", e.getMessage());
         }
-        return message;
+        return encodedMessage;
     }
 }
