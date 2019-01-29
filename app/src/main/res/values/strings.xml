@@ -86,7 +86,7 @@
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Ha solicitado una nueva contraseña que se le mandara por email, Por Favor revise su bandeja de entrada</string>
     //Dialogo Registro
     <string name="Dialogo_Registro_Title">Se ha registrado con exito</string>
-    <string name="Dialogo_Registro_Content">Por Favor, Comuniquese con el administrador del txoko para activar su cuenta</string>
+    <string name="Dialogo_Registro_Content">Por Favor, Su cuenta se ha activado, Por Favor dirijase al inicio de sesion para iniciar sesion</string>
     //Dialogo Productos
     <string name="Dialogo_Productos_Title">Producto Prueba</string>
     <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
@@ -123,6 +123,7 @@
     <string name="telephone_search_error">No Se Han Encontrado Telefonos</string>
     <string name="product_search_error">No Se Han Encontrado Productos</string>
     <string name="event_search_error">No Se Han Encontrado Eventos</string>
+    <string name="request_new_password_error">No se ha podido cambiar la contraseña, por favor, compruebe su conexión</string>
   
     //Recursos
     <string name="country_coin">€</string>

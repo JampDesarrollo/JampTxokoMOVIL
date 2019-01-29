@@ -2,6 +2,7 @@ package com.example.a2dam.jamp.models;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -16,14 +17,19 @@ import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
+import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
+import com.example.a2dam.jamp.logic.UserLogic;
+import com.example.a2dam.jamp.others.EncryptPassword;
+import com.example.a2dam.jamp.others.ILogicFactory;
 
 
 /**
@@ -33,7 +39,7 @@ import com.example.a2dam.jamp.exceptions.UserNotExistException;
  * @author Ander
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnInicio, btnRegistrarse;
     private EditText pfContrasena, tfUsuario;
@@ -209,9 +215,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void changepass() {
         if(tfUsuario.getText().toString().trim().length() < 255){//si el campo de usuario es menor de 255 (sin contar los blancos) continua probando
             if(tfUsuario.getText().toString().trim().length()>0){//si el campo de usuario en mayor de 0 (sin contar los blancos) continua a probar
-                //conectar con la base de datos
-                //conectar();
-                comprobarDatos();
+                //llama al metodo que se conecta con el servidor
+                if(conectarCambiarPass()){
+                    Dialog_Request_New_Password dialog= new Dialog_Request_New_Password();
+                    dialog.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
+                }
             }else{//si el campo esta vacio
                 //mostrar mensaje de error
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
@@ -231,32 +239,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*private void conectar() {
-        lblError.setText("");
-        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-
-
-        try {
-            UserBean returnUser = null,usuario = new UserBean(tfUsuario.getText().toString(), pfContrasena.getText().toString());
-            //crear hilo
-            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
-            thread.setUncaughtExceptionHandler(this::uncaughtException);
-            //inicializar hilo
-            thread.start();
-            //esperar a que el hilo muera
-            thread.join();
-            //coger el user que he recibido
-            returnUser = thread.getUser();
-            if (allOK) {//si no han saltado excepciones muestra un cuadro de dialogo Dialog_Request_New_Password
-                //mostrar el dialogo de solicitud de la nueva contraseña
-                DialogFragment dialogo =new Dialog_Request_New_Password();
-                dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
-            }
-        } catch (InterruptedException e) {
-            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }
-    }*/
-
     /**
      * LogIn method. At the moment when the user clicks on the button Start Session
      * will come to this method and will do all the necessary checks to be able to start a session.
@@ -269,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
             if (maxCaracters()) {
-                UserBean userReturn = comprobarDatos();
+                UserBean userReturn = conectarIniciarSesion();
                 //si el usuario que devuelve no es null
                 if (userReturn.getIdUser() != 0) {
                     //que vaya a la ventana principal
@@ -308,6 +290,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+
     /**
      * Method to check that all fields are full.
      *
@@ -340,66 +324,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //devolvemos el boolean
         return maxCaracteres;
     }
+    private UserBean conectarIniciarSesion() {
+        UserLogic ilogic=ILogicFactory.getUserLogic();
 
-    /**
-     * Method that checks if the user exists and if said password is with that user.
-     * In case the user is incorrect, the UserNotExistException exception jumps.
-     * If the password is incorrect, the PasswordNotOkException exception jumps.
-     * If there is an error connecting to the database, Exception will be thrown.
-     *
-     * @return Devuelve el usuario entero.
-     */
-
-    private UserBean comprobarDatos() {
         //conectar con la base de datos
         UserBean returnUser = null;
-/*
         try {
             //crear una variable userbean con todos los campos que ha metido el usuario para mandar al servidor
-            UserBean usuario = new UserBean(tfUsuario.getText().toString(), EncryptPassword.encrypt(pfContrasena.getText().toString()));
-            //crear un hilo para la implementacion de la logica
-            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
-            //recibe la excepciones que no se han controlado del hilo y las manda al metodo uncaughtException
-            thread.setUncaughtExceptionHandler(this::uncaughtException);
-            //inicializar hilo
-            thread.start();
-            //esperar al que el hilo muera
-            thread.join();
-            //coger el user que he recibido
-            returnUser = thread.getUser();
-        } catch (InterruptedException e) {
-            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }*/
+            returnUser=ilogic.findUserByLoginPasswMov(tfUsuario.getText().toString(),pfContrasena.getText().toString());
+        } catch (BusinessLogicException e) {
+            e.printStackTrace();
+        }
         return returnUser;
     }
 
-    /**
-     * method that catches exceptions
-     *
-     * @param t Thread
-     * @param e Throwable
-     */
-    @Override
-    public void uncaughtException(Thread t, Throwable e) {
-        if (e.getCause() instanceof UserNotExistException) {//si la excepcion atrapada es igual que la excepcion UserNotExistException
-            //muestra un mensaje de error en el campo destinado a los errores con la conxion
-            lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else if (e.getCause() instanceof PasswordNotOkException) {//si la excepcion atrapada es igual que la excepcion PasswordNotOkException
-            //muestra un mensaje de error en el campo destinado a los errores con la conxion
-            lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else if (e.getCause() instanceof UserLoginExistException){//si la excepcion atrapada es igual que la excepcion UserLoginExistException
-            //Proceso de mandar email
 
-            //crea un dialogo de Dialog_Request_New_Password
-            DialogFragment dialogo =new Dialog_Request_New_Password();
-            dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
-            //vacia el campo de error y lo pinta de azul
-            lblError.setText("");
-            lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        } else{//si es alguna otra excepcion
-            //muestra el mensaje en el campo destinado a los errores con la base de datos
-            lblError.setText(this.getResources().getString(R.string.no_hay_conexion));
+    private Boolean conectarCambiarPass() {
+        UserLogic ilogic=ILogicFactory.getUserLogic();
+
+        //conectar con la base de datos
+        Boolean ok = false;
+        try {
+            //llamar al metodo forgotpassword de la logica y mandamos el usuario al servidor
+            ok=ilogic.findUserForgotPassw(tfUsuario.getText().toString());
+        } catch (BusinessLogicException e) {//si casca pilla la excepcion
+            //mostrar un error en el campo de error
+            lblError.setText(R.string.request_new_password_error);
         }
+        return ok;
     }
 
     /**

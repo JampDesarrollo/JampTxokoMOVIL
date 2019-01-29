@@ -119,7 +119,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
 
 
         //Declarar all por separado
-        mongoclient = MongoClients.create("mongodb://192.168.0.15:27017/jamp");
+        mongoclient = MongoClients.create("mongodb://10.22.82.135:27017/jamp");
         mongoDB = mongoclient.getDatabase("jamp");
         collection = mongoDB.getCollection("telephones");
 

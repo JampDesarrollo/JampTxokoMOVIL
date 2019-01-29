@@ -15,14 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_LogOut;
 import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
 import com.example.a2dam.jamp.fragments.EventFragment;
 import com.example.a2dam.jamp.fragments.ExpenseFragment;
 import com.example.a2dam.jamp.fragments.ProductFragment;
 import com.example.a2dam.jamp.fragments.TelephoneFragment;
+
+import java.text.SimpleDateFormat;
 
 /**
  * Class that controller PrincipalActivity
@@ -34,20 +38,26 @@ public class PrincipalActivity extends AppCompatActivity
     /**
      * Full name TextView
      */
-    TextView tfFullName;
+    private TextView tfFullName;
+
     /**
      * Login TextView
      */
-    TextView tfLogin;
+    private TextView tfLogin;
+
     /**
      * LastAcces TextView
      */
-    TextView tfLastAcces;
+    private TextView tfLastAcces;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
 
     private NavigationView navigationView;
 
+    public static UserBean publicUser;
+    public static UserBean getPublicUser() {
+        return publicUser;
+    }
     /**
      * Method that create Principal Activity
      *
@@ -76,12 +86,15 @@ public class PrincipalActivity extends AppCompatActivity
         tfFullName = hView.findViewById(R.id.tfFullName);
         tfLogin = hView.findViewById(R.id.tfLogin);
         tfLastAcces = hView.findViewById(R.id.tfLastConnection);
-/*
-        UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
-        String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(user.getLastAccess());
-        tfFullName.setText(user.getFullname());
-        tfLogin.setText(user.getLogin());
-        tfLastAcces.setText("Ultimo acceso: " + date);*/
+        try {
+            publicUser = (UserBean) getIntent().getExtras().getSerializable("Usuario");
+            tfFullName.setText(publicUser.getFullname());
+            tfLogin.setText(publicUser.getLogin());
+            String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(publicUser.getLastAccess());
+            tfLastAcces.setText("Ultimo acceso: " + date);
+        }catch (NullPointerException e){
+            Toast.makeText(this,this.getResources().getString(R.string.null_pointer_exception_error), Toast.LENGTH_LONG).show();
+        }
 
 //        setupNavigationDrawerContent(navigationView);
 

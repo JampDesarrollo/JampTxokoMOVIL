@@ -11,8 +11,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.TxokoBean;
+import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
+import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
+import com.example.a2dam.jamp.logic.UserLogic;
 import com.example.a2dam.jamp.others.EncryptPassword;
 import com.example.a2dam.jamp.others.ILogicFactory;
 import java.sql.Timestamp;
@@ -25,7 +29,7 @@ import java.sql.Timestamp;
  * @version 1.0
  */
 
-public class Registro extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler{
+public class Registro extends AppCompatActivity implements View.OnClickListener{
     /**
      *  pass1 User Password EditText
      *  pass2 Repetition Of The User Password
@@ -49,7 +53,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
      *  correcto User Data Correct Boolean
      *  format User email Correct format Boolean
      */
-    Boolean correcto,formatEmail,bTextVisible, allOK;
+    Boolean correcto,formatEmail,bTextVisible,allOk;
 
     TextView lblError;
     //private UserLogic ilogic;
@@ -320,56 +324,39 @@ public class Registro extends AppCompatActivity implements View.OnClickListener,
      * Method that connect to the ilogic class to connect with the database
      */
 
-    private void conectar(){/*
+    private void conectar(){
         try{
-            //boolean que comprueba que la conexion con el servidor a ido ok
-            allOK = true;
-            //almacenar la hora del sistema en una variable long
-            Long tsLong = System.currentTimeMillis();
-            //guadar la variable tsLong con la hora del sistema en un  time stamp
-            Timestamp now = new Timestamp(tsLong);
+            allOk=true;
+            //Crear una variable userbean para mandar al server
+            UserBean user = new UserBean();
+            //crear una variable txoko bean para llenar el user
+            TxokoBean txoko=new TxokoBean();
+            //llenar el uniko campo del txoko del que disponemos
+            txoko.setIdTxoko(Integer.getInteger(textTxoko.getText().toString()));
+            //llenar el user entero
+            user.setLogin(textLogin.getText().toString());
+            user.setFullname(textFullName.getText().toString());
+            user.setEmail(texteMail.getText().toString());
+            user.setTxoko(txoko);
+            user.setPassword(EncryptPassword.encrypt(pass1.getText().toString()));
+            user.setLastAccess(String.valueOf(System.currentTimeMillis()));
+            user.setLastPasswordChange(String.valueOf(System.currentTimeMillis()));
+            UserLogic iLogic = ILogicFactory.getUserLogic();
+            iLogic.createUser(user);
 
-            //crear una variable userbean con todos los campos que ha metido el usuario para mandar al servidor, 5º campo llama a un metodo de la clase Encrypt password y se le manda la contraseña que ha introducido
-            //y devuelve la contraseña encriptada con la clave publica.
-            //este userbean es el correcto, el que se va a usar cuando cambiemos el userbean, porque este tiene el campo del txoko que el otro no tiene
-            //UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),textTxoko.getText().toString(), EncryptPassword.encrypt(pass1.getText().toString()), now, now);
-            //este user bean se tiene que borrar cuando metamos el nuevo userbean
-            UserBean user = new UserBean(textLogin.getText().toString(), texteMail.getText().toString(), textFullName.getText().toString(),EncryptPassword.encrypt(pass1.getText().toString()), now, now);
-            //crear un hilo para la implementacion de la logica
-            ThreadForSocketClient thread = new ThreadForSocketClient(user, ilogic, 1);
-            //recibe la excepciones que no se han controlado del hilo y las manda al metodo uncaughtException
-            thread.setUncaughtExceptionHandler(this::uncaughtException);
-            //inicia el hilo
-            thread.start();
-            //esperar al que el hilo muera
-            thread.join();
-            if (allOK) {//si no han saltado excepciones muestra un cuadro de dialogo Dialog_SignUp
-                Dialog_SingUp dial =new Dialog_SingUp();
-                dial.show(getSupportFragmentManager(),"Dialog_SingUp");
-            }
-        }catch(InterruptedException e){//captura la exception de interrupcion
-            //muestra un toaste diciendo que ha habido un problema con la conexion al servidor
-            Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }*/
-    }
 
-    /**
-     * Method that returns uncaught Exceptions
-     * @param t Thread
-     * @param e Throwable
-     */
-    @Override
-    public void uncaughtException(Thread t, Throwable e) {
-        if (e.getCause() instanceof UserLoginExistException) {//si la excepcion atrapada es igual que la excepcion UserLoginExistException
-            //muestra un mensaje de error en el campo destinado a los errores con la conxion
-            lblError.setText(this.getResources().getString(R.string.user_login_exist_error));
-            //devuelve la variable a false porque ha saltado una excepcion
-            allOK=false;
-        }else {//si el error es distinto a la excepcion UserLoginExistException
-            //muestra un toast diciendo que ha habido un error con la conexion al servidor
-            Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-            //devuelve la variable a false porque ha saltado una excepcion
-            allOK=false;
+
+        } catch (BusinessLogicException e) {
+            //muestra un error en el campo de errores del servidor diciendo que ha habido un problema con la conexion al servidor
+            lblError.setText(this.getResources().getString(R.string.conection_error));
+            allOk=false;
+            //lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+            //Toast.makeText(this,this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
+        }
+        if(allOk){//si no ha saltado ninguna excepcion
+            //muestra un cuadro de dialogo Dialog_SignUp
+            Dialog_SingUp dial =new Dialog_SingUp();
+            dial.show(getSupportFragmentManager(),"Dialog_SingUp");
         }
     }
 

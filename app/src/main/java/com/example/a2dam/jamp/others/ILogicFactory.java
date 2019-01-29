@@ -6,7 +6,9 @@
 package com.example.a2dam.jamp.others;
 
 import com.example.a2dam.jamp.logic.ExpenseLogic;
-import com.example.a2dam.jamp.logic.ExpenseLogicController;
+import com.example.a2dam.jamp.logic.UserLogic;
+import com.example.a2dam.jamp.logicControllers.ExpenseLogicController;
+import com.example.a2dam.jamp.logicControllers.UserLogicController;
 
 /**
  * Clase que devuelve objetos que implementan la interfaz. Si yo necesito
@@ -25,11 +27,11 @@ public class ILogicFactory {
      * Method that returns the new object of the implementation
      *
      * @return the logicImplementation
-     *//*
+     */
     public static UserLogic getUserLogic() {
         return new UserLogicController();
     }
-
+/*
     public static EventLogic getEventLogic() {
         return new EventLogicController();
     }

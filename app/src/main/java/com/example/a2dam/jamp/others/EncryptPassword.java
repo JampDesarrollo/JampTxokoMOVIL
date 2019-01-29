@@ -33,12 +33,13 @@ public class EncryptPassword {
     private static final Logger LOGGER = Logger.getLogger("jampclientside.ui.controller");
     /**
      *
-     * @param password
+     * @param passwordString
      * @return
      * @author ander
      */
-    public static byte[] encrypt(byte[] password) {
-        byte[] encodedMessage = null;
+    public static String encrypt(String passwordString) {
+        byte[] encodedMessage = null,password=passwordString.getBytes();
+        String returnPass=null;
         try {
             FileInputStream fis = new FileInputStream("public.key");
             byte[] byteA = new byte[fis.available()];
@@ -53,7 +54,7 @@ public class EncryptPassword {
             Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, publick);
             encodedMessage = cipher.doFinal(password);
-
+            returnPass=encodedMessage.toString();
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, "EncryptPassw: File not found", e.getMessage());
         } catch (IOException e) {
@@ -71,6 +72,6 @@ public class EncryptPassword {
         } catch (BadPaddingException e) {
             LOGGER.log(Level.SEVERE, "EncryptPassw: Bad padding", e.getMessage());
         }
-        return encodedMessage;
+        return returnPass;
     }
 }

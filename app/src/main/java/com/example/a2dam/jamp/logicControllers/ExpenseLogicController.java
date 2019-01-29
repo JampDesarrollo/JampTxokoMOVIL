@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.a2dam.jamp.logic;
+package com.example.a2dam.jamp.logicControllers;
 
 import com.example.a2dam.jamp.dataClasses.ExpenseBean;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.logic.ExpenseLogic;
 import com.example.a2dam.jamp.rest.ExpenseRESTCli;
 
 import java.util.Collection;
