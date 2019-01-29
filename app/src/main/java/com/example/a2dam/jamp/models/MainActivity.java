@@ -19,11 +19,12 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
 import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.exceptions.UserNotExistException;
-import messageuserbean.UserBean;
+
 
 /**
  * Class that controller Login view
@@ -270,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (maxCaracters()) {
                 UserBean userReturn = comprobarDatos();
                 //si el usuario que devuelve no es null
-                if (userReturn.getId() != 0) {
+                if (userReturn.getIdUser() != 0) {
                     //que vaya a la ventana principal
                     Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
                     iniciarSesion.putExtra("Usuario", userReturn);

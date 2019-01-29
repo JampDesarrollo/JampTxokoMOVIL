@@ -16,7 +16,6 @@ import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.others.EncryptPassword;
 import com.example.a2dam.jamp.others.ILogicFactory;
 import java.sql.Timestamp;
-import messageuserbean.UserBean;
 
 /**
  * Class that controller register view

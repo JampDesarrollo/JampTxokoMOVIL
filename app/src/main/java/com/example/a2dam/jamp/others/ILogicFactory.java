@@ -5,6 +5,9 @@
  */
 package com.example.a2dam.jamp.others;
 
+import com.example.a2dam.jamp.logic.ExpenseLogic;
+import com.example.a2dam.jamp.logic.ExpenseLogicController;
+
 /**
  * Clase que devuelve objetos que implementan la interfaz. Si yo necesito
  * un objeto de la logica, hay que pedirselo a la factoria.
@@ -33,11 +36,11 @@ public class ILogicFactory {
 
     public static ProductLogic getProductLogic() {
         return new UserLogicController();
-    }
+    }*/
 
     public static ExpenseLogic getExpenseLogic(){return new ExpenseLogicController();}
 
-    public static TelephoneLogic getTelephoneLogic() {
+    /*public static TelephoneLogic getTelephoneLogic() {
         return new TelephoneLogicController();
     }*/
 
