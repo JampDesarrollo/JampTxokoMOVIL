@@ -27,9 +27,7 @@ public class AdapterTelephone extends BaseAdapter {
         items.clear();
     }
     public void addAll(ArrayList<Telephone> category) {
-        for (int i = 0; i < category.size(); i++) {
-            items.add(category.get(i));
-        }
+        items.addAll(category);
     }
     @Override
     public Object getItem(int arg0) {

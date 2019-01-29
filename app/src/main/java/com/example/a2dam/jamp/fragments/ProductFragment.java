@@ -116,6 +116,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener, A
             }
         }
         if(products.isEmpty()) {
+            lv.setAdapter(null);
             productError.setVisibility(View.VISIBLE);
         }else{
             productError.setVisibility(View.INVISIBLE);

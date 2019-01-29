@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class AdapterEvents extends BaseAdapter {
     protected EventFragment activity;
     protected ArrayList<Event> items;
+
     public AdapterEvents(EventFragment activity, ArrayList<Event> items) {
         this.activity = activity;
         this.items = items;
@@ -28,9 +29,7 @@ public class AdapterEvents extends BaseAdapter {
         items.clear();
     }
     public void addAll(ArrayList<Event> events) {
-        for (int i = 0; i < events.size(); i++) {
-            items.add(events.get(i));
-        }
+        items.addAll(events);
     }
     @Override
     public Object getItem(int arg0) {
