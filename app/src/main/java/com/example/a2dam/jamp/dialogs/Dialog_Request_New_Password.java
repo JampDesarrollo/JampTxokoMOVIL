@@ -21,14 +21,18 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
         getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //establece un titulo
         builder.setTitle(R.string.Dialogo_Solicitud_Nueva_Contrasena_Title)
+                //establece un mensaje
                 .setMessage(R.string.Dialogo_Solicitud_Nueva_Contrasena_Content)
+                //establece un boton positivo
                 .setPositiveButton(R.string.Dialogos_Ok, this);
         // Create the AlertDialog object and return it
         return builder.create();
     }
 
     public void ok(){
+        //carga el fragment de dialogos
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         fragmentManager= getFragmentManager();
@@ -42,8 +46,11 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
-            case BUTTON_POSITIVE:
+            case BUTTON_POSITIVE://si clica en el boton positivo
+                //cierra el dialogo
                 dialog.dismiss();
+                //llama al metodo ok
+                ok();
                 break;
         }
     }
@@ -51,7 +58,7 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
     @Override
     public void onDetach() {
         super.onDetach();
-        //volver a establecer en el activity el tema por defecto
+        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
         getActivity().setTheme(R.style.AppTheme);
     }
 }

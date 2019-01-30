@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,13 +35,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        /*if (savedInstanceState != null) {
-            view= inflater.inflate(R.layout.fragment_expense_landscape, container, false);
-        }else{
-            view= inflater.inflate(R.layout.fragment_expense, container, false);
-        }*/
-
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             view= inflater.inflate(R.layout.fragment_expense_landscape, container, false);
         }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
@@ -68,7 +62,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         } catch (BusinessLogicException e) {
             e.printStackTrace();
         }
-        lblAmount.setText(Float.toString(cant));
+        lblAmount.setText(String.valueOf(cant));
         return view;
     }
 
@@ -82,7 +76,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
             outState.putBoolean("state", true);

@@ -59,79 +59,6 @@ public class UserRESTClient {
     }
 
     /**
-     * Get a users entities' idtxoko and return a list of users as a generic
-     * type object.
-     *
-     * @param responseType The Class object of the returning instance.
-     * @param idTxoko IdTxoko of the users to be found.
-     * @return A generic type, normally a list, containing the data.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public <T> T findAllTxokoUsers(GenericType<T> responseType, String idTxoko) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("txoko/{0}", new Object[]{idTxoko}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    /**
-     * Get a user entity XML representation from the user RESTful web service
-     * and return it as a generic type object.
-     *
-     * @param responseType The Class object of the returning instance.
-     * @param login Login of the user.
-     * @param password Password of the user.
-     * @return The object containing the data.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public <T> T findUserByLoginPasswPC(Class<T> responseType, String login, String password) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("PC/{0}/{1}", new Object[]{login, password}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    /**
-     * Send a request to the user RESTful web service to delete a user
-     * identified by its idUser.
-     *
-     * @param idUser The id of the user entity to be deleted.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public void deleteUser(String idUser) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("user/{0}", new Object[]{idUser})).request().delete();
-    }
-
-    /**
-     * Get a User entity XML representation from the user RESTful web service
-     * and return it as a generic type object.
-     *
-     * @param responseType The object containing data to be updated.
-     * @param idUser Id of the user.
-     * @return The object containing the data.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public <T> T findUserById(Class<T> responseType, String idUser) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path(java.text.MessageFormat.format("user/{0}", new Object[]{idUser}));
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
-    }
-
-    /**
-     * Create an user's entity XML representation and send it as a request to
-     * update it to the user RESTful web service.
-     *
-     * @param requestEntity The object containing data to be updated.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public void updateUser(Object requestEntity) throws ClientErrorException {
-        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
-    }
-
-    /**
      * Get a User entity XML representation from the user RESTful web service to
      * change the users password.
      *
@@ -159,21 +86,6 @@ public class UserRESTClient {
      */
     public void createUser(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
-    }
-
-    /**
-     * Get a list of user's entities XML representation from the user RESTful
-     * web service and return it as a generic type object.
-     *
-     * @param responseType The Class object of the returning instance.
-     * @return A generic type, normally a list, containing the data.
-     * @throws ClientErrorException If there is an error while processing. The
-     * error is wrapped in a HTTP error response.
-     */
-    public <T> T findAllUsers(GenericType<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("users");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
     /**
