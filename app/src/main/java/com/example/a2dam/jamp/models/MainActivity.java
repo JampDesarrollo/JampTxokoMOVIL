@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -52,51 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //establecer el tema por defecto, esto hace falta porque la aplicacion al iniciar tiene un tema diferente para la splash image
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //referenciar las variables de botones y botones de imagen declaradas arriba con los campos del diseño grafico y establecer el action listener de dichos botones
-        //el boton de iniciar sesio
-        btnInicio = findViewById(R.id.btnInicio);
-        btnInicio.setOnClickListener(this);
-        //el boton de registrarse
-        btnRegistrarse = findViewById(R.id.btnRegistrar);
-        btnRegistrarse.setOnClickListener(this);
-        //el boton de mostrar la contraseña
-        btnShowPass = findViewById(R.id.btnOjo);
-        btnShowPass.setOnClickListener(this);
-        //el boton del video
-        btnVideo=findViewById(R.id.btnVideo);
-        btnVideo.setOnClickListener(this);
-
-        //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color jamp (azul oscuro) en la rayas inferiores de los campos de texto
-        tfUsuario = findViewById(R.id.tfUsuario);
-        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        pfContrasena = findViewById(R.id.pfContraseña);
-        pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        lblError = findViewById(R.id.lblError);
-
-        //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
-        video=findViewById(R.id.videoView);
-
-        //referenciar el scrollbar que contiene todos los lementos excepto el videoview
-        resto=findViewById(R.id.scrollInicio);
-
-        //Inicializar todos los Booleans a false;
-        //este boolean es para saber la visibilidad del campo de la contraseña
-        bTextVisible = false;
-        //este boolean sirve para saber el estado del video
-        videoPlaying=false;
-        //este bollean sirve para saber si han saltado excepciones al conectar con el servidor
-        allOK=true;
-
-        //inicializar la logica de la factoria
-        //ilogic = ILogicFactory.getILogic();
-
+        //si el if de abajo funciona se puede quiitar este if y el metetodo de savedinstance
         //si el savedinstanceState es distinto de null significa que no es la primera vez que se ejecuta el onCreate, seguramente sea porque hemos girado el movil, entonces busca si dentro del saved hay una variable
         // llamada estado, si estado es igual a true significa que el video se tiene que reproducir asique quitamos la barra de titulo para que el videoview tenga el maximo tamaño posible y vamos al etodo crearVideo.
-        if (savedInstanceState != null) {
+        /*if (savedInstanceState != null) {
             if (savedInstanceState.getBoolean("state")) {
                 try {//intenta quitar la barra de arriba
                     getSupportActionBar().hide();
@@ -108,7 +71,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //ejecuta el metodo crearvideo.
                 crearVideo();
             }
+        }*/
+
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
+            //quita la barra de arriba
+            getSupportActionBar().hide();
+            //ejecuta el metodo crearvideo.
+            crearVideo();
+        }else {
+            //establece el layout de la ventana
+            setContentView(R.layout.activity_main);
+
+            //referenciar las variables de botones y botones de imagen declaradas arriba con los campos del diseño grafico y establecer el action listener de dichos botones
+            //el boton de iniciar sesio
+            btnInicio = findViewById(R.id.btnInicio);
+            btnInicio.setOnClickListener(this);
+            //el boton de registrarse
+            btnRegistrarse = findViewById(R.id.btnRegistrar);
+            btnRegistrarse.setOnClickListener(this);
+            //el boton de mostrar la contraseña
+            btnShowPass = findViewById(R.id.btnOjo);
+            btnShowPass.setOnClickListener(this);
+            //el boton del video
+            btnVideo = findViewById(R.id.btnVideo);
+            btnVideo.setOnClickListener(this);
+
+            //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color blanco en la rayas inferiores de los campos de texto
+            tfUsuario = findViewById(R.id.tfUsuario);
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+            pfContrasena = findViewById(R.id.pfContraseña);
+            pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+            lblError = findViewById(R.id.lblError);
+
+            //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
+            video = findViewById(R.id.videoView);
+
+            //referenciar el scrollbar que contiene todos los lementos excepto el videoview
+            resto = findViewById(R.id.scrollInicio);
+
+            //Inicializar todos los Booleans a false;
+            //este boolean es para saber la visibilidad del campo de la contraseña
+            bTextVisible = false;
+            //este boolean sirve para saber el estado del video
+            videoPlaying = false;
+            //este bollean sirve para saber si han saltado excepciones al conectar con el servidor
+            allOK = true;
         }
+
+
     }
 
     /**
@@ -158,13 +168,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
+        /*if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
             //crea una variable state a true en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
             outState.putBoolean("state", true);
         }else if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {//si la orientacion es vertical
             //crea una variable state a false en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
             outState.putBoolean("state", false);
-        }
+        }*/
     }
 
     private void crearVideo() {
@@ -215,8 +225,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void changepass() {
         if(tfUsuario.getText().toString().trim().length() < 255){//si el campo de usuario es menor de 255 (sin contar los blancos) continua probando
             if(tfUsuario.getText().toString().trim().length()>0){//si el campo de usuario en mayor de 0 (sin contar los blancos) continua a probar
-                //llama al metodo que se conecta con el servidor
-                if(conectarCambiarPass()){
+
+                if(conectarCambiarPass()){//llama al metodo que se conecta con el servidor si duelve true
+                    //carga el dialogo
                     Dialog_Request_New_Password dialog= new Dialog_Request_New_Password();
                     dialog.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
                 }
@@ -250,41 +261,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
-            if (maxCaracters()) {
+            if (maxCaracters()) {//si los campos no son superiores a 255
+                //llama al metodo ConectarIniciarSesion para conectar con el servidor
                 UserBean userReturn = conectarIniciarSesion();
-                //si el usuario que devuelve no es null
-                if (userReturn.getIdUser() != 0) {
+                if (userReturn.getIdUser() != 0) {//si el usuario que devuelve no es null
                     //que vaya a la ventana principal
                     Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                    //manda el usuario completo al activity principal
                     iniciarSesion.putExtra("Usuario", userReturn);
+                    //inicia el activity principal
                     startActivity(iniciarSesion);
-                    //pone los campos de la ventana de login vacios
+                    //vacia los campos de la ventana de login
                     tfUsuario.setText("");
                     pfContrasena.setText("");
                     lblError.setText("");
                 }
-            } else {
-                //si los caracteres se pasan del rango
-                if (pfContrasena.getText().toString().trim().length() > 255) {
+            } else {//si los caracteres se pasan del rango
+                if (pfContrasena.getText().toString().trim().length() > 255) {//si la contraseña es menor de 255
+                    //muestra el error
                     pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
+                    //pinta la linea del campo de rojo
                     pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                } else if (tfUsuario.getText().toString().trim().length() > 255) {
+                }
+                if (tfUsuario.getText().toString().trim().length() > 255) {//si el usuario es menor de 255
+                    //muestra el error
                     tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
-                    tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                } else {
-                    pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
-                    tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
-                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    //pinta la linea del campo de rojo
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }
         } else { //si no estan llenos los campos
-            if (tfUsuario.getText().toString().trim().length() == 0) {
+            if (tfUsuario.getText().toString().trim().length() == 0) {//si el usuario es igual a cero
+                //muestra el error
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
+                //pinta el campo de rojo
                 tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
-            if (pfContrasena.getText().toString().trim().length() == 0) {
+            if (pfContrasena.getText().toString().trim().length() == 0) {//si la contraseña esta vacia
+                //muestra el error del campo
                 pfContrasena.setError(this.getResources().getString(R.string.field_requiered_error));
+                //pinta el error de rojo
                 pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
         }

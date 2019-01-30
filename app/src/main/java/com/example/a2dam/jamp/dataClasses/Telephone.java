@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Telephone implements Serializable{
     private Integer id;
     private String nombre;
-    private Integer telephon;
+    private Integer telephone;
     private String description;
 
     /**
@@ -41,17 +41,17 @@ public class Telephone implements Serializable{
     }
 
     /**
-     * @return the telephon
+     * @return the telephone
      */
-    public Integer getTelephon() {
-        return telephon;
+    public Integer getTelephone() {
+        return telephone;
     }
 
     /**
-     * @param telephon the telephon to set
+     * @param telephone the telephone to set
      */
-    public void setTelephon(Integer telephon) {
-        this.telephon = telephon;
+    public void setTelephone(Integer telephone) {
+        this.telephone = telephone;
     }
 
     /**

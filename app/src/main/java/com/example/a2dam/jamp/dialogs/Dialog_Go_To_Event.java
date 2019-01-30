@@ -23,10 +23,13 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
         getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        //establece un titulo
         builder.setTitle(R.string.Dialogo_Asistir_Al_Evento_Title)
+                //establece un mensaje
                 .setMessage(R.string.Dialogo_Asistir_Al_Evento_Content)
+                //establece un boton positivo
                 .setPositiveButton(R.string.Dialogos_Ok, this)
+                //establece un boton negativo
                 .setNegativeButton(R.string.Dialogos_Cancelar,this);
 
         // Create the AlertDialog object and return it
@@ -36,12 +39,15 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
-            case BUTTON_POSITIVE:
+            case BUTTON_POSITIVE://si clica en el boton positivo
+                //crea un toast con un mensaje
                 Toast toast = Toast.makeText(getContext(),R.string.Dialogo_Asistir_Al_Evento_Toast,Toast.LENGTH_LONG);
                 toast.show();
+                //cierra el dialogo
                 this.dismiss();
                 break;
-            case BUTTON_NEGATIVE:
+            case BUTTON_NEGATIVE://si clica en el boton negativo
+                //cierra el dialogo
                 this.dismiss();
                 break;
         }
@@ -50,7 +56,7 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
     @Override
     public void onDetach() {
         super.onDetach();
-        //volver a establecer en el activity el tema por defecto
+        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
         getActivity().setTheme(R.style.AppTheme);
     }
 }

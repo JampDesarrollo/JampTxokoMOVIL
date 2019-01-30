@@ -49,7 +49,7 @@ public class AdapterTelephone extends BaseAdapter {
         TextView title = v.findViewById(R.id.textTelephoneName);
         title.setText(dir.getNombre());
         TextView description = v.findViewById(R.id.textTelephoneNum);
-        description.setText(dir.getTelephon().toString());
+        description.setText(dir.getTelephone().toString());
         return v;
     }
 }

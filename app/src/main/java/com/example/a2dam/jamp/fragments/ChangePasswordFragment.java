@@ -83,12 +83,15 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnShowActualPass: //si clica en el boton de mostrar la contraseña actual
+                //llama al metodo de mostrar contraseña y le manda los valores del campo de texto
                 actualpassboolean = showPassword(actualpass, actualpassboolean);
                 break;
             case R.id.btnShowNewPass1://si clica en el boton de mostrar la nueva contraseña 1
+                //llama al metodo de mostrar contraseña y le manda los valores del campo de texto
                 newpass1boolean=showPassword(newpass1,newpass1boolean);
                 break;
             case R.id.btnShowNewPass2://si clica en el boton de mostrar la nueva contraseña 2
+                //llama al metodo de mostrar contraseña y le manda los valores del campo de texto
                 newpass2boolean=showPassword(newpass2,newpass2boolean);
                 break;
             case R.id.btnCambiar://si pulsa en el boton de cambiar la contraseña
@@ -96,15 +99,6 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                 break;
         }
     }
-    /*public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){ //si la orientacion solicitada es vertical
-            outState.putBoolean("state", true);//ponemos un boolean state a true en el Bundle
-        }else if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {//si la orientacion solicitada es horizontal
-            outState.putBoolean("state", false);//ponemos un boolean state a false en el Bundle
-        }
-        //con esto podemos controlar arriba que layout cargara dependiendo de la orientacion de la pantalla
-    }*/
 
     private void cambiarPass() {
         if(checkPasswords()){//si el metodo checkpaddwords devuelve true

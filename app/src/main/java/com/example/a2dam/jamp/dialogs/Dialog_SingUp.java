@@ -19,8 +19,11 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
         getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //establece un titulo
         builder.setTitle(R.string.Dialogo_Registro_Title)
+                //establece un mensaje
                 .setMessage(R.string.Dialogo_Registro_Content)
+                //establece un boton positivo
                 .setPositiveButton(R.string.Dialogos_Ok, this);
         // Create the AlertDialog object and return it
         return builder.create();
@@ -29,8 +32,10 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
-            case BUTTON_POSITIVE:
+            case BUTTON_POSITIVE://si el boton es positivo
+                //cierra el dialogo
                 dialog.dismiss();
+                //cierra el activity
                 getActivity().finish();
                 break;
         }
@@ -39,7 +44,7 @@ public class Dialog_SingUp extends DialogFragment implements DialogInterface.OnC
     @Override
     public void onDetach() {
         super.onDetach();
-        //volver a establecer en el activity el tema por defecto
+        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
         getActivity().setTheme(R.style.AppTheme);
     }
 }
