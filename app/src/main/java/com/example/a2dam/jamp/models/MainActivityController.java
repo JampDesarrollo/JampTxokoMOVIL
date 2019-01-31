@@ -2,13 +2,11 @@ package com.example.a2dam.jamp.models;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -18,18 +16,13 @@ import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
-import com.example.a2dam.jamp.exceptions.UserLoginExistException;
-import com.example.a2dam.jamp.exceptions.UserNotExistException;
 import com.example.a2dam.jamp.logic.UserLogic;
-import com.example.a2dam.jamp.others.EncryptPassword;
 import com.example.a2dam.jamp.others.ILogicFactory;
 
 
@@ -40,7 +33,7 @@ import com.example.a2dam.jamp.others.ILogicFactory;
  * @author Ander
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivityController extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnInicio, btnRegistrarse;
     private EditText pfContrasena, tfUsuario;
@@ -56,22 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //establecer el tema por defecto, esto hace falta porque la aplicacion al iniciar tiene un tema diferente para la splash image
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        //si el if de abajo funciona se puede quiitar este if y el metetodo de savedinstance
-        //si el savedinstanceState es distinto de null significa que no es la primera vez que se ejecuta el onCreate, seguramente sea porque hemos girado el movil, entonces busca si dentro del saved hay una variable
-        // llamada estado, si estado es igual a true significa que el video se tiene que reproducir asique quitamos la barra de titulo para que el videoview tenga el maximo tamaño posible y vamos al etodo crearVideo.
-        /*if (savedInstanceState != null) {
-            if (savedInstanceState.getBoolean("state")) {
-                try {//intenta quitar la barra de arriba
-                    getSupportActionBar().hide();
-                }catch (NullPointerException e){//si no consigue quitar la barra se atrapa la excepcion
-                    //se muestra un mensaje en el campo de texto destinado a los errores con el servidor.
-                    lblError.setText(R.string.null_pointer_exception_error);
-                    e.printStackTrace();
-                }
-                //ejecuta el metodo crearvideo.
-                crearVideo();
-            }
-        }*/
 
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
             //quita la barra de arriba
@@ -132,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnInicio: //cuando pulse en el metodo Inicio Sesion
                 //este intent se borrara cuando este operativo
-                Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
                 startActivity(iniciarSesion);
                 //ejecuta el metodo logIn
                 //logIn();
@@ -143,9 +120,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //ejecuta el metodo animacion
                 showPassword();
                 break;
-            case R.id.btnRegistrar://cuando pulsa el boton de Registro
+            case R.id.btnRegistrar://cuando pulsa el boton de RegistroController
                 //Crea un nuevo intent que lleva a la ventana de registro
-                Intent registrar = new Intent(getApplicationContext(), Registro.class);
+                Intent registrar = new Intent(getApplicationContext(), RegistroController.class);
                 startActivity(registrar);
                 //despues de cargar la ventana de registro pone los siguientes campos de la ventana de login vacios
                 //campo del usuario
@@ -164,17 +141,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //en el outState para cuando recarge el activity carge e video en la ventana horizontal
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
-    }
-
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        /*if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
-            //crea una variable state a true en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
-            outState.putBoolean("state", true);
-        }else if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {//si la orientacion es vertical
-            //crea una variable state a false en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
-            outState.putBoolean("state", false);
-        }*/
     }
 
     private void crearVideo() {
@@ -266,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 UserBean userReturn = conectarIniciarSesion();
                 if (userReturn.getIdUser() != 0) {//si el usuario que devuelve no es null
                     //que vaya a la ventana principal
-                    Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                    Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
                     //manda el usuario completo al activity principal
                     iniciarSesion.putExtra("Usuario", userReturn);
                     //inicia el activity principal

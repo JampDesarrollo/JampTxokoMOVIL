@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.models.PrincipalActivity;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {
