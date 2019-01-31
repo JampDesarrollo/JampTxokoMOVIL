@@ -1,6 +1,5 @@
 package com.example.a2dam.jamp.fragments;
 
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,11 +21,11 @@ import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Change_Password;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.logic.UserLogic;
-import com.example.a2dam.jamp.models.PrincipalActivity;
+import com.example.a2dam.jamp.models.PrincipalActivityController;
 import com.example.a2dam.jamp.others.ILogicFactory;
 
-public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
-    private ChangePasswordFragment.OnFragmentInteractionListener mListener;
+public class ChangePasswordFragmentController extends Fragment implements View.OnClickListener {
+    private ChangePasswordFragmentController.OnFragmentInteractionListener mListener;
     private View vista;
     private EditText actualpass, newpass1,newpass2;
     private ImageButton btnShowActualpass,btnShowNewPass1,btnShowNewPass2;
@@ -34,7 +33,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     private Button btnCambiar;
     private UserBean user;
 
-    public ChangePasswordFragment() {
+    public ChangePasswordFragmentController() {
 
     }
 
@@ -50,7 +49,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         }
 
         //Establece el titulo de la barra superior
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
+        ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.nav_change_pass);
 
         //referenciar el campo de la contraseña actual
         actualpass=vista.findViewById(R.id.pfActualPassword);
@@ -74,8 +73,8 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         btnCambiar=vista.findViewById(R.id.btnCambiar);
         btnCambiar.setOnClickListener(this);
 
-        //referenciar el userBean al publicuser del PrincipalActivity para poder mandarlo a la logica con las contraseñas
-        user= PrincipalActivity.getPublicUser();
+        //referenciar el userBean al publicuser del PrincipalActivityController para poder mandarlo a la logica con las contraseñas
+        user= PrincipalActivityController.getPublicUser();
         return vista;
     }
 
@@ -123,8 +122,8 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                 FragmentTransaction fragmentTransaction;
                 fragmentManager = getFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                ProductFragment productFragment = new ProductFragment();
-                fragmentTransaction.replace(R.id.fragment, productFragment);
+                ProductFragmentController productFragmentController = new ProductFragmentController();
+                fragmentTransaction.replace(R.id.fragment, productFragmentController);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }

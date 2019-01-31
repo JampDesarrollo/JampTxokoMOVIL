@@ -29,7 +29,7 @@ import java.sql.Timestamp;
  * @version 1.0
  */
 
-public class Registro extends AppCompatActivity implements View.OnClickListener{
+public class RegistroController extends AppCompatActivity implements View.OnClickListener{
     /**
      *  pass1 User Password EditText
      *  pass2 Repetition Of The User Password
@@ -59,7 +59,7 @@ public class Registro extends AppCompatActivity implements View.OnClickListener{
     //private UserLogic ilogic;
 
     /**
-     * Method that create the Registro View
+     * Method that create the RegistroController View
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

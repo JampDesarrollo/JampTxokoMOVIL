@@ -1,13 +1,12 @@
 package com.example.a2dam.jamp.threads;
 
-import com.example.a2dam.jamp.dataClasses.Telephone;
+import com.example.a2dam.jamp.dataClasses.TelephoneBean;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
 
 import org.bson.Document;
 
@@ -15,13 +14,13 @@ import java.util.ArrayList;
 
 public class ThreadTelephone extends Thread {
     private int code;
-    private ArrayList<Telephone>telephones;
+    private ArrayList<TelephoneBean>telephones;
 
     //metodo que devuleve el array con los telefonos que hemos conseguido de la base de datos
-    public ArrayList<Telephone> getTelephones() {
+    public ArrayList<TelephoneBean> getTelephones() {
         return this.telephones;
     }
-    //metodo que inicializa el int code con el que le mandamos del TelephoneFragment
+    //metodo que inicializa el int code con el que le mandamos del TelephoneFragmentController
     public ThreadTelephone(int i){
         this.code=i;
     }
@@ -53,10 +52,10 @@ public class ThreadTelephone extends Thread {
                             //copia en el documento el contenido del cursor con los telefonos
                             documento = cursor.next();
                             //declara una variable de tipo telefono para copiar los campos del documento con los telefonos de la base de datos
-                            Telephone telephone= new Telephone();
-                            telephone.setNombre(documento.getString("name"));
+                            TelephoneBean telephone= new TelephoneBean();
+                            telephone.setName(documento.getString("name"));
                             telephone.setDescription(documento.getString("description"));
-                            telephone.setTelephone(Integer.valueOf(documento.getString("telephone")));
+                            telephone.setTelephone(documento.getString("telephone"));
 
                             //añade al array el telefonos que hemos sacado del documento
                             telephones.add(telephone);

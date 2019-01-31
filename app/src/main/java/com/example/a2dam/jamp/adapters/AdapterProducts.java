@@ -8,17 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dataClasses.Product;
-import com.example.a2dam.jamp.fragments.ProductFragment;
+import com.example.a2dam.jamp.dataClasses.ProductBean;
+import com.example.a2dam.jamp.fragments.ProductFragmentController;
 
 import java.util.ArrayList;
 
 public class AdapterProducts extends BaseAdapter {
-    protected ProductFragment activity;
-    protected ArrayList<Product> items;
+    protected ProductFragmentController activity;
+    protected ArrayList<ProductBean> items;
 
     //inicializar las variables declaradas arriba
-    public AdapterProducts(ProductFragment activity, ArrayList<Product> items) {
+    public AdapterProducts(ProductFragmentController activity, ArrayList<ProductBean> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -27,11 +27,6 @@ public class AdapterProducts extends BaseAdapter {
     @Override
     public int getCount() {
         return items.size();
-    }
-
-    //metodo para vaciar el arraylist
-    public void clear() {
-        items.clear();
     }
 
     //obtener el elemento mediante un argumento
@@ -57,12 +52,12 @@ public class AdapterProducts extends BaseAdapter {
         }
 
         //creamos una  variable de tipo producto y la  inicializamos con la posicion que le hemos mandado del array
-        Product product=items.get(position);
+        ProductBean product=items.get(position);
         //declaramos y referenciamos los textview del titulo y el precio del producto seleccionado
         TextView title=v.findViewById(R.id.textProduct_Name), price=v.findViewById(R.id.textProductPrice);
-        //en esoscampos introducimos los datos que hemos recibido del array y hemos guardado en la variable de productos
-        title.setText(product.getName().toString());
-        price.setText(product.getPrice().toString());
+        //en esos campos introducimos los datos que hemos recibido del array y hemos guardado en la variable de productos
+        title.setText(product.getName());
+        price.setText(String.valueOf(product.getPrice()));
 
         return v;
     }

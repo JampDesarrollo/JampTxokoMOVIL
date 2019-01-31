@@ -14,29 +14,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.adapters.AdapterTelephone;
-import com.example.a2dam.jamp.dataClasses.Telephone;
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.models.PrincipalActivity;
+import com.example.a2dam.jamp.dataClasses.TelephoneBean;
+import com.example.a2dam.jamp.models.PrincipalActivityController;
 import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TelephoneFragment.OnFragmentInteractionListener} interface
+ * {@link TelephoneFragmentController.OnFragmentInteractionListener} interface
  * to handle interaction events.
  */
-public class TelephoneFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class TelephoneFragmentController extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
     private EditText search;
     private ImageButton btnSearch;
     private ListView lv;
     private TextView telephoneError;
     private View view;
-    private ArrayList <Telephone> telephones;
+    private ArrayList <TelephoneBean> telephones;
 
     private OnFragmentInteractionListener mListener;
 
-    public TelephoneFragment() {
+    public TelephoneFragmentController() {
         // Required empty public constructor
     }
 
@@ -48,7 +48,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         view = inflater.inflate(R.layout.fragment_telephone, container, false);
 
         //establecer el titulo del fragment en la barra superior
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
+        ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.fragment_telephones_titulo);
 
         //referenciar y escuchar el boton de busqueda
         btnSearch=view.findViewById(R.id.btnSearchTelephone);
@@ -66,17 +66,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
         //cargamos los telefonos llamando al metodo de cargar telfonos
         cargarTelefonos();
 
-        if(telephones.isEmpty()) {//si el metodo cargar telefonos devuelve un array vacio
-            //se hace visible un mesaje de error oculto
-            telephoneError.setVisibility(View.VISIBLE);
-        }else{//si el array esta lleno
-            //crear un nuevo tipo de dato adapterevents y lo inicializamos con el mismo y el array que tenemos lleno
-            AdapterTelephone adapter = new AdapterTelephone(this, telephones);
-            //llamamos al setadapter del listview con el adapter que hemos creado antes para llenar el listview con todos los items del array
-            lv.setAdapter(adapter);
-            //definimos el onintemclick
-            lv.setOnItemClickListener(this);
-        }
+        cargarLista(telephones);
 
         return view;
     }
@@ -99,7 +89,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
                 break;
         }
     }
-    //metodo que llena un arraylist con nombres y numeros de telefonos consecutivos
+    //metodo que llena un arraylist con nombres y numeros de telefonos
     private void cargarTelefonos() {
         //esta seria la forma de llenar los telefonos mediante un hilo desde el seridor
         /*try {
@@ -117,10 +107,10 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
 
         for (int i = 0; i < 20; i++) {
             //crea un telefono
-            Telephone tel = new Telephone();
+            TelephoneBean tel = new TelephoneBean();
             //le carga los datos
-            tel.setNombre("Telepizza" + " " + i);
-            tel.setTelephone(944644465 + i);
+            tel.setName("Telepizza" + " " + i);
+            tel.setTelephone(String.valueOf(944644465 + i));
             //los mete en un array que usamos para mandarselo al adapter
             telephones.add(tel);
         }
@@ -128,15 +118,20 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
 
     private void cargarTelefonosCondicional() {
         //crea un nuevo arraylist para cargar los telefonos
-        ArrayList<Telephone> telephonesCondicional = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            //compara el nombre de un campo del array de telefonos con el texto de campo de busqueda
-            if (telephones.get(i).getNombre().trim().toLowerCase().contains(search.getText().toString().trim().toLowerCase())) {//si coinciden los campos
+        ArrayList<TelephoneBean> telephonesCondicional = new ArrayList<>();
+        for (int i = 0; i < telephones.size(); i++) {
+            //compara el nombre de un campo del array de telefonos con el texto del campo de busqueda
+            if (telephones.get(i).getName().trim().toLowerCase().contains(search.getText().toString().trim().toLowerCase())) {//si coinciden los campos
                 //si coincide mete ese telefono en otro array que se va a usar para cargar la lista
                 telephonesCondicional.add(telephones.get(i));
             }
         }
-        if(telephonesCondicional.isEmpty()){//si esta vacio
+        cargarLista(telephonesCondicional);
+
+    }
+
+    private void cargarLista(ArrayList<TelephoneBean> telephones) {
+        if(telephones.isEmpty()){//si esta vacio
             //vacia el listview
             lv.setAdapter(null);
             //hace visible el campod el error
@@ -145,7 +140,7 @@ public class TelephoneFragment extends Fragment implements View.OnClickListener,
             //oculta el campo del error por si estuviera visible
             telephoneError.setVisibility(View.INVISIBLE);
             //crear un nuevo tipo de dato adapterevents y pasamos el array
-            AdapterTelephone adapter = new AdapterTelephone(this, telephonesCondicional);
+            AdapterTelephone adapter = new AdapterTelephone(this, telephones);
             //llamamos al setadapter del listview con el adapter que hemos creado antes
             lv.setAdapter(adapter);
             //definimos el onintemclick

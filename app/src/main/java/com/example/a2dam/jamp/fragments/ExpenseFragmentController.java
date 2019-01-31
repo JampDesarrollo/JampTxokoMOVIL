@@ -16,11 +16,11 @@ import android.widget.TextView;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.logic.ExpenseLogic;
+import com.example.a2dam.jamp.models.PrincipalActivityController;
 import com.example.a2dam.jamp.others.ILogicFactory;
-import com.example.a2dam.jamp.models.PrincipalActivity;
 
 
-public class ExpenseFragment extends Fragment implements View.OnClickListener {
+public class ExpenseFragmentController extends Fragment implements View.OnClickListener {
 
     protected TextView lblAmount;
     protected AnimationDrawable coinAnimation;
@@ -40,7 +40,7 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
             view= inflater.inflate(R.layout.fragment_expense, container, false);
         }
-        ((PrincipalActivity) getActivity()).getSupportActionBar().setTitle(R.string.fragment_expense_title);
+        ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.fragment_expense_title);
 
         lblAmount = view.findViewById(R.id.cantidad);
         imgCoins=view.findViewById(R.id.coin);
@@ -73,15 +73,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
             case R.id.expenseLayout:
                 animacion();
                 break;
-        }
-    }
-
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
-            outState.putBoolean("state", true);
-        }else if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            outState.putBoolean("state", false);
         }
     }
 

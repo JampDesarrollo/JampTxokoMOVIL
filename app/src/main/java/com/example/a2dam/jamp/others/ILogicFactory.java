@@ -26,7 +26,7 @@ public class ILogicFactory {
      * Metodo que va a devolver un nuevo objeto que implementa la interfaz.
      * Method that returns the new object of the implementation
      *
-     * @return the logicImplementation
+     * @return the UserLogicController
      */
     public static UserLogic getUserLogic() {
         return new UserLogicController();
@@ -39,7 +39,12 @@ public class ILogicFactory {
     public static ProductLogic getProductLogic() {
         return new UserLogicController();
     }*/
-
+    /**
+     * Metodo que va a devolver un nuevo objeto que implementa la interfaz.
+     * Method that returns the new object of the implementation
+     *
+     * @return the ExpenselogicController
+     */
     public static ExpenseLogic getExpenseLogic(){return new ExpenseLogicController();}
 
     /*public static TelephoneLogic getTelephoneLogic() {

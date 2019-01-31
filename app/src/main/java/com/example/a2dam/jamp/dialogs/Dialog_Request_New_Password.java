@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 
-import com.example.a2dam.jamp.fragments.ProductFragment;
+import com.example.a2dam.jamp.fragments.ProductFragmentController;
 
 import com.example.a2dam.jamp.R;
 
@@ -37,8 +37,8 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
         FragmentTransaction fragmentTransaction;
         fragmentManager= getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        ProductFragment productFragment = new ProductFragment();
-        fragmentTransaction.replace(R.id.fragment, productFragment);
+        ProductFragmentController productFragmentController = new ProductFragmentController();
+        fragmentTransaction.replace(R.id.fragment, productFragmentController);
         fragmentTransaction.commit();
     }
 
