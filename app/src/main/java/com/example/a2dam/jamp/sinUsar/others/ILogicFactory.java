@@ -6,9 +6,13 @@
 package com.example.a2dam.jamp.sinUsar.others;
 
 
+import com.example.a2dam.jamp.sinUsar.logic.EventLogic;
 import com.example.a2dam.jamp.sinUsar.logic.ExpenseLogic;
+import com.example.a2dam.jamp.sinUsar.logic.ProductLogic;
 import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
+import com.example.a2dam.jamp.sinUsar.logicControllers.EventLogicController;
 import com.example.a2dam.jamp.sinUsar.logicControllers.ExpenseLogicController;
+import com.example.a2dam.jamp.sinUsar.logicControllers.ProductLogicController;
 import com.example.a2dam.jamp.sinUsar.logicControllers.UserLogicController;
 
 /**
@@ -32,13 +36,13 @@ public class ILogicFactory {
     public static UserLogic getUserLogic() {
         return new UserLogicController();
     }
-/*
+
     public static EventLogic getEventLogic() {
         return new EventLogicController();
     }
     public static ProductLogic getProductLogic() {
-        return new UserLogicController();
-    }*/
+        return new ProductLogicController();
+    }
     /**
      * Metodo que va a devolver un nuevo objeto que implementa la interfaz.
      * Method that returns the new object of the implementation
@@ -47,8 +51,5 @@ public class ILogicFactory {
      */
     public static ExpenseLogic getExpenseLogic(){return new ExpenseLogicController();}
 
-    /*public static TelephoneLogic getTelephoneLogic() {
-        return new TelephoneLogicController();
-    }*/
 
 }

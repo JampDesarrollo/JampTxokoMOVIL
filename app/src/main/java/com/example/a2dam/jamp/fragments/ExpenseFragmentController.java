@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.models.PrincipalActivityController;
-import com.example.a2dam.jamp.sinUsar.logic.ExpenseLogic;
 
 /**
  * Fragment used to diplay the user the amount to pay on the month.
@@ -43,7 +42,7 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
     /**
      * Expense Logic object.
      */
-    private ExpenseLogic ilogic;
+    //private ExpenseLogic ilogic;
     /**
      * View.
      */
@@ -51,7 +50,7 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
     /**
      * Float number of the amount.
      */
-    private Float cant=0.0f;
+    public Float cant;
 
     /**
      * On create view method for the fragment.
@@ -72,7 +71,7 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
         ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.fragment_expense_title);
 
         lblAmount = view.findViewById(R.id.cantidad);
-        lblAmount.setText("0.0");
+        lblAmount.setText(R.string.fragment_events_event_price);
         imgCoins=view.findViewById(R.id.coin);
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
         coinAnimation.run();
@@ -93,7 +92,7 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
         } catch (BusinessLogicException e) {
             e.printStackTrace();
         }*/
-        setGastos(cant);
+
         return view;
     }
 
@@ -121,14 +120,5 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
             lblAmount.animate().scaleX(1).scaleY(1).setDuration(1000);
             max=false;
         }
-    }
-
-    /**
-     * Methos for add expenses
-     * @param gastoTotal total expenses to add
-     */
-    public void setGastos(Float gastoTotal) {
-        Float gasto=gastoTotal+Float.valueOf(lblAmount.getText().toString());
-        lblAmount.setText(String.valueOf(gasto));
     }
 }

@@ -60,7 +60,6 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="150dp"
             android:fontFamily="@font/alef"
-            android:text=""
             android:textAlignment="center"
             android:textSize="36sp"
             app:layout_constraintBottom_toBottomOf="parent"

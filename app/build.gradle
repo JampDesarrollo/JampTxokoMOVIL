@@ -14,6 +14,13 @@ android {
         versionName '2.0'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    sourceSets {
+        main {
+            java{
+                exclude '**/sinUsar/*'
+           }
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -42,10 +49,10 @@ dependencies {
     implementation files('libs/mongodb-driver-core-3.9.1.jar')
     implementation files('libs/mongodb-driver-3.9.1.jar')
 
-    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
+    /*implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.4.0-b180830.0359'
     implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.28'
     implementation group: 'org.glassfish.hk2', name: 'hk2-api', version: '2.5.0'
     implementation('org.glassfish.jersey.inject:jersey-hk2:2.28@jar') {
         exclude group: 'javax.inject', module: 'javax.inject'
-    }
+    }*/
 }

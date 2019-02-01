@@ -1,16 +1,20 @@
-package com.example.a2dam.jamp.logicControllers;
+package com.example.a2dam.jamp.sinUsar.logicControllers;
 
 import com.example.a2dam.jamp.dataClasses.EventBean;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.exceptions.IdNotOkException;
 import com.example.a2dam.jamp.exceptions.NameNotOkException;
 import com.example.a2dam.jamp.rest.EventRESTClient;
-import com.example.a2dam.jamp.logic.EventLogic;
+import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.sinUsar.logic.EventLogic;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.Collection;
 import java.util.List;
+
+import javax.ws.rs.ClientErrorException;
+import javax.ws.rs.core.GenericType;
 
 public class EventLogicController implements EventLogic {
 

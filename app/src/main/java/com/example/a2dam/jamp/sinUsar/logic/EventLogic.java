@@ -1,8 +1,8 @@
-package com.example.a2dam.jamp.logic;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
+package com.example.a2dam.jamp.sinUsar.logic;
 import com.example.a2dam.jamp.exceptions.NameNotOkException;
 import com.example.a2dam.jamp.exceptions.IdNotOkException;
 import com.example.a2dam.jamp.dataClasses.EventBean;
+import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
 
 import java.util.Collection;
 

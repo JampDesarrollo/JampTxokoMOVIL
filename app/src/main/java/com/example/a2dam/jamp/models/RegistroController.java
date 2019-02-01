@@ -14,10 +14,6 @@ import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.TxokoBean;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
-import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
-import com.example.a2dam.jamp.sinUsar.others.EncryptPassword;
-import com.example.a2dam.jamp.sinUsar.others.ILogicFactory;
 
 /**
  * Class that controller register view
@@ -126,11 +122,8 @@ public class RegistroController extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnRegistrarse:
-                //este dialog se borrara cuando la aplicacion este terminada
-                DialogFragment dialogo =new Dialog_SingUp();
-                dialogo.show(getSupportFragmentManager(),"Dialog_SingUp");
                 // si le da al boton de registro, vaya al metodo para comprobar todos los campos
-                //controlarTodosLosCampos();
+                controlarTodosLosCampos();
                 break;
             case R.id.btnAtras:
                 //si se pulsa el boton de atras cierra el activity registro y vuelve al que este en la cola, en este caso el mainActivity tambien conocido como Login Page
@@ -293,8 +286,12 @@ public class RegistroController extends AppCompatActivity implements View.OnClic
             correcto=false;
         }
         if(correcto) {//si todas las comprobaciones anteriores estan bien vaya al metodo de conectar
+            //mostramos un dialogo de confirmacion de registro, esto se borra en la version con el servidor
+            DialogFragment dialogo =new Dialog_SingUp();
+            dialogo.show(getSupportFragmentManager(),"Dialog_SingUp");
+
             //va al metodo conectar que se encarga de conectar con el servidor y manda el usuario con todos los campos que hemos comprobado
-            conectar();
+            //conectar();
         }
 
     }
@@ -322,7 +319,7 @@ public class RegistroController extends AppCompatActivity implements View.OnClic
      * Method that connect to the ilogic class to connect with the database
      */
 
-    private void conectar(){
+    private void conectar(){/*
         try{
             allOk=true;
             //Crear una variable userbean para mandar al server
@@ -355,7 +352,7 @@ public class RegistroController extends AppCompatActivity implements View.OnClic
             //muestra un cuadro de dialogo Dialog_SignUp
             Dialog_SingUp dial =new Dialog_SingUp();
             dial.show(getSupportFragmentManager(),"Dialog_SingUp");
-        }
+        }*/
     }
 
     /**
