@@ -91,7 +91,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
         lblAmount.setText(Float.toString(cant) + "€");*/
-        lblAmount.setText("59.0 €");
         return view;
     }
 
@@ -105,19 +104,6 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
             case R.id.expenseLayout:
                 animacion();
                 break;
-        }
-    }
-
-    /**
-     * Landscape and portrait method.
-     * @param outState state
-     */
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
-            outState.putBoolean("state", true);
-        }else if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            outState.putBoolean("state", false);
         }
     }
 
