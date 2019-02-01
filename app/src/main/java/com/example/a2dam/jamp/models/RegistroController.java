@@ -14,9 +14,10 @@ import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.TxokoBean;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.logic.UserLogic;
-import com.example.a2dam.jamp.others.EncryptPassword;
+import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
+import com.example.a2dam.jamp.sinUsar.others.EncryptPassword;
+import com.example.a2dam.jamp.sinUsar.others.ILogicFactory;
 
 /**
  * Class that controller register view
