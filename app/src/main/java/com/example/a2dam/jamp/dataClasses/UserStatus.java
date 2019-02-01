@@ -17,5 +17,5 @@ public enum UserStatus {
     /**
      * Disabled enumeration
      */
-    DISABLED;
+    DISABLED
 }

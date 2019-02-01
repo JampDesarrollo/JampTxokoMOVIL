@@ -4,9 +4,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
@@ -21,9 +21,8 @@ import android.widget.VideoView;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
-import com.example.a2dam.jamp.exceptions.PasswordNotOkException;
-import com.example.a2dam.jamp.exceptions.UserLoginExistException;
-import com.example.a2dam.jamp.exceptions.UserNotExistException;
+import com.example.a2dam.jamp.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.logic.UserLogic;
 
 
 /**
@@ -33,7 +32,7 @@ import com.example.a2dam.jamp.exceptions.UserNotExistException;
  * @author Ander
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, Thread.UncaughtExceptionHandler {
+public class MainActivityController extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnInicio, btnRegistrarse;
     private EditText pfContrasena, tfUsuario;
@@ -46,63 +45,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //establecer el tema por defecto, esto hace falta porque la aplicacion al iniciar tiene un tema diferente para la splash image
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        //referenciar las variables de botones y botones de imagen declaradas arriba con los campos del diseño grafico y establecer el action listener de dichos botones
-        //el boton de iniciar sesio
-        btnInicio = findViewById(R.id.btnInicio);
-        btnInicio.setOnClickListener(this);
-        //el boton de registrarse
-        btnRegistrarse = findViewById(R.id.btnRegistrar);
-        btnRegistrarse.setOnClickListener(this);
-        //el boton de mostrar la contraseña
-        btnShowPass = findViewById(R.id.btnOjo);
-        btnShowPass.setOnClickListener(this);
-        //el boton del video
-        btnVideo=findViewById(R.id.btnVideo);
-        btnVideo.setOnClickListener(this);
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
+            //quita la barra de arriba
+            getSupportActionBar().hide();
+            //ejecuta el metodo crearvideo.
+            crearVideo();
+        }else {
+            //establece el layout de la ventana
+            setContentView(R.layout.activity_main);
 
-        //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color jamp (azul oscuro) en la rayas inferiores de los campos de texto
-        tfUsuario = findViewById(R.id.tfUsuario);
-        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        pfContrasena = findViewById(R.id.pfContraseña);
-        pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        lblError = findViewById(R.id.lblError);
+            //referenciar las variables de botones y botones de imagen declaradas arriba con los campos del diseño grafico y establecer el action listener de dichos botones
+            //el boton de iniciar sesio
+            btnInicio = findViewById(R.id.btnInicio);
+            btnInicio.setOnClickListener(this);
+            //el boton de registrarse
+            btnRegistrarse = findViewById(R.id.btnRegistrar);
+            btnRegistrarse.setOnClickListener(this);
+            //el boton de mostrar la contraseña
+            btnShowPass = findViewById(R.id.btnOjo);
+            btnShowPass.setOnClickListener(this);
+            //el boton del video
+            btnVideo = findViewById(R.id.btnVideo);
+            btnVideo.setOnClickListener(this);
 
-        //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
-        video=findViewById(R.id.videoView);
+            //referenciar las variables de texto declaradas arriba con los campos de texto del diseño grafico y establecer el color blanco en la rayas inferiores de los campos de texto
+            tfUsuario = findViewById(R.id.tfUsuario);
+            tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+            pfContrasena = findViewById(R.id.pfContraseña);
+            pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
+            lblError = findViewById(R.id.lblError);
 
-        //referenciar el scrollbar que contiene todos los lementos excepto el videoview
-        resto=findViewById(R.id.scrollInicio);
+            //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
+            video = findViewById(R.id.videoView);
 
-        //Inicializar todos los Booleans a false;
-        //este boolean es para saber la visibilidad del campo de la contraseña
-        bTextVisible = false;
-        //este boolean sirve para saber el estado del video
-        videoPlaying=false;
-        //este bollean sirve para saber si han saltado excepciones al conectar con el servidor
-        allOK=true;
+            //referenciar el scrollbar que contiene todos los lementos excepto el videoview
+            resto = findViewById(R.id.scrollInicio);
 
-        //inicializar la logica de la factoria
-        //ilogic = ILogicFactory.getILogic();
-
-        //si el savedinstanceState es distinto de null significa que no es la primera vez que se ejecuta el onCreate, seguramente sea porque hemos girado el movil, entonces busca si dentro del saved hay una variable
-        // llamada estado, si estado es igual a true significa que el video se tiene que reproducir asique quitamos la barra de titulo para que el videoview tenga el maximo tamaño posible y vamos al etodo crearVideo.
-        if (savedInstanceState != null) {
-            if (savedInstanceState.getBoolean("state")) {
-                try {//intenta quitar la barra de arriba
-                    getSupportActionBar().hide();
-                }catch (NullPointerException e){//si no consigue quitar la barra se atrapa la excepcion
-                    //se muestra un mensaje en el campo de texto destinado a los errores con el servidor.
-                    lblError.setText(R.string.null_pointer_exception_error);
-                    e.printStackTrace();
-                }
-                //ejecuta el metodo crearvideo.
-                crearVideo();
-            }
+            //Inicializar todos los Booleans a false;
+            //este boolean es para saber la visibilidad del campo de la contraseña
+            bTextVisible = false;
+            //este boolean sirve para saber el estado del video
+            videoPlaying = false;
+            //este bollean sirve para saber si han saltado excepciones al conectar con el servidor
+            allOK = true;
         }
+
+
     }
 
     /**
@@ -116,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnInicio: //cuando pulse en el metodo Inicio Sesion
                 //este intent se borrara cuando este operativo
-                Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
                 startActivity(iniciarSesion);
                 //ejecuta el metodo logIn
                 //logIn();
@@ -127,9 +119,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //ejecuta el metodo animacion
                 showPassword();
                 break;
-            case R.id.btnRegistrar://cuando pulsa el boton de Registro
+            case R.id.btnRegistrar://cuando pulsa el boton de RegistroController
                 //Crea un nuevo intent que lleva a la ventana de registro
-                Intent registrar = new Intent(getApplicationContext(), Registro.class);
+                Intent registrar = new Intent(getApplicationContext(), RegistroController.class);
                 startActivity(registrar);
                 //despues de cargar la ventana de registro pone los siguientes campos de la ventana de login vacios
                 //campo del usuario
@@ -147,17 +139,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //no llama al metodo crear video como seria logico sino que cambia la orientacion de la pantalla a horizontal lo que hace que directamente vaya al metodo onSavedIntanceState el cual guarda un boolean
                 //en el outState para cuando recarge el activity carge e video en la ventana horizontal
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        }
-    }
-
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
-            //crea una variable state a true en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
-            outState.putBoolean("state", true);
-        }else if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {//si la orientacion es vertical
-            //crea una variable state a false en el outState que se va a usar al recargar el activity para saber si tiene que ejecutar el video o no
-            outState.putBoolean("state", false);
         }
     }
 
@@ -209,9 +190,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void changepass() {
         if(tfUsuario.getText().toString().trim().length() < 255){//si el campo de usuario es menor de 255 (sin contar los blancos) continua probando
             if(tfUsuario.getText().toString().trim().length()>0){//si el campo de usuario en mayor de 0 (sin contar los blancos) continua a probar
-                //conectar con la base de datos
-                //conectar();
-                comprobarDatos();
+
+                if(conectarCambiarPass()){//llama al metodo que se conecta con el servidor si duelve true
+                    //carga el dialogo
+                    Dialog_Request_New_Password dialog= new Dialog_Request_New_Password();
+                    dialog.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
+                }
             }else{//si el campo esta vacio
                 //mostrar mensaje de error
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
@@ -231,32 +215,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /*private void conectar() {
-        lblError.setText("");
-        tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.colorJAMP));
-
-
-        try {
-            UserBean returnUser = null,usuario = new UserBean(tfUsuario.getText().toString(), pfContrasena.getText().toString());
-            //crear hilo
-            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
-            thread.setUncaughtExceptionHandler(this::uncaughtException);
-            //inicializar hilo
-            thread.start();
-            //esperar a que el hilo muera
-            thread.join();
-            //coger el user que he recibido
-            returnUser = thread.getUser();
-            if (allOK) {//si no han saltado excepciones muestra un cuadro de dialogo Dialog_Request_New_Password
-                //mostrar el dialogo de solicitud de la nueva contraseña
-                DialogFragment dialogo =new Dialog_Request_New_Password();
-                dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
-            }
-        } catch (InterruptedException e) {
-            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }
-    }*/
-
     /**
      * LogIn method. At the moment when the user clicks on the button Start Session
      * will come to this method and will do all the necessary checks to be able to start a session.
@@ -268,45 +226,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
-            if (maxCaracters()) {
-                UserBean userReturn = comprobarDatos();
-                //si el usuario que devuelve no es null
-                if (userReturn.getIdUser() != 0) {
+            if (maxCaracters()) {//si los campos no son superiores a 255
+                //llama al metodo ConectarIniciarSesion para conectar con el servidor
+                UserBean userReturn = conectarIniciarSesion();
+                if (userReturn.getIdUser() != 0) {//si el usuario que devuelve no es null
                     //que vaya a la ventana principal
-                    Intent iniciarSesion = new Intent(MainActivity.this, PrincipalActivity.class);
+                    Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
+                    //manda el usuario completo al activity principal
                     iniciarSesion.putExtra("Usuario", userReturn);
+                    //inicia el activity principal
                     startActivity(iniciarSesion);
-                    //pone los campos de la ventana de login vacios
+                    //vacia los campos de la ventana de login
                     tfUsuario.setText("");
                     pfContrasena.setText("");
                     lblError.setText("");
                 }
-            } else {
-                //si los caracteres se pasan del rango
-                if (pfContrasena.getText().toString().trim().length() > 255) {
+            } else {//si los caracteres se pasan del rango
+                if (pfContrasena.getText().toString().trim().length() > 255) {//si la contraseña es menor de 255
+                    //muestra el error
                     pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
+                    //pinta la linea del campo de rojo
                     pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                } else if (tfUsuario.getText().toString().trim().length() > 255) {
+                }
+                if (tfUsuario.getText().toString().trim().length() > 255) {//si el usuario es menor de 255
+                    //muestra el error
                     tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
-                    tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
-                } else {
-                    pfContrasena.setError(this.getResources().getString(R.string.max_lenght_error));
-                    tfUsuario.setError(this.getResources().getString(R.string.max_lenght_error));
-                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    //pinta la linea del campo de rojo
                     tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
             }
         } else { //si no estan llenos los campos
-            if (tfUsuario.getText().toString().trim().length() == 0) {
+            if (tfUsuario.getText().toString().trim().length() == 0) {//si el usuario es igual a cero
+                //muestra el error
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
+                //pinta el campo de rojo
                 tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
-            if (pfContrasena.getText().toString().trim().length() == 0) {
+            if (pfContrasena.getText().toString().trim().length() == 0) {//si la contraseña esta vacia
+                //muestra el error del campo
                 pfContrasena.setError(this.getResources().getString(R.string.field_requiered_error));
+                //pinta el error de rojo
                 pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
             }
         }
     }
+
+
 
     /**
      * Method to check that all fields are full.
@@ -340,66 +305,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //devolvemos el boolean
         return maxCaracteres;
     }
+    private UserBean conectarIniciarSesion() {
+        UserLogic ilogic=ILogicFactory.getUserLogic();
 
-    /**
-     * Method that checks if the user exists and if said password is with that user.
-     * In case the user is incorrect, the UserNotExistException exception jumps.
-     * If the password is incorrect, the PasswordNotOkException exception jumps.
-     * If there is an error connecting to the database, Exception will be thrown.
-     *
-     * @return Devuelve el usuario entero.
-     */
-
-    private UserBean comprobarDatos() {
         //conectar con la base de datos
         UserBean returnUser = null;
-/*
         try {
             //crear una variable userbean con todos los campos que ha metido el usuario para mandar al servidor
-            UserBean usuario = new UserBean(tfUsuario.getText().toString(), EncryptPassword.encrypt(pfContrasena.getText().toString()));
-            //crear un hilo para la implementacion de la logica
-            ThreadForSocketClient thread = new ThreadForSocketClient(usuario, ilogic, 2);
-            //recibe la excepciones que no se han controlado del hilo y las manda al metodo uncaughtException
-            thread.setUncaughtExceptionHandler(this::uncaughtException);
-            //inicializar hilo
-            thread.start();
-            //esperar al que el hilo muera
-            thread.join();
-            //coger el user que he recibido
-            returnUser = thread.getUser();
-        } catch (InterruptedException e) {
-            Toast.makeText(this, this.getResources().getString(R.string.conection_error), Toast.LENGTH_LONG).show();
-        }*/
+            returnUser=ilogic.findUserByLoginPasswMov(tfUsuario.getText().toString(),pfContrasena.getText().toString());
+        } catch (BusinessLogicException e) {
+            e.printStackTrace();
+        }
         return returnUser;
     }
 
-    /**
-     * method that catches exceptions
-     *
-     * @param t Thread
-     * @param e Throwable
-     */
-    @Override
-    public void uncaughtException(Thread t, Throwable e) {
-        if (e.getCause() instanceof UserNotExistException) {//si la excepcion atrapada es igual que la excepcion UserNotExistException
-            //muestra un mensaje de error en el campo destinado a los errores con la conxion
-            lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else if (e.getCause() instanceof PasswordNotOkException) {//si la excepcion atrapada es igual que la excepcion PasswordNotOkException
-            //muestra un mensaje de error en el campo destinado a los errores con la conxion
-            lblError.setText(this.getResources().getString(R.string.email_o_contrase_a_incorrecta));
-        } else if (e.getCause() instanceof UserLoginExistException){//si la excepcion atrapada es igual que la excepcion UserLoginExistException
-            //Proceso de mandar email
 
-            //crea un dialogo de Dialog_Request_New_Password
-            DialogFragment dialogo =new Dialog_Request_New_Password();
-            dialogo.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
-            //vacia el campo de error y lo pinta de azul
-            lblError.setText("");
-            lblError.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
-        } else{//si es alguna otra excepcion
-            //muestra el mensaje en el campo destinado a los errores con la base de datos
-            lblError.setText(this.getResources().getString(R.string.no_hay_conexion));
+    private Boolean conectarCambiarPass() {
+        UserLogic ilogic=ILogicFactory.getUserLogic();
+
+        //conectar con la base de datos
+        Boolean ok = false;
+        try {
+            //llamar al metodo forgotpassword de la logica y mandamos el usuario al servidor
+            ok=ilogic.findUserForgotPassw(tfUsuario.getText().toString());
+        } catch (BusinessLogicException e) {//si casca pilla la excepcion
+            //mostrar un error en el campo de error
+            lblError.setText(R.string.request_new_password_error);
         }
+        return ok;
     }
 
     /**

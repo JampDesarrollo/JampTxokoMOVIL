@@ -18,54 +18,29 @@ import com.example.a2dam.jamp.logic.ExpenseLogic;
 import com.example.a2dam.jamp.others.ILogicFactory;
 import com.example.a2dam.jamp.models.PrincipalActivity;
 
-/**
- * Fragment used to diplay the user the amount to pay on the month.
- * @author Ander
- */
+
 public class ExpenseFragment extends Fragment implements View.OnClickListener {
-    /**
-     * Amount textView.
-     */
+
     protected TextView lblAmount;
-    /**
-     * Animation Drawable.
-     */
     protected AnimationDrawable coinAnimation;
-    /**
-     * Imageview for the coin.
-     */
     protected ImageView imgCoins;
-    /**
-     * FrameLayout
-     */
     protected FrameLayout fLayout;
-    /**
-     * Boolean Max.
-     */
     protected Boolean max;
-    /**
-     * Expense Logic object.
-     */
     protected ExpenseLogic ilogic;
-    /**
-     * View.
-     */
     protected View view ;
-    /**
-     * Float number of the amount.
-     */
     protected Float cant;
 
-    /**
-     * On create view method for the fragment.
-     * @param inflater inf
-     * @param container cont
-     * @param savedInstanceState instance
-     * @return View
-     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        /*if (savedInstanceState != null) {
+            view= inflater.inflate(R.layout.fragment_expense_landscape, container, false);
+        }else{
+            view= inflater.inflate(R.layout.fragment_expense, container, false);
+        }*/
+
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             view= inflater.inflate(R.layout.fragment_expense_landscape, container, false);
         }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
@@ -78,26 +53,26 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
         coinAnimation.run();
 
+
         fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this);
         ilogic = ILogicFactory.getExpenseLogic();
       
         max=false;
 
-        //CODE TO GET THE TOTAL AMOUNT OF THE MONTH
-        /*try {
+
+
+        //HACERLO en otro thread?
+        try {
             cant = ilogic.findMonthExpensesSingleUser(1);
         } catch (BusinessLogicException e) {
             e.printStackTrace();
         }
-        lblAmount.setText(Float.toString(cant) + "€");*/
+        lblAmount.setText(Float.toString(cant));
         return view;
     }
 
-    /**
-     * On click method for the UI animation.
-     * @param v view
-     */
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -107,9 +82,16 @@ public class ExpenseFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    /**
-     * Method for the animation.
-     */
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            outState.putBoolean("state", true);
+        }else if(getActivity().getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            outState.putBoolean("state", false);
+        }
+    }
+
+
     private void animacion() {
         if(!max){
             lblAmount.animate().scaleX(2).scaleY(2).setDuration(1000);

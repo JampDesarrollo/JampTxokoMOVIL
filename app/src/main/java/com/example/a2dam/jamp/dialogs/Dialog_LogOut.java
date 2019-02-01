@@ -21,9 +21,11 @@ public class Dialog_LogOut extends DialogFragment implements DialogInterface.OnC
         getActivity().setTheme(R.style.Dialog_custom);
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        //establece un titulo
         builder.setTitle(R.string.Dialogo_LogOut_Title)
+                //establece un boton negativo
                 .setNegativeButton(R.string.Dialogo_LogOut_no,this)
+                //establece un boton positivo
                 .setPositiveButton(R.string.Dialogo_LogOut_yes, this);
 
         // Create the AlertDialog object and return it
@@ -33,10 +35,12 @@ public class Dialog_LogOut extends DialogFragment implements DialogInterface.OnC
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
-            case BUTTON_POSITIVE:
+            case BUTTON_POSITIVE://si el boton es positivo
+                //cierra el activity
                 getActivity().finish();
                 break;
-            case BUTTON_NEGATIVE:
+            case BUTTON_NEGATIVE://si el boton es negativo
+                //cierra el dialogo
                 this.dismiss();
         }
     }
@@ -44,7 +48,7 @@ public class Dialog_LogOut extends DialogFragment implements DialogInterface.OnC
     @Override
     public void onDetach() {
         super.onDetach();
-        //volver a establecer en el activity el tema por defecto
+        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
         getActivity().setTheme(R.style.AppTheme);
     }
 }

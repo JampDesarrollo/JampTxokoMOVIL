@@ -22,8 +22,11 @@ public class Dialog_Change_Password extends DialogFragment implements DialogInte
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        //establece un titulo
         builder.setTitle(R.string.Dialogo_Cambio_Contraseña_Title)
+                //establece un mensaje
                 .setMessage(R.string.Dialogo_Cambio_Contraseña_Content)
+                //establece un boton positivo
                 .setPositiveButton(R.string.Dialogos_Ok, this);
 
         // Create the AlertDialog object and return it
@@ -33,7 +36,8 @@ public class Dialog_Change_Password extends DialogFragment implements DialogInte
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
-            case BUTTON_POSITIVE:
+            case BUTTON_POSITIVE://si clica en el boton positivo
+                //cierra el dialogo
                 dialog.dismiss();
                 break;
         }
@@ -42,7 +46,7 @@ public class Dialog_Change_Password extends DialogFragment implements DialogInte
     @Override
     public void onDetach() {
         super.onDetach();
-        //volver a establecer en el activity el tema por defecto
+        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
         getActivity().setTheme(R.style.AppTheme);
     }
 }

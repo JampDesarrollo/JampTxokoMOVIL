@@ -15,39 +15,49 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_LogOut;
-import com.example.a2dam.jamp.fragments.ChangePasswordFragment;
-import com.example.a2dam.jamp.fragments.EventFragment;
-import com.example.a2dam.jamp.fragments.ExpenseFragment;
-import com.example.a2dam.jamp.fragments.ProductFragment;
-import com.example.a2dam.jamp.fragments.TelephoneFragment;
+import com.example.a2dam.jamp.fragments.ChangePasswordFragmentController;
+import com.example.a2dam.jamp.fragments.EventFragmentController;
+import com.example.a2dam.jamp.fragments.ExpenseFragmentController;
+import com.example.a2dam.jamp.fragments.ProductFragmentController;
+import com.example.a2dam.jamp.fragments.TelephoneFragmentController;
+
+import java.text.SimpleDateFormat;
 
 /**
- * Class that controller PrincipalActivity
+ * Class that controller PrincipalActivityController
  * @author Julen
  */
-public class PrincipalActivity extends AppCompatActivity
+public class PrincipalActivityController extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     /**
      * Full name TextView
      */
-    TextView tfFullName;
+    private TextView tfFullName;
+
     /**
      * Login TextView
      */
-    TextView tfLogin;
+    private TextView tfLogin;
+
     /**
      * LastAcces TextView
      */
-    TextView tfLastAcces;
+    private TextView tfLastAcces;
 
-    DrawerLayout drawerLayout;
+    private DrawerLayout drawerLayout;
 
     private NavigationView navigationView;
 
+    public static UserBean publicUser;
+    public static UserBean getPublicUser() {
+        return publicUser;
+    }
     /**
      * Method that create Principal Activity
      *
@@ -76,12 +86,15 @@ public class PrincipalActivity extends AppCompatActivity
         tfFullName = hView.findViewById(R.id.tfFullName);
         tfLogin = hView.findViewById(R.id.tfLogin);
         tfLastAcces = hView.findViewById(R.id.tfLastConnection);
-/*
-        UserBean user = (UserBean) getIntent().getExtras().getSerializable("Usuario");
-        String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(user.getLastAccess());
-        tfFullName.setText(user.getFullname());
-        tfLogin.setText(user.getLogin());
-        tfLastAcces.setText("Ultimo acceso: " + date);*/
+        try {
+            publicUser = (UserBean) getIntent().getExtras().getSerializable("Usuario");
+            tfFullName.setText(publicUser.getFullname());
+            tfLogin.setText(publicUser.getLogin());
+            String date = new SimpleDateFormat("HH:mm dd/MM/yyyy").format(publicUser.getLastAccess());
+            tfLastAcces.setText("Ultimo acceso: " + date);
+        }catch (NullPointerException e){
+            Toast.makeText(this,this.getResources().getString(R.string.null_pointer_exception_error), Toast.LENGTH_LONG).show();
+        }
 
 //        setupNavigationDrawerContent(navigationView);
 
@@ -97,7 +110,7 @@ public class PrincipalActivity extends AppCompatActivity
 
     /**
      * Method to close the nav header if is opened and
-     * close the PrincipalActivity if nav_header is closed with back button
+     * close the PrincipalActivityController if nav_header is closed with back button
      */
     @Override
     public void onBackPressed() {
@@ -113,15 +126,15 @@ public class PrincipalActivity extends AppCompatActivity
             if(manager.getBackStackEntryCount() > 1) {
                 super.onBackPressed();
                 Fragment currentFragment =manager.findFragmentById(R.id.fragment);
-                if(currentFragment instanceof ProductFragment){
+                if(currentFragment instanceof ProductFragmentController){
                     navigationView.getMenu().getItem(0).setChecked(true);
-                }else if(currentFragment instanceof EventFragment){
+                }else if(currentFragment instanceof EventFragmentController){
                     navigationView.getMenu().getItem(1).setChecked(true);
-                }else if(currentFragment instanceof TelephoneFragment){
+                }else if(currentFragment instanceof TelephoneFragmentController){
                     navigationView.getMenu().getItem(2).setChecked(true);
-                }else if(currentFragment instanceof ExpenseFragment){
+                }else if(currentFragment instanceof ExpenseFragmentController){
                     navigationView.getMenu().getItem(3).setChecked(true);
-                }else if(currentFragment instanceof ChangePasswordFragment){
+                }else if(currentFragment instanceof ChangePasswordFragmentController){
                     navigationView.getMenu().getItem(4).setChecked(true);
                 }
             }
@@ -129,7 +142,7 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     /**
-     * Method that create menuOptions in PrincipalActivity
+     * Method that create menuOptions in PrincipalActivityController
      *
      * @param menu
      * @return
@@ -142,7 +155,7 @@ public class PrincipalActivity extends AppCompatActivity
     }
 
     /**
-     * Method that logOut and close PrincipalActivity
+     * Method that logOut and close PrincipalActivityController
      *
      * @param item
      * @return
@@ -193,24 +206,24 @@ public class PrincipalActivity extends AppCompatActivity
         fragmentTransaction = fragmentManager.beginTransaction();
         switch (position) {
             case 0:
-                ProductFragment productFragment = new ProductFragment();
-                fragmentTransaction.replace(R.id.fragment, productFragment);
+                ProductFragmentController productFragmentController = new ProductFragmentController();
+                fragmentTransaction.replace(R.id.fragment, productFragmentController);
                 break;
             case 1:
-                EventFragment eventFragment = new EventFragment();
-                fragmentTransaction.replace(R.id.fragment, eventFragment);
+                EventFragmentController eventFragmentController = new EventFragmentController();
+                fragmentTransaction.replace(R.id.fragment, eventFragmentController);
                 break;
             case 2:
-                TelephoneFragment telephonFragment = new TelephoneFragment();
+                TelephoneFragmentController telephonFragment = new TelephoneFragmentController();
                 fragmentTransaction.replace(R.id.fragment, telephonFragment);
                 break;
             case 3:
-                ExpenseFragment expenseFragment = new ExpenseFragment();
-                fragmentTransaction.replace(R.id.fragment, expenseFragment);
+                ExpenseFragmentController expenseFragmentController = new ExpenseFragmentController();
+                fragmentTransaction.replace(R.id.fragment, expenseFragmentController);
                 break;
             case 4:
-                ChangePasswordFragment changePasswordFragment = new ChangePasswordFragment();
-                fragmentTransaction.replace(R.id.fragment, changePasswordFragment);
+                ChangePasswordFragmentController changePasswordFragmentController = new ChangePasswordFragmentController();
+                fragmentTransaction.replace(R.id.fragment, changePasswordFragmentController);
                 break;
         }
         //Hace que los fragment se añadan a la cola de ejecucion (es para cuando cliquemos el boton de atras no te cierre el activity y te muestre el de login sino que te vaya al anterior fragment)
