@@ -21,8 +21,9 @@ import android.widget.VideoView;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.logic.UserLogic;
+import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
+import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
+import com.example.a2dam.jamp.sinUsar.others.ILogicFactory;
 
 
 /**
@@ -41,7 +42,7 @@ public class MainActivityController extends AppCompatActivity implements View.On
     private Boolean bTextVisible,videoPlaying,allOK;
     private VideoView video;
     private ScrollView resto;
-    //private UserLogic ilogic;
+    private UserLogic ilogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

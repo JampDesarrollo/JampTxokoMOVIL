@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.a2dam.jamp.others;
+package com.example.a2dam.jamp.sinUsar.others;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

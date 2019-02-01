@@ -126,6 +126,10 @@
   
     //Recursos
     <string name="country_coin">€</string>
+    <string name="mongo_ip">192.168.0.15</string>
+    <string name="mongo_port">27017</string>
+    <string name="mongo_db">jamp</string>
+    <string name="mongo_collection">telephones</string>
 
 
 </resources>

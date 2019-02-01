@@ -1,8 +1,6 @@
-package com.example.a2dam.jamp.threads;
+package com.example.a2dam.jamp.sinUsar.threads;
 
-import android.util.Log;
-import android.view.View;
-
+import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.TelephoneBean;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -40,9 +38,10 @@ public class ThreadTelephone extends Thread {
                 try {
                     telephones = new ArrayList<>();
                     //se conecta al servidor mongo
-                    MongoClient mongoclient = MongoClients.create("mongodb://192.168.21.8:27017/jamp");
-                    MongoDatabase mongoDB = mongoclient.getDatabase("jamp");
-                    MongoCollection<Document> collection = mongoDB.getCollection("telephones");
+                    String mongo="mongodb://"+ R.string.mongo_ip+":"+R.string.mongo_port+"/"+R.string.mongo_db;
+                    MongoClient mongoclient = MongoClients.create(mongo);
+                    MongoDatabase mongoDB = mongoclient.getDatabase(String.valueOf(R.string.mongo_db));
+                    MongoCollection<Document> collection = mongoDB.getCollection(String.valueOf(R.string.mongo_collection));
 
                     //busca todos los campos en la coleccion y los mete en un cursor
                     FindIterable<Document> fi;
