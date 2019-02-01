@@ -9,17 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.TxokoBean;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_SingUp;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.exceptions.UserLoginExistException;
 import com.example.a2dam.jamp.logic.UserLogic;
 import com.example.a2dam.jamp.others.EncryptPassword;
-import com.example.a2dam.jamp.others.ILogicFactory;
-import java.sql.Timestamp;
 
 /**
  * Class that controller register view

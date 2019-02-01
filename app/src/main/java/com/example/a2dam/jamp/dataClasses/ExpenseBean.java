@@ -6,15 +6,11 @@
 package com.example.a2dam.jamp.dataClasses;
 
 import java.io.Serializable;
-import java.util.Date;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author WIN10
  */
-@XmlRootElement(name = "expense")
 public class ExpenseBean implements Serializable {
 
     private Integer idExpense;
@@ -110,7 +106,6 @@ public class ExpenseBean implements Serializable {
     /**
      * @return the date
      */
-    @XmlElement(name = "dateExpense")
     public String getDate() {
         return this.date;
     }

@@ -23,7 +23,6 @@ import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
 import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.logic.UserLogic;
-import com.example.a2dam.jamp.others.ILogicFactory;
 
 
 /**

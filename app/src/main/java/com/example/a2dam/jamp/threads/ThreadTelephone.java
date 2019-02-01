@@ -1,5 +1,8 @@
 package com.example.a2dam.jamp.threads;
 
+import android.util.Log;
+import android.view.View;
+
 import com.example.a2dam.jamp.dataClasses.TelephoneBean;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -13,28 +16,31 @@ import org.bson.Document;
 import java.util.ArrayList;
 
 public class ThreadTelephone extends Thread {
+    private ArrayList<TelephoneBean> telephones;
     private int code;
-    private ArrayList<TelephoneBean>telephones;
 
-    //metodo que devuleve el array con los telefonos que hemos conseguido de la base de datos
-    public ArrayList<TelephoneBean> getTelephones() {
-        return this.telephones;
+    public ArrayList<TelephoneBean> getTelephones(){
+        return telephones;
     }
-    //metodo que inicializa el int code con el que le mandamos del TelephoneFragmentController
-    public ThreadTelephone(int i){
+
+    public ThreadTelephone(ArrayList<TelephoneBean> receivedTelephones, int i){
+        this.telephones=receivedTelephones;
         this.code=i;
     }
+
+
 
     /**
      * Method that start the thread
      */
     @Override
     public void run() {
-        switch (code){
-            case 1://si le hemos mandado el numero 1
+       switch (code){
+            case 1:
                 try {
+                    telephones = new ArrayList<>();
                     //se conecta al servidor mongo
-                    MongoClient mongoclient = MongoClients.create("mongodb://192.168.21.38:27017/jamp");
+                    MongoClient mongoclient = MongoClients.create("mongodb://192.168.21.8:27017/jamp");
                     MongoDatabase mongoDB = mongoclient.getDatabase("jamp");
                     MongoCollection<Document> collection = mongoDB.getCollection("telephones");
 
@@ -64,8 +70,7 @@ public class ThreadTelephone extends Thread {
                         //cierra el cursor
                         cursor.close();
                     }
-                }catch (Exception e){//si casca
-                    // tira una RuntimeException con el nombre de la excepcion que ha habido
+                }catch (Exception e){
                     throw new RuntimeException(e);
                 }
                 break;

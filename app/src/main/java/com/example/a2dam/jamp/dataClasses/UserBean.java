@@ -7,7 +7,6 @@ package com.example.a2dam.jamp.dataClasses;
 
 import java.io.Serializable;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Data Transfer Object used in UI and client side for representing User entity.
@@ -15,7 +14,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Ander
  */
-@XmlRootElement(name = "user")
 public class UserBean implements Serializable {
 
     private ExpenseBean expenses;

@@ -54,7 +54,6 @@
     <string name="fragment_products_price">0,50</string>
     <string name="fragment_products_product_toast">Se han encontrado los siguientes productos</string>
 
-
     //Events
     <string name="fragment_events_title">Eventos</string>
     <string name="fragment_events_search_event">Introduce el evento a buscar</string>
@@ -67,7 +66,6 @@
 
     //expense
     <string name="fragment_expense_title">Gastos</string>
-    <string name="fragment_expense_cantidad">Cantidad</string>
     <string name="fragment_expense_coin_sprite">Coin sprite</string>
     <string name="fragment_expense_month_expenses">Gastos este mes:</string>
 
@@ -120,7 +118,7 @@
     <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
-    <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception...</string>
+    <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception</string>
     <string name="telephone_search_error">No Se Han Encontrado Telefonos</string>
     <string name="product_search_error">No Se Han Encontrado Productos</string>
     <string name="event_search_error">No Se Han Encontrado Eventos</string>

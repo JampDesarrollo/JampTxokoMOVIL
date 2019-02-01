@@ -10,11 +10,18 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.fragments.ExpenseFragmentController;
 
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class Dialog_Go_To_Event extends DialogFragment implements DialogInterface.OnClickListener {
+
+    private Float gasto;
+
+    public Dialog_Go_To_Event(Bundle datosProducto) {
+        gasto=datosProducto.getFloat("precio");
+    }
 
     @NonNull
     @Override
@@ -40,6 +47,7 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
     public void onClick(DialogInterface dialog, int which) {
         switch (which){
             case BUTTON_POSITIVE://si clica en el boton positivo
+                anadirGasto();
                 //crea un toast con un mensaje
                 Toast toast = Toast.makeText(getContext(),R.string.Dialogo_Asistir_Al_Evento_Toast,Toast.LENGTH_LONG);
                 toast.show();
@@ -51,6 +59,14 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
                 this.dismiss();
                 break;
         }
+    }
+
+    private void anadirGasto() {
+        ExpenseFragmentController expense = new ExpenseFragmentController();
+        expense.setGastos(gasto);
+        //cierra el "dialogo"
+        getFragmentManager().beginTransaction().remove(this).commit();
+
     }
 
     @Override

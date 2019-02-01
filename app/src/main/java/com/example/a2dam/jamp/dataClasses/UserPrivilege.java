@@ -17,5 +17,5 @@ public enum UserPrivilege {
     /**
      * Admin privilege
      */
-    ADMIN;
+    ADMIN
 }

@@ -11,43 +11,25 @@
 package com.example.a2dam.jamp.dataClasses;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
  * @author Usuario
  */
-@XmlRootElement(name = "event")
 public class EventBean implements Serializable {
 
   private Integer idEvent;
-  private SimpleStringProperty description;
-  private SimpleStringProperty price;
-  private SimpleStringProperty name;
-  private SimpleStringProperty img;
-  private SimpleStringProperty date;
+  private String description;
+  private String price;
+  private String name;
+  private String img;
+  private String date;
   private List<TxokoBean> txokos;
   private List<UserBean> users;
 
   public EventBean() {
-    this.idEvent = idEvent;
-    this.description = new SimpleStringProperty();
-    this.price = new SimpleStringProperty();
-    this.name = new SimpleStringProperty();
-    this.img = new SimpleStringProperty();
-    this.date = new SimpleStringProperty();
-    this.txokos = txokos;
-    this.users = users;
   }
 
   public EventBean(String name,
@@ -55,66 +37,66 @@ public class EventBean implements Serializable {
                    String date,
                    String img,
                    String price) {
-    this.name = new SimpleStringProperty(name);
-    this.description = new SimpleStringProperty(description);
-    this.date = new SimpleStringProperty(date);
-    this.img = new SimpleStringProperty(img);
-    this.price = new SimpleStringProperty(price);
+    this.name = name;
+    this.description = description;
+    this.date = date;
+    this.img = img;
+    this.price = price;
   }
   /**
    * @return the description
    */
   public String getDescription() {
-    return this.description.get();
+    return this.description;
   }
 
   /**
    * @param description the description to set
    */
   public void setDescription(String description) {
-    this.description.set(description);
+    this.description=description;
   }
 
   /**
    * @return the price
    */
   public String getPrice() {
-    return this.price.get();
+    return this.price;
   }
 
   /**
    * @param price the price to set
    */
   public void setPrice(String price) {
-    this.price.set(price);
+    this.price=price;
   }
 
   /**
    * @return the name
    */
   public String getName() {
-    return this.name.get();
+    return this.name;
   }
 
   /**
    * @param name the name to set
    */
   public void setName(String name) {
-    this.name.set(name);
+    this.name=name;
   }
 
   /**
    * @return the img
    */
   public String getImg() {
-    return this.img.get();
+    return this.img;
   }
 
   /**
    * @param img the img to set
    */
   public void setImg(String img) {
-    this.img.set(img);
+    this.img=img;
   }
 
   /**
@@ -170,13 +152,13 @@ public class EventBean implements Serializable {
    * @return the date
    */
   public String getDate() {
-    return this.date.get();
+    return this.date;
   }
 
   /**
    * @param date the date to set
    */
   public void setDate(String date) {
-    this.date.set(date);
+    this.date=date;
   }
 }
