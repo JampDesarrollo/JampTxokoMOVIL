@@ -26,7 +26,7 @@ public class ExpenseRESTCli {
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://192.168.20.99:8080/JampServerSide/webresources";
+    private static final String BASE_URI = "http://192.168.20.128:8080/JampServerSide/webresources";
      /**
      * Construct a ExpenseRESTClient. It creates a RESTful web client and
      * establishes the path of the WebTarget object associated to the client.
