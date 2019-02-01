@@ -63,6 +63,7 @@ public class PrincipalActivityController extends AppCompatActivity
      *
      * @param savedInstanceState
      */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,10 +83,14 @@ public class PrincipalActivityController extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         View hView = navigationView.getHeaderView(0);
 
-
         tfFullName = hView.findViewById(R.id.tfFullName);
         tfLogin = hView.findViewById(R.id.tfLogin);
         tfLastAcces = hView.findViewById(R.id.tfLastConnection);
+
+        //estas dos lineas se borran en la version con servidor
+        MainActivityController main=new MainActivityController();
+        tfLogin.setText(main.getUsuario());
+        /*
         try {
             publicUser = (UserBean) getIntent().getExtras().getSerializable("Usuario");
             tfFullName.setText(publicUser.getFullname());
@@ -94,9 +99,7 @@ public class PrincipalActivityController extends AppCompatActivity
             tfLastAcces.setText("Ultimo acceso: " + date);
         }catch (NullPointerException e){
             Toast.makeText(this,this.getResources().getString(R.string.null_pointer_exception_error), Toast.LENGTH_LONG).show();
-        }
-
-//        setupNavigationDrawerContent(navigationView);
+        }*/
 
         /*si el savedInstanceState es igual a null significa que es la primera vez que se carga la actividad entonces llama al metodo setFragment() y le manda el fragmento que queremos que se muestre, en este caso
         es la actividad de productos (la 0), si es distinto de null significa que la actividad ya estaba cargada y no queremos que nos vuelva a cargar el fragment de productos sino que queremos quedarnos en el
@@ -105,6 +108,7 @@ public class PrincipalActivityController extends AppCompatActivity
             setFragment(0);
             navigationView.getMenu().getItem(0).setChecked(true);
         }
+
     }
 
 

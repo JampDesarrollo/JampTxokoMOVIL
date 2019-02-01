@@ -17,12 +17,6 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 
 public class Dialog_Go_To_Event extends DialogFragment implements DialogInterface.OnClickListener {
 
-    private Float gasto;
-
-    public Dialog_Go_To_Event(Bundle datosProducto) {
-        gasto=datosProducto.getFloat("precio");
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -48,11 +42,6 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
         switch (which){
             case BUTTON_POSITIVE://si clica en el boton positivo
                 anadirGasto();
-                //crea un toast con un mensaje
-                Toast toast = Toast.makeText(getContext(),R.string.Dialogo_Asistir_Al_Evento_Toast,Toast.LENGTH_LONG);
-                toast.show();
-                //cierra el dialogo
-                this.dismiss();
                 break;
             case BUTTON_NEGATIVE://si clica en el boton negativo
                 //cierra el dialogo
@@ -62,10 +51,11 @@ public class Dialog_Go_To_Event extends DialogFragment implements DialogInterfac
     }
 
     private void anadirGasto() {
-        ExpenseFragmentController expense = new ExpenseFragmentController();
-        expense.setGastos(gasto);
-        //cierra el "dialogo"
-        getFragmentManager().beginTransaction().remove(this).commit();
+        //cierra el dialogo
+        this.dismiss();
+        //crea un toast con un mensaje
+        Toast toast = Toast.makeText(getContext(),R.string.Dialogo_Asistir_Al_Evento_Toast,Toast.LENGTH_LONG);
+        toast.show();
 
     }
 

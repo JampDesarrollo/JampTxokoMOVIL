@@ -4,8 +4,8 @@
     <string name="title_activity_principal">Menu Principal</string>
     <string name="navigation_drawer_open">Abrir el menú</string>
     <string name="navigation_drawer_close">Cerrar el menú</string>
-    <string name="nav_header_title">Julen</string>
-    <string name="nav_header_subtitle">Julen Zarate</string>
+    <string name="nav_header_title">Jamp</string>
+    <string name="nav_header_subtitle">Jamp Desarrollo</string>
 
     //SignUp Page
     <string name="registro_Login">Nombre Usuario</string>
@@ -31,7 +31,7 @@
     <string name="tutorial_Button">Boton del tutorial</string>
 
     //Navigation Drawer
-    <string name="last_connection">Ultima Conexion: 10/01/1988</string>
+    <string name="last_connection">Ultima Conexion: 05/02/2019</string>
     <string name="action_logOut">Cerrar Sesion</string>
     <string name="nav_outgoings">Gastos</string>
     <string name="nav_products">Productos</string>
@@ -123,6 +123,8 @@
     <string name="product_search_error">No Se Han Encontrado Productos</string>
     <string name="event_search_error">No Se Han Encontrado Eventos</string>
     <string name="request_new_password_error">No se ha podido cambiar la contraseña, por favor, compruebe su conexión</string>
+    <string name="userNotOk_Error">Usuario Incorrecto</string>
+    <string name="passNotOk_Error">Contraseña Incorrecta</string>
   
     //Recursos
     <string name="country_coin">€</string>

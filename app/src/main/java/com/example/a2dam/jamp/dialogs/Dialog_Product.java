@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.fragments.ExpenseFragmentController;
+import com.example.a2dam.jamp.models.PrincipalActivityController;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {
@@ -70,12 +71,6 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
                 minus();
                 break;
             case R.id.btnOk://si clicamos en ok
-                //creamos un string con el texto que vamos a mostrar en el toast
-                String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + textCount.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + productName.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
-                //creamos el toast con el texto
-                Toast toast = Toast.makeText(getContext(),toasttext,Toast.LENGTH_LONG);
-                //muestra el toast
-                toast.show();
                 //llama al metodo añadir productos
                 anadirProductos();
                 break;
@@ -114,10 +109,13 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
     }
 
     private void anadirProductos() {
-        Float gastoTotal= Float.valueOf(price*count);
-        ExpenseFragmentController expense = new ExpenseFragmentController();
-        expense.setGastos(gastoTotal);
         //cierra el "dialogo"
         getFragmentManager().beginTransaction().remove(this).commit();
+        //creamos un string con el texto que vamos a mostrar en el toast
+        String toasttext=this.getResources().getString(R.string.Dialogo_Productos_Toast_1) + " " + textCount.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_2) + " " + productName.getText().toString() + " " + this.getResources().getString(R.string.Dialogo_Productos_Toast_3);
+        //creamos el toast con el texto
+        Toast toast = Toast.makeText(getContext(),toasttext,Toast.LENGTH_LONG);
+        //muestra el toast
+        toast.show();
     }
 }

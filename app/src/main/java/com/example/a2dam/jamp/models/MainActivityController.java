@@ -17,13 +17,8 @@ import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Request_New_Password;
-import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
-import com.example.a2dam.jamp.sinUsar.others.ILogicFactory;
 
 
 /**
@@ -42,7 +37,12 @@ public class MainActivityController extends AppCompatActivity implements View.On
     private Boolean bTextVisible,videoPlaying,allOK;
     private VideoView video;
     private ScrollView resto;
-    private UserLogic ilogic;
+
+    //creamos un usuario y una contraseña para manejar en el programa con sus respectivos getter and setter (debajo de todos los metodos), estas variables no se deberian usar en la aplicacion que se conecta al servidor
+    public String usuario="jamp",pass="Jamp12345";
+
+
+    //private UserLogic ilogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,11 +108,8 @@ public class MainActivityController extends AppCompatActivity implements View.On
         //en el momento que pulsa un boton se ejecuta este metodo y comprueba que boton se a mostrado
         switch (v.getId()) {
             case R.id.btnInicio: //cuando pulse en el metodo Inicio Sesion
-                //este intent se borrara cuando este operativo
-                Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
-                startActivity(iniciarSesion);
                 //ejecuta el metodo logIn
-                //logIn();
+                logIn();
                 break;
             case R.id.btnOjo: //cuando pulse el boton del ojo
                 //ejecuta el metodo animacion
@@ -191,12 +188,14 @@ public class MainActivityController extends AppCompatActivity implements View.On
     private void changepass() {
         if(tfUsuario.getText().toString().trim().length() < 255){//si el campo de usuario es menor de 255 (sin contar los blancos) continua probando
             if(tfUsuario.getText().toString().trim().length()>0){//si el campo de usuario en mayor de 0 (sin contar los blancos) continua a probar
-
-                if(conectarCambiarPass()){//llama al metodo que se conecta con el servidor si duelve true
+                if(tfUsuario.getText().toString().equals(usuario)){
+                    pass="Jamp12345";
+                }
+                /*if(conectarCambiarPass()){//llama al metodo que se conecta con el servidor si duelve true
                     //carga el dialogo
                     Dialog_Request_New_Password dialog= new Dialog_Request_New_Password();
                     dialog.show(getSupportFragmentManager(),"Dialog_Request_New_Password");
-                }
+                }*/
             }else{//si el campo esta vacio
                 //mostrar mensaje de error
                 tfUsuario.setError(this.getResources().getString(R.string.field_requiered_error));
@@ -228,8 +227,22 @@ public class MainActivityController extends AppCompatActivity implements View.On
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
             if (maxCaracters()) {//si los campos no son superiores a 255
+                if(tfUsuario.getText().toString().equals(usuario)){
+                    if (pfContrasena.getText().toString().equals(pass)) {
+                        Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
+                        startActivity(iniciarSesion);
+                        //vacia los campos de la ventana de login
+                        tfUsuario.setText("");
+                        pfContrasena.setText("");
+                        lblError.setText("");
+                    }else {
+                        lblError.setText(R.string.passNotOk_Error);
+                    }
+                }else{
+                    lblError.setText(R.string.userNotOk_Error);
+                }
                 //llama al metodo ConectarIniciarSesion para conectar con el servidor
-                UserBean userReturn = conectarIniciarSesion();
+                /*UserBean userReturn = conectarIniciarSesion();
                 if (userReturn.getIdUser() != 0) {//si el usuario que devuelve no es null
                     //que vaya a la ventana principal
                     Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
@@ -241,7 +254,7 @@ public class MainActivityController extends AppCompatActivity implements View.On
                     tfUsuario.setText("");
                     pfContrasena.setText("");
                     lblError.setText("");
-                }
+                }*/
             } else {//si los caracteres se pasan del rango
                 if (pfContrasena.getText().toString().trim().length() > 255) {//si la contraseña es menor de 255
                     //muestra el error
@@ -306,6 +319,7 @@ public class MainActivityController extends AppCompatActivity implements View.On
         //devolvemos el boolean
         return maxCaracteres;
     }
+    /*
     private UserBean conectarIniciarSesion() {
         UserLogic ilogic=ILogicFactory.getUserLogic();
 
@@ -318,21 +332,23 @@ public class MainActivityController extends AppCompatActivity implements View.On
             e.printStackTrace();
         }
         return returnUser;
-    }
+    }*/
 
 
     private Boolean conectarCambiarPass() {
+        Boolean ok = true;
+        /*
         UserLogic ilogic=ILogicFactory.getUserLogic();
 
         //conectar con la base de datos
-        Boolean ok = false;
+
         try {
             //llamar al metodo forgotpassword de la logica y mandamos el usuario al servidor
             ok=ilogic.findUserForgotPassw(tfUsuario.getText().toString());
         } catch (BusinessLogicException e) {//si casca pilla la excepcion
             //mostrar un error en el campo de error
             lblError.setText(R.string.request_new_password_error);
-        }
+        }*/
         return ok;
     }
 
@@ -351,5 +367,21 @@ public class MainActivityController extends AppCompatActivity implements View.On
             //pone a variable bTextVisible a true porque se estan mostrando las contraseñas
             bTextVisible = true;
         }
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 }

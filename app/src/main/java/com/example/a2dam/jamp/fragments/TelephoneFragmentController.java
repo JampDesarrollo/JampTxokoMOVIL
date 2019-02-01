@@ -57,7 +57,7 @@ public class TelephoneFragmentController extends Fragment implements View.OnClic
         //referenciar el campo de texto de busqueda
         search=view.findViewById(R.id.tfSearchTelephoneName);
 
-        //referenciar el listview
+        //referenciar el campo de error
         telephoneError= view.findViewById(R.id.lblSearchTelephoneError);
 
         //referenciar el list view
@@ -80,7 +80,7 @@ public class TelephoneFragmentController extends Fragment implements View.OnClic
                 if(search.getText().toString().trim().isEmpty()){//si el campo esta vacio
                     // muestra el error del campo requerido
                     search.setError(this.getResources().getString(R.string.field_requiered_error));
-                    //pinta la linea inferior del campo de busqueda de rojo
+
                     search.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }else{//si el campo esta lleno
                     //llamamos al metodo de cargar los datos con la condicional del campo de busqueda
@@ -91,7 +91,7 @@ public class TelephoneFragmentController extends Fragment implements View.OnClic
     }
     //metodo que llena un arraylist con nombres y numeros de telefonos
     private void cargarTelefonos() {
-        //esta seria la forma de llenar los telefonos mediante un hilo desde el seridor
+        //esta seria la forma de llenar los telefonos mediante un hilo desde el servidor
         /*try {
             ThreadTelephone thread =new ThreadTelephone(1);
             //inicializar hilo
@@ -104,7 +104,7 @@ public class TelephoneFragmentController extends Fragment implements View.OnClic
             e.printStackTrace();
         }*/
 
-
+        telephones=new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             //crea un telefono
             TelephoneBean tel = new TelephoneBean();
