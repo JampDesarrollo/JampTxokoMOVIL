@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.fragments.ExpenseFragmentController;
 
 @SuppressLint("ValidFragment")
 public class Dialog_Product extends Fragment implements View.OnClickListener {
     private Button btnPlus,btnMinus,btnOk,btnCancelar;
     protected EditText textCount;
-    protected Integer count;
+    protected Integer count,price;
     protected TextView productName, productDescription;
 
     @Override
@@ -32,6 +33,8 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
         //llena los textos con los datos que le pasamos
         productName.setText(this.getArguments().getString("nombre"));
         productDescription.setText(this.getArguments().getString("descripcion"));
+
+        price=this.getArguments().getInt("precio");
         return view;
     }
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
                 //muestra el toast
                 toast.show();
                 //llama al metodo añadir productos
-                añadirProductos();
+                anadirProductos();
                 break;
             case R.id.btnCancelar://si pulsamos en cancelar
                 //cierra el "dialogo"
@@ -88,7 +91,7 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
             //suma 1 en el contador
             count++;
             //muestra el contador en el campo de texto
-            textCount.setText(count.toString());
+            textCount.setText(String.valueOf(count));
         }else{//si el contador es 25
             //muestra un toast de error
             Toast toast1 = Toast.makeText(getContext(),R.string.Dialogo_Productos_Max_Error, Toast.LENGTH_LONG);
@@ -102,7 +105,7 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
             // resta 1 al contador
             count--;
             //muestra el contador en el campo
-            textCount.setText(count.toString());
+            textCount.setText(String.valueOf(count));
         }else{//si el contador es igual a 1
             //muestra el error
             Toast toast1 = Toast.makeText(getContext(),R.string.Dialogo_Productos_Min_Error, Toast.LENGTH_LONG);
@@ -110,8 +113,11 @@ public class Dialog_Product extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void añadirProductos() {
-        //aqui tenemos que hace la llamada al servidor para añadir productos
+    private void anadirProductos() {
+        Float gastoTotal= Float.valueOf(price*count);
+        ExpenseFragmentController expense = new ExpenseFragmentController();
+        expense.setGastos(gastoTotal);
+        //cierra el "dialogo"
         getFragmentManager().beginTransaction().remove(this).commit();
     }
 }

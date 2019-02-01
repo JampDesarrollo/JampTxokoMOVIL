@@ -14,15 +14,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
 import com.example.a2dam.jamp.R;
 import com.example.a2dam.jamp.dataClasses.UserBean;
 import com.example.a2dam.jamp.dialogs.Dialog_Change_Password;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.logic.UserLogic;
 import com.example.a2dam.jamp.models.PrincipalActivityController;
-import com.example.a2dam.jamp.others.ILogicFactory;
 
 public class ChangePasswordFragmentController extends Fragment implements View.OnClickListener {
     private ChangePasswordFragmentController.OnFragmentInteractionListener mListener;
@@ -103,7 +98,7 @@ public class ChangePasswordFragmentController extends Fragment implements View.O
         if(checkPasswords()){//si el metodo checkpaddwords devuelve true
             //declaramos un booblean allok que vamos a usar para comprobar que la parte del servidor ha ido bien
             Boolean allOk=false;
-            try {
+            /*try {
                 //Declarar un UserLogic llamando al metodo getUserLogic del iLogicFactory
                 UserLogic iLogic=ILogicFactory.getUserLogic();
                 //mandamos los datos a la logica para que se comunique con el servidor y nos devuelve un boolean a true si all ha ido bien
@@ -111,7 +106,7 @@ public class ChangePasswordFragmentController extends Fragment implements View.O
             } catch (BusinessLogicException e) {//si salta una excepcion la pilla
                 //muestra un toast con el mensaje de error en la conexion
                 Toast.makeText(getContext(),R.string.conection_error,Toast.LENGTH_LONG).show();
-            }
+            }*/
             if(allOk) {//si all ha ido bien
                 //Mostrar un dialogo informativo diciendo que ha cambiado la contraseña
                 Dialog_Change_Password dialog = new Dialog_Change_Password();

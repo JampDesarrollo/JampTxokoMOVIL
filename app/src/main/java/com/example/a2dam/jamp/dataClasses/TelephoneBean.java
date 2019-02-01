@@ -6,7 +6,6 @@
   package com.example.a2dam.jamp.dataClasses;
 
   import java.io.Serializable;
-  import javafx.beans.property.SimpleStringProperty;
 
   /**
    *
@@ -16,36 +15,31 @@
     /**
      *
      */
-    private SimpleStringProperty idTelephone;
+    private String idTelephone;
 
     /**
      *
      */
-    private SimpleStringProperty name;
+    private String name;
     /**
      *
      */
-    private SimpleStringProperty telephone;
+    private String telephone;
 
     /**
      *
      */
-    private SimpleStringProperty description;
+    private String description;
 
     /**
      *
      */
-    private SimpleStringProperty town;
+    private String town;
 
     /**
      *
      */
     public TelephoneBean(){
-      this.idTelephone = new SimpleStringProperty();
-      this.description = new SimpleStringProperty();
-      this.telephone = new SimpleStringProperty();
-      this.name = new SimpleStringProperty();
-      this.town = new SimpleStringProperty();
     }
 
     /**
@@ -59,67 +53,67 @@
                          String description,
                          String telephone,
                          String town){
-      this.name=new SimpleStringProperty(name);
-      this.description=new SimpleStringProperty(description);
-      this.telephone=new SimpleStringProperty(telephone);
-      this.town = new SimpleStringProperty(town);
+      this.name=name;
+      this.description=description;
+      this.telephone=telephone;
+      this.town = town;
     }
 
     /**
      * @return the id
      */
     public String getId() {
-      return this.idTelephone.get();
+      return this.idTelephone;
     }
 
     /**
-     * @param id the id to set
+     * @param idTelephone the id to set
      */
     public void setId(String idTelephone) {
-      this.idTelephone.set(idTelephone);
+      this.idTelephone=idTelephone;
     }
 
     /**
      * @return the nombre
      */
     public String getName() {
-      return this.name.get();
+      return this.name;
     }
 
     /**
      * @param nombre the nombre to set
      */
     public void setName(String nombre) {
-      this.name.set(nombre);
+      this.name=nombre;
     }
 
     /**
      * @return the telephon
      */
     public String getTelephone() {
-      return this.telephone.get();
+      return this.telephone;
     }
 
     /**
      * @param telephone
-     * @param telephon the telephon to set
+     * @param telephone the telephon to set
      */
     public void setTelephone(String telephone) {
-      this.telephone.set(telephone);
+      this.telephone=telephone;
     }
 
     /**
      * @return the description
      */
     public String getDescription() {
-      return this.description.get();
+      return this.description;
     }
 
     /**
      * @param description the description to set
      */
     public void setDescription(String description) {
-      this.description.set(description);
+      this.description=description;
     }
 
     /**
@@ -127,14 +121,14 @@
      * @return
      */
     public String getTown() {
-      return this.town.get();
+      return this.town;
     }
 
     /**
      * @param town the town to set
      */
     public void setTown(String town) {
-      this.town.set(town);
+      this.town=town;
     }
 
     public boolean equals(Object object) {
@@ -155,11 +149,7 @@
       if ((this.getTelephone()== null && other.getTelephone()!= null) || (this.getTelephone() != null && !this.getTelephone().equals(other.getTelephone()))) {
         return false;
       }
-      if ((this.getTown()== null && other.getTown()!= null) || (this.getTown() != null && !this.getTown().equals(other.getTown()))) {
-        return false;
-      }
-
-      return true;
+        return (this.getTown() != null || other.getTown() == null) && (this.getTown() == null || this.getTown().equals(other.getTown()));
     }
 
   }

@@ -91,7 +91,9 @@ public class EventFragmentController extends Fragment implements View.OnClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Dialog_Go_To_Event dialog =new Dialog_Go_To_Event();
+        Bundle datosProducto=new Bundle();
+        datosProducto.putString("precio",events.get(position).getPrice());
+        Dialog_Go_To_Event dialog =new Dialog_Go_To_Event(datosProducto);
         dialog.show(getFragmentManager(),"Dialog_Go_To_Event");
     }
 

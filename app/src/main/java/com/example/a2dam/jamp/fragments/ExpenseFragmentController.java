@@ -1,10 +1,8 @@
 package com.example.a2dam.jamp.fragments;
 
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a2dam.jamp.R;
-import com.example.a2dam.jamp.exceptions.BusinessLogicException;
 import com.example.a2dam.jamp.logic.ExpenseLogic;
 import com.example.a2dam.jamp.models.PrincipalActivityController;
-import com.example.a2dam.jamp.others.ILogicFactory;
 
 
 public class ExpenseFragmentController extends Fragment implements View.OnClickListener {
@@ -43,6 +39,7 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
         ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.fragment_expense_title);
 
         lblAmount = view.findViewById(R.id.cantidad);
+        lblAmount.setText("0");
         imgCoins=view.findViewById(R.id.coin);
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
         coinAnimation.run();
@@ -55,15 +52,20 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
         max=false;
 
 
-
+        /*
         //HACERLO en otro thread?
         try {
             cant = ilogic.findMonthExpensesSingleUser(1);
         } catch (BusinessLogicException e) {
             e.printStackTrace();
         }
-        lblAmount.setText(String.valueOf(cant));
+        lblAmount.setText(String.valueOf(cant));*/
         return view;
+    }
+
+    public void setGastos(Float gasto){
+        Float gastosTotales=Float.valueOf(lblAmount.getText().toString())+gasto;
+        lblAmount.setText(String.valueOf(gastosTotales));
     }
 
 

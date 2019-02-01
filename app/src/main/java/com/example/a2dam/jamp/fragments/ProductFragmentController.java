@@ -90,6 +90,7 @@ public class ProductFragmentController extends Fragment implements View.OnClickL
         Bundle datosProducto=new Bundle();
         datosProducto.putString("nombre",products.get(position).getName());
         datosProducto.putString("descripcion",products.get(position).getDescription());
+        datosProducto.putInt("precio",Integer.valueOf(products.get(position).getPrice()));
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         fragmentManager = getFragmentManager();

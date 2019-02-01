@@ -8,42 +8,38 @@
 
  import java.io.Serializable;
  import java.util.List;
- import javafx.beans.property.SimpleIntegerProperty;
- import javafx.beans.property.SimpleStringProperty;
- import javax.xml.bind.annotation.XmlRootElement;
 
 
  /**
   *
   * @author Julen
   */
- @XmlRootElement (name = "product")
  public class ProductBean implements Serializable{
 
    /**
     *
     */
-   private SimpleIntegerProperty idProduct;
+   private Integer idProduct;
 
    /**
     *
     */
-   private SimpleStringProperty stock;
+   private String stock;
 
    /**
     *
     */
-   private SimpleStringProperty name;
+   private String name;
 
    /**
     *
     */
-   private SimpleStringProperty price;
+   private String price;
 
    /**
     *
     */
-   private SimpleStringProperty description;
+   private String description;
 
    /**
     *
@@ -51,13 +47,6 @@
    private List<TxokoBean> txokos;
 
    public ProductBean(){
-     this.idProduct = new SimpleIntegerProperty();
-     this.name = new SimpleStringProperty ();
-     this.description = new SimpleStringProperty();
-     this.price = new SimpleStringProperty();
-     this.stock = new SimpleStringProperty();
-     this.txokos = txokos;
-
    }
 
    public ProductBean(String name,
@@ -65,79 +54,79 @@
                       String stock,
                       String price,
                       String venta){
-     this.name=new SimpleStringProperty(name);
-     this.description=new SimpleStringProperty(description);
-     this.stock=new SimpleStringProperty(stock);
-     this.price = new SimpleStringProperty(price);
+     this.name=name;
+     this.description=description;
+     this.stock=stock;
+     this.price = price;
    }
 
    /**
     * @return the idProduct
     */
    public Integer getIdProduct() {
-     return this.idProduct.get();
+     return this.idProduct;
    }
    /**
     * @param idProduct the idProduct to set
     */
    public void setIdProduct(Integer idProduct) {
-     this.idProduct.set(idProduct);
+     this.idProduct=idProduct;
    }
 
    /**
     * @return the stock
     */
    public String getStock() {
-     return this.stock.get();
+     return this.stock;
    }
 
    /**
     * @param stock the stock to set
     */
    public void setStock(String stock) {
-     this.stock.set(stock);
+     this.stock=stock;
    }
 
    /**
     * @return the name
     */
    public String getName() {
-     return this.name.get();
+     return this.name;
    }
 
    /**
     * @param name the name to set
     */
    public void setName(String name) {
-     this.name.set(name);
+     this.name=name;
    }
 
    /**
     * @return the price
     */
    public String getPrice() {
-     return this.price.get();
+     return this.price;
    }
 
    /**
     * @param price the price to set
     */
    public void setPrice(String price) {
-     this.price.set(price);
+     this.price=price;
    }
 
    /**
     * @return the description
     */
    public String getDescription() {
-     return this.description.get();
+     return this.description;
    }
 
    /**
     * @param description the description to set
     */
    public void setDescription(String description) {
-     this.description.set(description);
+     this.description=description;
    }
 
    /**
@@ -173,9 +162,6 @@
      if ((this.getStock() == null && other.getStock() != null) || (this.getStock() != null && !this.getStock().equals(other.getStock()))) {
        return false;
      }
-     if ((this.getPrice() == null && other.getPrice() != null) || (this.getPrice() != null && !this.getPrice().equals(other.getPrice()))) {
-       return false;
-     }
-     return true;
+       return (this.getPrice() != null || other.getPrice() == null) && (this.getPrice() == null || this.getPrice().equals(other.getPrice()));
    }
  }

@@ -6,12 +6,10 @@
 package com.example.a2dam.jamp.dataClasses;
 
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Usuario
  */
-@XmlRootElement(name = "txoko")
 public class TxokoBean {
 
     private UserBean users;
