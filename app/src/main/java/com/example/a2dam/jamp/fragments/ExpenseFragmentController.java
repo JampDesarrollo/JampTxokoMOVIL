@@ -63,27 +63,29 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+        if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
+            //infla el layout de expenses horizontal
             view= inflater.inflate(R.layout.fragment_expense_landscape, container, false);
-        }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){
+        }else if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_PORTRAIT){//si la orientacion es vertical
+            //carga el layout vertical
             view= inflater.inflate(R.layout.fragment_expense, container, false);
         }
+        //mostrar la barra superior
         ((PrincipalActivityController) getActivity()).getSupportActionBar().setTitle(R.string.fragment_expense_title);
 
+        //referenciar todas la variables
         lblAmount = view.findViewById(R.id.cantidad);
         lblAmount.setText(R.string.fragment_events_event_price);
         imgCoins=view.findViewById(R.id.coin);
         coinAnimation = (AnimationDrawable) imgCoins.getDrawable();
+        //iniciar la animacion
         coinAnimation.run();
 
-
+        //referenciar y escuchar el layout para hacer la otra animacion
         fLayout = view.findViewById(R.id.expenseLayout);
         fLayout.setOnClickListener(this);
-        //ilogic = ILogicFactory.getExpenseLogic();
       
         max=false;
-
-
 
         //CODE TO GET THE TOTAL AMOUNT OF THE MONTH
         /*
@@ -103,7 +105,8 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.expenseLayout:
+            case R.id.expenseLayout://si clica en el layout
+                //llama al metodo de la animacion
                 animacion();
                 break;
         }
@@ -113,11 +116,15 @@ public class ExpenseFragmentController extends Fragment implements View.OnClickL
      * Method for the animation.
      */
     private void animacion() {
-        if(!max){
+        if(!max){//si max es false
+            //escala el tamaño de los gastos x2
             lblAmount.animate().scaleX(2).scaleY(2).setDuration(1000);
+            //pone max a true para que la siguiente vez que clique escale para abajo
             max=true;
-        }else{
+        }else{//si max en false
+            //escala el tamaño de los gastos x1
             lblAmount.animate().scaleX(1).scaleY(1).setDuration(1000);
+            //pone max a false para que la siguiente vez que clique escale para arriba
             max=false;
         }
     }
