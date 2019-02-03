@@ -49,8 +49,6 @@
     <string name="fragment_telephones_search_telephone">Sar ezazu bilatzeko produktua</string>
     <string name="fragment_telephones_titulo">Probetxuko telefonoak</string>
     <string name="fragment_telephones_toast">Hurrengo telefonoak aurkitu dira</string>
-    <string name="telepizza">Telepizza</string>
-    <string name="Dialogos_Ok">Ok</string>
     <string name="Dialogos_Cancelar">Deuseztatu</string>
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Title">Pasahitz berria eskatuta</string>
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Email bitartez pasahitz berria bidaliko zaio, mesedez begira ezazu posta elektronikoa</string>

@@ -72,11 +72,11 @@
     <string name="fragment_telephones_search_telephone">Introduce el telefono a buscar</string>
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
     <string name="fragment_telephones_toast">Se han encontrado los siguientes telefonos</string>
-    <string name="telepizza">Telepizza</string>
+    <string name="telepizza" translatable="false">Telepizza</string>
 
 
     //Dialogos
-    <string name="Dialogos_Ok">Ok</string>
+    <string name="Dialogos_Ok" translatable="false">Ok</string>
     <string name="Dialogos_Cancelar">Cancelar</string>
 
     //Dialogo Solicitud De Nueva Contraseña
