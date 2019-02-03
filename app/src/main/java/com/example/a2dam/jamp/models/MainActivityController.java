@@ -41,7 +41,6 @@ public class MainActivityController extends AppCompatActivity implements View.On
     //creamos un usuario y una contraseña para manejar en el programa con sus respectivos getter and setter (debajo de todos los metodos), estas variables no se deberian usar en la aplicacion que se conecta al servidor
     public String usuario="jamp",pass="Jamp12345";
 
-
     //private UserLogic ilogic;
 
     @Override
@@ -227,19 +226,15 @@ public class MainActivityController extends AppCompatActivity implements View.On
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
             if (maxCaracters()) {//si los campos no son superiores a 255
-                if(tfUsuario.getText().toString().equals(usuario)){
-                    if (pfContrasena.getText().toString().equals(pass)) {
+                if(tfUsuario.getText().toString().equals(usuario) && pfContrasena.getText().toString().equals(pass)) {
                         Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
                         startActivity(iniciarSesion);
                         //vacia los campos de la ventana de login
-                        tfUsuario.setText("");
-                        pfContrasena.setText("");
-                        lblError.setText("");
-                    }else {
-                        lblError.setText(R.string.passNotOk_Error);
-                    }
+                        this.finish();
                 }else{
-                    lblError.setText(R.string.userNotOk_Error);
+                    lblError.setText(R.string.login_error);
+                    tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
                 //llama al metodo ConectarIniciarSesion para conectar con el servidor
                 /*UserBean userReturn = conectarIniciarSesion();

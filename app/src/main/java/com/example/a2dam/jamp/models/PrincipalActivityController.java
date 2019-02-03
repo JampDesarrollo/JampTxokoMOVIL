@@ -1,5 +1,6 @@
 package com.example.a2dam.jamp.models;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -171,6 +172,8 @@ public class PrincipalActivityController extends AppCompatActivity
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
             case R.id.action_logOut:
+                Intent iniciarSesion = new Intent(PrincipalActivityController.this, MainActivityController.class);
+                startActivity(iniciarSesion);
                 finish();
                 break;
         }
