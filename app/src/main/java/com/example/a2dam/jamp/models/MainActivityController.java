@@ -48,6 +48,8 @@ public class MainActivityController extends AppCompatActivity implements View.On
         //establecer el tema por defecto, esto hace falta porque la aplicacion al iniciar tiene un tema diferente para la splash image
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        //establece el layout de la ventana
+        setContentView(R.layout.activity_main);
 
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
             //quita la barra de arriba
@@ -140,6 +142,10 @@ public class MainActivityController extends AppCompatActivity implements View.On
     }
 
     private void crearVideo() {
+        //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
+        video = findViewById(R.id.videoView);
+        //referenciar el scrollbar que contiene todos los lementos excepto el videoview
+        resto = findViewById(R.id.scrollInicio);
         //pone el videoview donde se va a mostrar el video visible
         video.setVisibility(View.VISIBLE);
         //pone el scrollbar que contiene el resto de los elementos invisibles para que el usuario al tocar la pantalla no pueda interactuar con dichos campos
