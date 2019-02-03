@@ -41,7 +41,6 @@ public class MainActivityController extends AppCompatActivity implements View.On
     //creamos un usuario y una contraseña para manejar en el programa con sus respectivos getter and setter (debajo de todos los metodos), estas variables no se deberian usar en la aplicacion que se conecta al servidor
     public String usuario="jamp",pass="Jamp12345";
 
-
     //private UserLogic ilogic;
 
     @Override
@@ -49,6 +48,8 @@ public class MainActivityController extends AppCompatActivity implements View.On
         //establecer el tema por defecto, esto hace falta porque la aplicacion al iniciar tiene un tema diferente para la splash image
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
+        //establece el layout de la ventana
+        setContentView(R.layout.activity_main);
 
         if(getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){//si la orientacion es horizontal
             //quita la barra de arriba
@@ -141,6 +142,10 @@ public class MainActivityController extends AppCompatActivity implements View.On
     }
 
     private void crearVideo() {
+        //referenciar el videoview declarado arriba con el videoview del inicio de sesion que esta oculto
+        video = findViewById(R.id.videoView);
+        //referenciar el scrollbar que contiene todos los lementos excepto el videoview
+        resto = findViewById(R.id.scrollInicio);
         //pone el videoview donde se va a mostrar el video visible
         video.setVisibility(View.VISIBLE);
         //pone el scrollbar que contiene el resto de los elementos invisibles para que el usuario al tocar la pantalla no pueda interactuar con dichos campos
@@ -227,19 +232,15 @@ public class MainActivityController extends AppCompatActivity implements View.On
             tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.blanco));
             //si todos los campos estan llenos miramos el maximo de caracteres
             if (maxCaracters()) {//si los campos no son superiores a 255
-                if(tfUsuario.getText().toString().equals(usuario)){
-                    if (pfContrasena.getText().toString().equals(pass)) {
+                if(tfUsuario.getText().toString().equals(usuario) && pfContrasena.getText().toString().equals(pass)) {
                         Intent iniciarSesion = new Intent(MainActivityController.this, PrincipalActivityController.class);
                         startActivity(iniciarSesion);
                         //vacia los campos de la ventana de login
-                        tfUsuario.setText("");
-                        pfContrasena.setText("");
-                        lblError.setText("");
-                    }else {
-                        lblError.setText(R.string.passNotOk_Error);
-                    }
+                        this.finish();
                 }else{
-                    lblError.setText(R.string.userNotOk_Error);
+                    lblError.setText(R.string.login_error);
+                    tfUsuario.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
+                    pfContrasena.setBackgroundTintList(this.getResources().getColorStateList(R.color.rojo));
                 }
                 //llama al metodo ConectarIniciarSesion para conectar con el servidor
                 /*UserBean userReturn = conectarIniciarSesion();

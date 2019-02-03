@@ -2,12 +2,15 @@ package com.example.a2dam.jamp.dialogs;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
 import com.example.a2dam.jamp.R;
+import com.example.a2dam.jamp.models.MainActivityController;
+import com.example.a2dam.jamp.models.PrincipalActivityController;
 
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -38,6 +41,8 @@ public class Dialog_LogOut extends DialogFragment implements DialogInterface.OnC
             case BUTTON_POSITIVE://si el boton es positivo
                 //cierra el activity
                 getActivity().finish();
+                Intent iniciarSesion = new Intent(getActivity(), MainActivityController.class);
+                startActivity(iniciarSesion);
                 break;
             case BUTTON_NEGATIVE://si el boton es negativo
                 //cierra el dialogo

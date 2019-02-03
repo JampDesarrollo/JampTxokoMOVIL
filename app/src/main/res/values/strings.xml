@@ -4,8 +4,8 @@
     <string name="title_activity_principal">Menu Principal</string>
     <string name="navigation_drawer_open">Abrir el menú</string>
     <string name="navigation_drawer_close">Cerrar el menú</string>
-    <string name="nav_header_title">Jamp</string>
-    <string name="nav_header_subtitle">Jamp Desarrollo</string>
+    <string name="nav_header_title" translatable="false">Jamp</string>
+    <string name="nav_header_subtitle" translatable="false">Jamp Desarrollo</string>
 
     //SignUp Page
     <string name="registro_Login">Nombre Usuario</string>
@@ -14,7 +14,6 @@
     <string name="registro_email">Email</string>
     <string name="registro_Txoko">Id del Txoko</string>
     <string name="registro_Contraseña">Contraseña</string>
-    <string name="show_password_2">Show Password 2</string>
     <string name="registro_Atras">Atras</string>
 
     //LogIn Page
@@ -22,7 +21,7 @@
     <string name="usuario">Usuario</string>
     <string name="contrase_a">Contraseña</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
-    <string name="jamp">JAMP</string>
+    <string name="jamp" translatable="false">JAMP</string>
     <string name="email_o_contrase_a_incorrecta">Email o contraseña incorrecta</string>
     <string name="registrarse">Registrarse</string>
     <string name="ojo">Mostrar Contraseña</string>
@@ -51,7 +50,7 @@
     <string name="fragment_products_title">Productos</string>
     <string name="fragment_products_product">Fanta de naranja</string>
     <string name="fragment_products_description">Esto es una lata de Fanta de naranja</string>
-    <string name="fragment_products_price">0,50</string>
+    <string name="fragment_products_price" translatable="false">0,50</string>
     <string name="fragment_products_product_toast">Se han encontrado los siguientes productos</string>
 
     //Events
@@ -59,9 +58,9 @@
     <string name="fragment_events_search_event">Introduce el evento a buscar</string>
     <string name="fragment_events_go">Asistir al Evento</string>
     <string name="fragment_events_event_title">Fiestas de Erandio</string>
-    <string name="fragment_event_event_date">25/06/2019</string>
+    <string name="fragment_event_event_date" translatable="false">25/06/2019</string>
     <string name="fragment_events_event_description">Las fiestas de erandio por san juan seran este año en la plaza mayor</string>
-    <string name="fragment_events_event_price">15</string>
+    <string name="fragment_events_event_price" translatable="false">15</string>
     <string name="fragment_events_event_toast">Se han encontrado los siguientes eventos</string>
 
     //expense
@@ -73,11 +72,11 @@
     <string name="fragment_telephones_search_telephone">Introduce el telefono a buscar</string>
     <string name="fragment_telephones_titulo">Telefonos De Interes</string>
     <string name="fragment_telephones_toast">Se han encontrado los siguientes telefonos</string>
-    <string name="telepizza">Telepizza</string>
+    <string name="telepizza" translatable="false">Telepizza</string>
 
 
     //Dialogos
-    <string name="Dialogos_Ok">Ok</string>
+    <string name="Dialogos_Ok" translatable="false">Ok</string>
     <string name="Dialogos_Cancelar">Cancelar</string>
 
     //Dialogo Solicitud De Nueva Contraseña
@@ -85,7 +84,7 @@
     <string name="Dialogo_Solicitud_Nueva_Contrasena_Content">Ha solicitado una nueva contraseña que se le mandara por email, Por Favor revise su bandeja de entrada</string>
     //Dialogo Registro
     <string name="Dialogo_Registro_Title">Se ha registrado con exito</string>
-    <string name="Dialogo_Registro_Content">Por Favor, Su cuenta se ha activado, Por Favor dirijase al inicio de sesion para iniciar sesion</string>
+    <string name="Dialogo_Registro_Content">Su cuenta se ha activado, Por Favor dirijase al inicio de sesion para comprobarlo</string>
     //Dialogo Productos
     <string name="Dialogo_Productos_Title">Producto Prueba</string>
     <string name="Dialogo_Productos_Content">Este es un producto de pruebaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</string>
@@ -118,20 +117,20 @@
     <string name="user_need_error">Debe Introducir el usuario para cambiar la contraseña</string>
     <string name="actual_pass_and_new_pass_equals_error">La nueva contraseña no puede ser la misma que la contraseña actual</string>
     <string name="new_pass_equals_error">Las Contraseña Deben Ser Iguales</string>
-    <string name="null_pointer_exception_error">ui ui ui, Null Pointer Exception</string>
+    <string name="null_pointer_exception_error" translatable="false">ui ui ui, Null Pointer Exception</string>
     <string name="telephone_search_error">No Se Han Encontrado Telefonos</string>
     <string name="product_search_error">No Se Han Encontrado Productos</string>
     <string name="event_search_error">No Se Han Encontrado Eventos</string>
     <string name="request_new_password_error">No se ha podido cambiar la contraseña, por favor, compruebe su conexión</string>
-    <string name="userNotOk_Error">Usuario Incorrecto</string>
-    <string name="passNotOk_Error">Contraseña Incorrecta</string>
+    <string name="login_error">Usuario o contraseña incorrectos</string>
   
     //Recursos
     <string name="country_coin">€</string>
-    <string name="mongo_ip">192.168.0.15</string>
-    <string name="mongo_port">27017</string>
-    <string name="mongo_db">jamp</string>
-    <string name="mongo_collection">telephones</string>
+    <string name="mongo_ip" translatable="false">192.168.0.15</string>
+    <string name="mongo_port" translatable="false">27017</string>
+    <string name="mongo_db" translatable="false">jamp</string>
+    <string name="mongo_collection" translatable="false">telephones</string>
+    <string name="show_password_2">Mostrar Contraseña</string>
 
 
 </resources>
