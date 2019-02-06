@@ -61,8 +61,8 @@
     <string name="Dialogo_Productos_Toast_1">" It has been added"</string>
     <string name="Dialogo_Productos_Toast_2">product of</string>
     <string name="Dialogo_Productos_Toast_3">to your monthly expenses</string>
-    <string name="Dialogo_Cambio_Contraseña_Title">Password Changed</string>
-    <string name="Dialogo_Cambio_Contraseña_Content">You have modified your password, close session and return to login to test your new password</string>
+    <string name="Dialogo_Cambio_Contrasena_Title">Password Changed</string>
+    <string name="Dialogo_Cambio_Contrasena_Content">You have modified your password, close session and return to login to test your new password</string>
     <string name="Dialogo_Asistir_Al_Evento_Title">Atend the event</string>
     <string name="Dialogo_Asistir_Al_Evento_Content">" Are you sure you want to attend the selected event?"</string>
     <string name="Dialogo_Asistir_Al_Evento_Toast">" The expense of the event has been added to your monthly expenses"</string>
@@ -86,4 +86,6 @@
     <string name="request_new_password_error">Could not change the password, please check your connection</string>
     <string name="country_coin">£</string>
     <string name="login_error">Bad user or password</string>
+    <string name="fragment_change_password_actual_pass">Actual Password</string>
+    <string name="fragment_change_password_new_pass">New Password</string>
 </resources>
