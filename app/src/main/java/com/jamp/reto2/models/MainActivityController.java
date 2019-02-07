@@ -17,7 +17,6 @@ import android.widget.MediaController;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.VideoView;
-
 import com.jamp.reto2.R;
 import com.jamp.reto2.dialogs.Dialog_Request_New_Password;
 
@@ -326,19 +325,19 @@ public class MainActivityController extends AppCompatActivity implements View.On
     }
     /*
     private UserBean conectarIniciarSesion() {
-        UserLogic ilogic=ILogicFactory.getUserLogic();
+        UserLogic ilogic= ILogicFactory.getUserLogic();
 
         //conectar con la base de datos
         UserBean returnUser = null;
         try {
             //crear una variable userbean con todos los campos que ha metido el usuario para mandar al servidor
-            returnUser=ilogic.findUserByLoginPasswMov(tfUsuario.getText().toString(),pfContrasena.getText().toString());
+            returnUser=ilogic.findUserByLoginPasswMov(tfUsuario.getText().toString(),EncryptPassword.encrypt(pfContrasena.getText().toString()));
         } catch (BusinessLogicException e) {
             e.printStackTrace();
         }
         return returnUser;
-    }*/
-
+    }
+*/
 
     private Boolean conectarCambiarPass() {
         Boolean ok = true;

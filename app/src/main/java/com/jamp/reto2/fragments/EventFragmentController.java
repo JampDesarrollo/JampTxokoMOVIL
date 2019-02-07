@@ -1,5 +1,6 @@
 package com.jamp.reto2.fragments;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -109,7 +110,7 @@ public class EventFragmentController extends Fragment implements View.OnClickLis
     //metodo que llena un arraylist con nombres y numeros de telefonos
     private void cargarEventos() {
         //creamos un formateador para la fecha
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         events=new ArrayList<>();
         //bucle para llenar un array con 10 eventos
         for(int i=0; i<10; i++){

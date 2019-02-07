@@ -5,9 +5,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 
 import com.jamp.reto2.R;
+import com.jamp.reto2.fragments.ProductFragmentController;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -38,8 +41,21 @@ public class Dialog_Change_Password extends DialogFragment implements DialogInte
             case BUTTON_POSITIVE://si clica en el boton positivo
                 //cierra el dialogo
                 dialog.dismiss();
+                //llama al metodo ok()
+                ok();
                 break;
         }
+    }
+
+    public void ok(){
+        //carga el fragment de dialogos
+        FragmentManager fragmentManager;
+        FragmentTransaction fragmentTransaction;
+        fragmentManager= getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        ProductFragmentController productFragmentController = new ProductFragmentController();
+        fragmentTransaction.replace(R.id.fragment, productFragmentController);
+        fragmentTransaction.commit();
     }
 
     @Override

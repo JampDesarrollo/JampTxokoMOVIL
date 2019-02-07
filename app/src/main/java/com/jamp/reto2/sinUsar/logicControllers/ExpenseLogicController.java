@@ -5,15 +5,12 @@
  */
 package com.jamp.reto2.sinUsar.logicControllers;
 
-import com.example.a2dam.jamp.sinUsar.rest.ExpenseRESTCli;
 import com.jamp.reto2.sinUsar.exceptions.BusinessLogicException;
 import com.jamp.reto2.sinUsar.logic.ExpenseLogic;
 import com.jamp.reto2.sinUsar.rest.ExpenseRESTCli;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.ws.rs.ClientErrorException;
 
 /**
  *

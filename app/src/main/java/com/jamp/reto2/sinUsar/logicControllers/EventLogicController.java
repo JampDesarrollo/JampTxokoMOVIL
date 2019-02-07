@@ -13,9 +13,6 @@ import java.util.logging.Logger;
 import java.util.Collection;
 import java.util.List;
 
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.core.GenericType;
-
 public class EventLogicController implements EventLogic {
 
     private EventRESTClient webClient;

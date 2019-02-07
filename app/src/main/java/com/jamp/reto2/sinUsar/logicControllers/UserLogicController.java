@@ -5,10 +5,6 @@
  */
 package com.jamp.reto2.sinUsar.logicControllers;
 
-import com.example.a2dam.jamp.dataClasses.UserBean;
-import com.example.a2dam.jamp.sinUsar.exceptions.BusinessLogicException;
-import com.example.a2dam.jamp.sinUsar.logic.UserLogic;
-import com.example.a2dam.jamp.sinUsar.rest.UserRESTClient;
 import com.jamp.reto2.dataClasses.UserBean;
 import com.jamp.reto2.sinUsar.exceptions.BusinessLogicException;
 import com.jamp.reto2.sinUsar.logic.UserLogic;

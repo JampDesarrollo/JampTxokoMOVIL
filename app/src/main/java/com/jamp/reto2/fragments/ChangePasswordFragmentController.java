@@ -19,6 +19,7 @@ import com.jamp.reto2.R;
 import com.jamp.reto2.dataClasses.UserBean;
 import com.jamp.reto2.dialogs.Dialog_Change_Password;
 import com.jamp.reto2.models.PrincipalActivityController;
+import com.jamp.reto2.sinUsar.others.EncryptPassword;
 
 public class ChangePasswordFragmentController extends Fragment implements View.OnClickListener {
     private ChangePasswordFragmentController.OnFragmentInteractionListener mListener;
@@ -103,7 +104,7 @@ public class ChangePasswordFragmentController extends Fragment implements View.O
                 //Declarar un UserLogic llamando al metodo getUserLogic del iLogicFactory
                 UserLogic iLogic=ILogicFactory.getUserLogic();
                 //mandamos los datos a la logica para que se comunique con el servidor y nos devuelve un boolean a true si all ha ido bien
-                allOk=iLogic.findUserChangePasswMov(user.getIdUser(),actualpass.getText().toString(),newpass1.getText().toString());
+                allOk=iLogic.findUserChangePasswMov(user.getIdUser(), EncryptPassword.encrypt(actualpass.getText().toString()),EncryptPassword.encrypt(newpass1.getText().toString()));
             } catch (BusinessLogicException e) {//si salta una excepcion la pilla
                 //muestra un toast con el mensaje de error en la conexion
                 Toast.makeText(getContext(),R.string.conection_error,Toast.LENGTH_LONG).show();

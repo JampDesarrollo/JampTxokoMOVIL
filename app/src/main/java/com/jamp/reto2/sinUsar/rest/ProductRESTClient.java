@@ -1,12 +1,5 @@
 package com.jamp.reto2.sinUsar.rest;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
-
 
 /**
  * Jersey REST client generated for REST resource:ProductREST [product]<br>

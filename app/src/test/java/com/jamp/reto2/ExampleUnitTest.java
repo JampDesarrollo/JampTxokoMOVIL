@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp;
+package com.jamp.reto2;
 
 import org.junit.Test;
 

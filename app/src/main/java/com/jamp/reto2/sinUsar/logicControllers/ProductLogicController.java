@@ -1,6 +1,5 @@
 package com.jamp.reto2.sinUsar.logicControllers;
 
-import com.example.a2dam.jamp.rest.ProductRESTClient;
 import com.jamp.reto2.dataClasses.ProductBean;
 import com.jamp.reto2.sinUsar.exceptions.BusinessLogicException;
 import com.jamp.reto2.sinUsar.logic.ProductLogic;
@@ -9,9 +8,6 @@ import com.jamp.reto2.sinUsar.rest.ProductRESTClient;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.ws.rs.ClientErrorException;
-import javax.ws.rs.core.GenericType;
 
 /**
  * Class that implements the productLogic iterface

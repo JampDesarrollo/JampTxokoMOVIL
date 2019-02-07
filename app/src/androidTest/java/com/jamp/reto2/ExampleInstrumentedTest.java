@@ -1,4 +1,4 @@
-package com.example.a2dam.jamp;
+package com.jamp.reto2;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

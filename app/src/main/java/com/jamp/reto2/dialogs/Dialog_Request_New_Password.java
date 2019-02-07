@@ -4,12 +4,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
-
 import com.jamp.reto2.R;
-import com.jamp.reto2.fragments.ProductFragmentController;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 
@@ -30,17 +26,6 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
         return builder.create();
     }
 
-    public void ok(){
-        //carga el fragment de dialogos
-        FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-        fragmentManager= getFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        ProductFragmentController productFragmentController = new ProductFragmentController();
-        fragmentTransaction.replace(R.id.fragment, productFragmentController);
-        fragmentTransaction.commit();
-    }
-
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
@@ -48,16 +33,7 @@ public class Dialog_Request_New_Password extends DialogFragment implements Dialo
             case BUTTON_POSITIVE://si clica en el boton positivo
                 //cierra el dialogo
                 dialog.dismiss();
-                //llama al metodo ok
-                ok();
                 break;
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //volver a establecer en el activity el tema por defecto cuando se cierra el dialogo
-        getActivity().setTheme(R.style.AppTheme);
     }
 }
