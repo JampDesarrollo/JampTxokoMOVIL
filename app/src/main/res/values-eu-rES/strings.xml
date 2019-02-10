@@ -61,8 +61,8 @@
     <string name="Dialogo_Productos_Toast_2">produktu</string>
     <string name="Dialogo_Productos_Toast_3">ko zure hilabeteko gastuetara</string>
     <string name="Dialogo_Productos_Toast_1">gehitu dira</string>
-    <string name="Dialogo_Cambio_Contraseña_Title">Pasahitza aldatuta</string>
-    <string name="Dialogo_Cambio_Contraseña_Content">Pasahitza aldatu duzu, mesedez, itxi saioa pasahitz berria frogatzeko</string>
+    <string name="Dialogo_Cambio_Contrasena_Title">Pasahitza aldatuta</string>
+    <string name="Dialogo_Cambio_Contrasena_Content">Pasahitza aldatu duzu, mesedez, itxi saioa pasahitz berria frogatzeko</string>
     <string name="Dialogo_Asistir_Al_Evento_Title">Ekiltadira joan</string>
     <string name="Dialogo_Asistir_Al_Evento_Content">Aukeratutako ekitaldira joan nahi duzu?</string>
     <string name="Dialogo_Asistir_Al_Evento_Toast">ekitaldiko gastuak hilabeteko gastuetara gehitu dira</string>
@@ -86,4 +86,6 @@
     <string name="request_new_password_error">Ezin izan da pasahitza aldatu, mesedez, berraztertu konexioa</string>
     <string name="country_coin">€</string>
     <string name="login_error">Erabiltzaile edo Pasahitza okerra</string>
+    <string name="fragment_change_password_actual_pass">Oraingo Pasahitza</string>
+    <string name="fragment_change_password_new_pass">Pasahitz Berria</string>
 </resources>

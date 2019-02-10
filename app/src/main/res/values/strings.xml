@@ -44,6 +44,8 @@
     //Change Password
     <string name="fragment_change_password_title">Cambiar Contraseña</string>
     <string name="fragment_change_password_button">Cambiar</string>
+    <string name="fragment_change_password_actual_pass">Contraseña actual</string>
+    <string name="fragment_change_password_new_pass">Nueva Contraseña</string>
 
     //Products
     <string name="fragment_products_search_product">Introduce el producto a buscar</string>
@@ -94,8 +96,8 @@
     <string name="Dialogo_Productos_Toast_2">productos de</string>
     <string name="Dialogo_Productos_Toast_3">a tus gastos mensuales.</string>
     //Dialogo Cambio Contraseña
-    <string name="Dialogo_Cambio_Contraseña_Title">Contraseña Modificada</string>
-    <string name="Dialogo_Cambio_Contraseña_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
+    <string name="Dialogo_Cambio_Contrasena_Title">Contraseña Modificada</string>
+    <string name="Dialogo_Cambio_Contrasena_Content">Ha modificado su contraseña, cierre sesion y vuelva ha iniciar sesion para probar su nueva contraseña</string>
     //Dialogo Asistir al evento
     <string name="Dialogo_Asistir_Al_Evento_Title">Asistir Al Evento</string>
     <string name="Dialogo_Asistir_Al_Evento_Content">Seguro que desea asistir al evento seleccionado?</string>
